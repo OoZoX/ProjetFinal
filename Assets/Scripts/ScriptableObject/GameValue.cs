@@ -9,7 +9,10 @@ public class GameValue : ScriptableObject
     [Header("GameObject")]
 
     [Tooltip("GameObject camera a move")]
-    [SerializeField] public GameObject m_camera;
+    public GameObject m_camera;
+
+    [Tooltip("GameObject Carre detection")]
+    public GameObject m_carreDetection;
     
 
 }

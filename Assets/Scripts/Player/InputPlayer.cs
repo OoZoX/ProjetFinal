@@ -32,17 +32,18 @@ public class InputPlayer : MonoBehaviour
     void Update()
     {
         GetMousePositionScreen();
-        GetMousePositionWorld();
+        GetClickMouse();
         GetKeyBoard();
     }
 
-    private void GetMousePositionWorld()
+    private void GetClickMouse()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            m_posSourisWorld = _Camera.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
-        }
+        DetectionZone.Instance.m_isClickLeft = Input.GetMouseButton(0);
+    }
+    public void m_GetMousePositionWorld()
+    {
+        m_posSourisWorld = _Camera.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
     }
     private void GetMousePositionScreen()
     {
