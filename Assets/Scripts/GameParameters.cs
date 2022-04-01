@@ -17,6 +17,12 @@ public class GameParameters : ScriptableObject
     [SerializeField] private Color _team2Color;
     public Color Team2Color { get => _team2Color; }
 
+    [Header("Match")]
+
+    [Tooltip("La durée en s d'un match")]
+    [SerializeField] private float _matchTimeLimit;
+    public float MatchTimeLimit { get => _matchTimeLimit; }
+
     [Header("Tanks")]
 
     [Tooltip("Le nombre de pv d'un tank")]
@@ -42,6 +48,10 @@ public class GameParameters : ScriptableObject
     [Tooltip("La vitesse en m/s d'un obus de tank")]
     [SerializeField] private float _tankShellSpeed;
     public float TankShellSpeed { get => _tankShellSpeed; }
+
+    [Tooltip("La durée de vie en s d'un obus de tank")]
+    [SerializeField] private float _tankShellDuration;
+    public float TankShellDuration { get => _tankShellDuration; }
 
     [Tooltip("Les dégâts de l'explosion d'un obus de tank")]
     [SerializeField] private float _tankShellDamage;
@@ -106,6 +116,12 @@ public class GameParameters : ScriptableObject
     public LayerMask LayerVisionObstacleAsMask { get => LayerMask.GetMask(LayerVisionObstacle); }
 
 
+    [SerializeField] private string _layerObstacle;
+    public string LayerObstacle { get => _layerObstacle; }
+    public int LayerObstacleAsLayer { get => LayerMask.NameToLayer(LayerObstacle); }
+    public LayerMask LayerObstacleAsMask { get => LayerMask.GetMask(LayerObstacle); }
+
+
     [SerializeField] private string _layerTank;
     public string LayerTank { get => _layerTank; }
     public int LayerTankAsLayer { get => LayerMask.NameToLayer(LayerTank); }
@@ -140,7 +156,6 @@ public class GameParameters : ScriptableObject
     public string LayerPickup { get => _layerPickup; }
     public int LayerPickupAsLayer { get => LayerMask.NameToLayer(LayerPickup); }
     public LayerMask LayerPickupAsMask { get => LayerMask.GetMask(LayerPickup); }
-
 
 
 }
