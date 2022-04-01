@@ -7,7 +7,8 @@ public class InputPlayer : MonoBehaviour
     private Camera _Camera;
 
 
-    public Vector3 m_posSouri;
+    public Vector3 m_posSourisWorld;
+    public Vector3 m_posSourisScreen;
 
     public static InputPlayer Instance;
 
@@ -30,47 +31,30 @@ public class InputPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMousePosition();
+        GetMousePositionScreen();
+        GetMousePositionWorld();
         GetKeyBoard();
     }
 
-    private void GetMousePosition()
+    private void GetMousePositionWorld()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            m_posSouri = _Camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
-            Debug.Log($"<color=yellow>" + m_posSouri.x + "</color> <color=blue>" + m_posSouri.y + "</color>");
+            m_posSourisWorld = _Camera.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
         }
+    }
+    private void GetMousePositionScreen()
+    {
+        m_posSourisScreen = Input.mousePosition;
+        //Debug.Log($"<color=yellow>" + m_posSourisScreen.x + "</color> <color=blue>" + m_posSourisScreen.y + "</color>");
     }
 
     private void GetKeyBoard()
     {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            MouvementCamera.Instance.m_depCamHaut = true;
-        }
-        else
-            MouvementCamera.Instance.m_depCamHaut = false;
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            MouvementCamera.Instance.m_depCamBas = true;
-        }
-        else
-            MouvementCamera.Instance.m_depCamBas = false;
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            MouvementCamera.Instance.m_depCamGauche = true;
-        }
-        else
-            MouvementCamera.Instance.m_depCamGauche = false;
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            MouvementCamera.Instance.m_depCamDroite = true;
-        }
-        else
-            MouvementCamera.Instance.m_depCamGauche = false;
+        MouvementCamera.Instance.m_depCamHaut = Input.GetKey(KeyCode.Z);
+        MouvementCamera.Instance.m_depCamBas = Input.GetKey(KeyCode.S);
+        MouvementCamera.Instance.m_depCamGauche = Input.GetKey(KeyCode.Q);
+        MouvementCamera.Instance.m_depCamDroite = Input.GetKey(KeyCode.D);
     }
 }

@@ -133,8 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 793165596}
   - component: {fileID: 793165595}
+  - component: {fileID: 793165597}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: ManagerPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ace1f7baae5c7479b409fdd7bbf582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_posSourisWorld: {x: 0, y: 0, z: 0}
+  m_posSourisScreen: {x: 0, y: 0, z: 0}
 --- !u!4 &793165596
 Transform:
   m_ObjectHideFlags: 0
@@ -166,3 +169,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &793165597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793165594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792f2c1ce374b92439e72d11ef5ab27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameStats: {fileID: 11400000, guid: 6220a2325bc762e4da1fe2ec648e90c8, type: 2}
+  _zoneDepCam: 100
+  _vitesseDepCam: 5
+  m_depCamHaut: 0
+  m_depCamBas: 0
+  m_depCamDroite: 0
+  m_depCamGauche: 0
+  m_depCamSouriHaut: 0
+  m_depCamSouriBas: 0
+  m_depCamSouriDroite: 0
+  m_depCamSouriGauche: 0
