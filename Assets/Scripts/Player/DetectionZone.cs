@@ -6,6 +6,8 @@ public class DetectionZone : MonoBehaviour
 {
     //[SerializeField]
     //private GameValue _gameValue;
+    [SerializeField]
+    LayerMask layerMask;
 
     public bool _firstClick = false;
     private Vector3 _posMouseScreen;
@@ -15,7 +17,7 @@ public class DetectionZone : MonoBehaviour
 
     private void Start()
     {
-        transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         Vector3 loacalVectorScale = new Vector3(0, 0, 0);
         transform.localScale = loacalVectorScale;
 
@@ -43,10 +45,10 @@ public class DetectionZone : MonoBehaviour
             _firstClick = true;
          
             InputPlayer.Instance.m_GetMousePositionWorld();
-            _posSquare = InputPlayer.Instance.m_posSourisWorld;
+            _posSquare = new Vector3(InputPlayer.Instance.m_posSourisWorld.x, InputPlayer.Instance.m_posSourisWorld.y, -1);
             transform.position = _posSquare;
 
-            transform.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
             
         }
@@ -74,9 +76,16 @@ public class DetectionZone : MonoBehaviour
             {
                 Debug.Log($"<color=red> Stop Detection Zone </color>");
                 _firstClick = false;
-                transform.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 Vector3 LoacalVectorScale = new Vector3(0,0,0);
                 transform.localScale = LoacalVectorScale;
             } }
+    }
+
+    private void DetectTank()
+    {
+
+        ContactFilter2D contactfliter = contactfliter.SetLayerMask();
+        Physics2D.OverlapBox()
     }
 }
