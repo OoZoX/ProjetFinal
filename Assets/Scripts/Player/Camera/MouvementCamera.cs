@@ -53,7 +53,8 @@ public class MouvementCamera : MonoBehaviour
 
     private void CheckPosSourisForDepCam()
     {
-        Vector3 PosSouri = InputPlayer.Instance.m_posSourisScreen;
+        InputPlayer.Instance.GetMousePositionScreen();
+        Vector3 PosSouri = InputPlayer.Instance.m_posMouseScreen;
 
         if (PosSouri.y > ScreenHeight - _zoneDepCam)
             m_depCamSouriHaut = true;

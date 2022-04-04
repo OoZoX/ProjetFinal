@@ -7,8 +7,10 @@ public class InputPlayer : MonoBehaviour
     private Camera _Camera;
 
 
+    public bool m_clickMouseLeft = false;
+
     public Vector3 m_posSourisWorld;
-    public Vector3 m_posSourisScreen;
+    public Vector3 m_posMouseScreen;
 
     public static InputPlayer Instance;
 
@@ -31,23 +33,22 @@ public class InputPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMousePositionScreen();
         GetClickMouse();
         GetKeyBoard();
     }
 
-    private void GetClickMouse()
+    public void GetClickMouse()
     {
-        DetectionZone.Instance.m_isClickLeft = Input.GetMouseButton(0);
+        m_clickMouseLeft = Input.GetMouseButton(0);
     }
     public void m_GetMousePositionWorld()
     {
         m_posSourisWorld = _Camera.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
     }
-    private void GetMousePositionScreen()
+    public void GetMousePositionScreen()
     {
-        m_posSourisScreen = Input.mousePosition;
+        m_posMouseScreen = Input.mousePosition;
         //Debug.Log($"<color=yellow>" + m_posSourisScreen.x + "</color> <color=blue>" + m_posSourisScreen.y + "</color>");
     }
 
