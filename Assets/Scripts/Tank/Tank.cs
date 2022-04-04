@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tank : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _tankSprite;
-    [SerializeField] private SpriteRenderer _turretSprite;
+    [SerializeField] private GameObject _turret;
     [SerializeField] private bool _shoot;
     [SerializeField] private GameObject _projectile;
     [SerializeField] public float _speed, _areaRadius, _fireRate;
@@ -19,8 +19,8 @@ public class Tank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _health = 3;
-        rotationSpeed = 1f;
+        _health = 30;
+
 
 
     }
@@ -31,8 +31,8 @@ public class Tank : MonoBehaviour
          if(_health == 0)
          {
             Destroy(gameObject);
-         }  
-
+         }
+        OrientationTurret();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,7 +51,7 @@ public class Tank : MonoBehaviour
         {
             ThrowProjectile();
         }
-            OrientationTurret();
+
 
     }
 
@@ -62,8 +62,9 @@ public class Tank : MonoBehaviour
         if (_counter > _fireRate)
         {
             Debug.Log("shoot");
-            GameObject clone = Instantiate(_projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            GameObject clone = Instantiate(_projectile, transform.position,Quaternion.Euler(0,0,- 90) * _turret.transform.rotation );
             Vector3 aimedPoint = _shootPosition.transform.position;
+            Debug.Log(_turret.transform.rotation.z + " _turret.transform.rotation.z ");
             clone.GetComponent<Obus>().LaunchProjectile(aimedPoint);
 
             _counter = 0f;
@@ -77,12 +78,16 @@ public class Tank : MonoBehaviour
 
     private void OrientationTurret()
     {
-        directionTurret = (_shootPosition.transform.position - _turretSprite.transform.position).normalized;
-        lookRotation = Quaternion.LookRotation(directionTurret);
-        _turretSprite.transform.rotation = Quaternion.Slerp(_turretSprite.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        
+        directionTurret = (_shootPosition.transform.position - _turret.transform.position).normalized;
+        Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * directionTurret;
+        lookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
+        _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         Debug.Log("directionTurret " + directionTurret);
         Debug.Log("lookRotation " + lookRotation);
-        //_turretSprite.transform.Rotate()
+
+
+
 
     }
 }

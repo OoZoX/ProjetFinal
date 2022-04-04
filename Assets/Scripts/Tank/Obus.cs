@@ -8,16 +8,22 @@ public class Obus : MonoBehaviour
       [SerializeField] private float _projectileSpeed = 1f;
       [SerializeField] private Rigidbody2D _projectileRg2D;
       [SerializeField] private float _lifeTime = 3f;
-
+    Quaternion toRotation;
       public void Start()
       {
-         // _projectileRg2D = gameObject.GetComponent<Rigidbody2D>();
-      }
 
-      public void LaunchProjectile(Vector3 aimedPoint)
-      {
-          StartCoroutine(Fire(aimedPoint));
       }
+     void Update()
+     {
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 0.1f);
+
+     }
+    public void LaunchProjectile(Vector3 aimedPoint)
+    {
+        StartCoroutine(Fire(aimedPoint));
+
+
+    }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -32,10 +38,11 @@ public class Obus : MonoBehaviour
     
     private IEnumerator Fire(Vector3 aimedPoint)
       {
-          Vector2 dir = (aimedPoint - transform.position).normalized;
-          _projectileRg2D.AddForce(dir * _projectileSpeed, ForceMode2D.Impulse);
+        Vector2 dir = transform.up;
+        _projectileRg2D.AddForce(dir * _projectileSpeed, ForceMode2D.Impulse);
 
-          StartCoroutine(DestroyProjectile());
+
+        StartCoroutine(DestroyProjectile());
           yield return null;
       }
 
