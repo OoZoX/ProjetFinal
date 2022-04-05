@@ -15,7 +15,6 @@ public class Obus : MonoBehaviour
       }
      void Update()
      {
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 0.1f);
 
      }
     public void LaunchProjectile(Vector3 aimedPoint)
@@ -27,7 +26,7 @@ public class Obus : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        Debug.Log("Collision ");
         if (collision.gameObject.CompareTag("Tank"))
         {
             Debug.Log("obus to tank " );
@@ -41,9 +40,8 @@ public class Obus : MonoBehaviour
         Vector2 dir = transform.up;
         _projectileRg2D.AddForce(dir * _projectileSpeed, ForceMode2D.Impulse);
 
-
         StartCoroutine(DestroyProjectile());
-          yield return null;
+        yield return null;
       }
 
       private IEnumerator DestroyProjectile()

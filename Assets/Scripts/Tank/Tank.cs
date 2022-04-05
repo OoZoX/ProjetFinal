@@ -9,18 +9,18 @@ public class Tank : MonoBehaviour
     [SerializeField] private bool _shoot;
     [SerializeField] private GameObject _projectile;
     [SerializeField] public float _speed, _areaRadius, _fireRate;
-    [SerializeField] public float _counter;
     [SerializeField] public SpriteRenderer _shootPosition;
-    private int _health;
-    public float rotationSpeed;
+    [SerializeField] public int _health;
+    [SerializeField] public float rotationSpeed;
+    [SerializeField] public Animator _TankAnimator;
     private Quaternion lookRotation;
     private Vector3 directionTurret;
+    private float _counter;
 
     // Start is called before the first frame update
     void Start()
     {
-        _health = 30;
-
+        _counter = 0;
 
 
     }
@@ -30,11 +30,23 @@ public class Tank : MonoBehaviour
     {
          if(_health == 0)
          {
-            Destroy(gameObject);
+            _TankAnimator.SetBool("Explosing", true);
+            StartCoroutine(Explosion());
          }
-        OrientationTurret();
-    }
+         OrientationTurret();
 
+
+    }
+    private IEnumerator Explosion()
+    {
+        _turret.SetActive(false);
+        Destroy(gameObject, 0.9f);
+        _tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
+        yield return new WaitForSeconds(0.6f);
+        _tankSprite.transform.localScale = new Vector2(0.9f, 0.9f);
+        yield return new WaitForSeconds(0.2f);
+        _tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -50,6 +62,7 @@ public class Tank : MonoBehaviour
         if (_shoot)
         {
             ThrowProjectile();
+
         }
 
 
@@ -57,12 +70,10 @@ public class Tank : MonoBehaviour
 
     private void ThrowProjectile()
     {
-        //Debug.Log("_counter " + _counter);
-        //Debug.Log("_fireRate " + _fireRate);
         if (_counter > _fireRate)
         {
             Debug.Log("shoot");
-            GameObject clone = Instantiate(_projectile, transform.position,Quaternion.Euler(0,0,- 90) * _turret.transform.rotation );
+            GameObject clone = Instantiate(_projectile, new Vector3(_turret.transform.position.x , _turret.transform.position.y  , _turret.transform.position.z) ,Quaternion.Euler(0,0,- 90) * _turret.transform.rotation );
             Vector3 aimedPoint = _shootPosition.transform.position;
             Debug.Log(_turret.transform.rotation.z + " _turret.transform.rotation.z ");
             clone.GetComponent<Obus>().LaunchProjectile(aimedPoint);
@@ -83,11 +94,5 @@ public class Tank : MonoBehaviour
         Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * directionTurret;
         lookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
         _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        Debug.Log("directionTurret " + directionTurret);
-        Debug.Log("lookRotation " + lookRotation);
-
-
-
-
     }
 }
