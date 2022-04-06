@@ -3014,10 +3014,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 855681013382420503, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     - target: {fileID: 959890394456380251, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3066,17 +3062,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipe 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4706504552431238093, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     - target: {fileID: 4706504552431238094, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
       objectReference: {fileID: 0}
-    - target: {fileID: 7926778148872040364, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
