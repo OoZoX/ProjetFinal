@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4808225962835829129}
   m_Layer: 15
   m_Name: TankVert
-  m_TagString: Tank
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

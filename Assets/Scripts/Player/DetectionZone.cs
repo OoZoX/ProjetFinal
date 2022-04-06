@@ -12,6 +12,9 @@ public class DetectionZone : MonoBehaviour
     public bool _firstClick = false;
     private Vector3 _posMouseScreen;
     private Vector3 _posSquare;
+    private List<Collider2D> collider2DsTank = new List<Collider2D>();
+    private List<Collider2D> collider2DsTankCopy = new List<Collider2D>();
+    private List<Collider2D> collider2DsTankDelete = new List<Collider2D>();
 
     public bool m_isClickLeft = false;
 
@@ -58,14 +61,14 @@ public class DetectionZone : MonoBehaviour
     {
         if(m_isClickLeft && _firstClick)
         {
-            Debug.Log($"<color=blue> " + transform.rotation + " </color>");
+            //Debug.Log($"<color=blue> " + transform.rotation + " </color>");
             InputPlayer.Instance.m_GetMousePositionWorld();
             _posMouseScreen = InputPlayer.Instance.m_posSourisWorld;
 
             Vector3 LocalVectorScale = _posMouseScreen - _posSquare;
             transform.localScale = LocalVectorScale;
 
-           
+            DetectTank();
 
         }
     }
@@ -74,6 +77,7 @@ public class DetectionZone : MonoBehaviour
     {
         if(!m_isClickLeft && _firstClick) {
             {
+
                 Debug.Log($"<color=red> Stop Detection Zone </color>");
                 _firstClick = false;
                 transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
@@ -88,6 +92,41 @@ public class DetectionZone : MonoBehaviour
         ContactFilter2D contactfliter = new ContactFilter2D();
         contactfliter.SetLayerMask(layerMask);
 
-        Physics2D.OverlapBox()
+        Vector2 Size = new Vector2 (Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y));
+        Vector2 CenterPoint = new Vector2(_posSquare.x + (transform.localScale.x/2), _posSquare.y + (transform.localScale.y/2));
+
+        
+
+        Physics2D.OverlapBox(CenterPoint, Size, 0, contactfliter, collider2DsTank);
+
+        foreach (Collider2D collider in collider2DsTank)
+        {
+            if (!collider2DsTankCopy.Contains(collider))
+            {
+                Debug.Log("pas dedans");
+                collider2DsTankCopy.Add(collider);
+                collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.03f);
+            }
+
+
+        }
+        foreach (Collider2D collider in collider2DsTankCopy)
+        {
+            if (!collider2DsTank.Contains(collider))
+            {
+                collider2DsTankDelete.Add(collider);
+                collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.0f);
+            }
+        }
+
+        foreach(Collider2D collider in collider2DsTankDelete)
+        {
+            collider2DsTankCopy.Remove(collider);
+        }
+
+        collider2DsTankDelete.Clear();
+
+
+        
     }
 }

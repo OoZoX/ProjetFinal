@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankVert (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1067877658415173805, guid: 7f28a68b5e0057d45b55ddf808b70c7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05726506a17390247aa630b69ffca751, type: 2}
     - target: {fileID: 1067877658415173806, guid: 7f28a68b5e0057d45b55ddf808b70c7f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -106,6 +110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankVert (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1067877658415173805, guid: 7f28a68b5e0057d45b55ddf808b70c7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2639d01d11a85949b9c399dbfb9dcb7, type: 2}
     - target: {fileID: 1067877658415173806, guid: 7f28a68b5e0057d45b55ddf808b70c7f, type: 3}
       propertyPath: m_RootOrder
       value: 2

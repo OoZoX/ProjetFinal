@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8fc6dd59481124e99442bfd9dd24a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 32768
   _firstClick: 0
   m_isClickLeft: 0
 --- !u!4 &492799905
@@ -162,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492799903}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: -6.942, y: 1.492, z: 10}
+  m_LocalPosition: {x: -4.44, y: 0.74, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 965253942}
@@ -2739,7 +2742,6 @@ GameObject:
   m_Component:
   - component: {fileID: 965253942}
   - component: {fileID: 965253941}
-  - component: {fileID: 965253943}
   m_Layer: 0
   m_Name: SelectTank
   m_TagString: Untagged
@@ -2812,32 +2814,6 @@ Transform:
   m_Father: {fileID: 492799905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &965253943
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965253940}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &981913518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,7 +2846,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
@@ -2965,6 +2941,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipe 2
       objectReference: {fileID: 0}
+    - target: {fileID: 685665371744102744, guid: 96620c9f2197c1744ae31f405a9103fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1568830557035808455, guid: 96620c9f2197c1744ae31f405a9103fd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3034,10 +3014,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 855681013382420502, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+    - target: {fileID: 855681013382420503, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     - target: {fileID: 959890394456380251, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3086,21 +3066,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipe 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4706504552431238092, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+    - target: {fileID: 4706504552431238093, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     - target: {fileID: 4706504552431238094, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
       objectReference: {fileID: 0}
-    - target: {fileID: 7926778148872040365, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926778148872040365, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+    - target: {fileID: 7926778148872040364, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1cf5738d2e6a5c4e94c03b28f5b3ba2, type: 3}

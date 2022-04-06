@@ -44,7 +44,7 @@ public class InputPlayer : MonoBehaviour
     public void m_GetMousePositionWorld()
     {
         m_posSourisWorld = _Camera.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
+        //Debug.Log($"<color=yellow>" + m_posSourisWorld.x + "</color> <color=blue>" + m_posSourisWorld.y + "</color>");
     }
     public void GetMousePositionScreen()
     {
