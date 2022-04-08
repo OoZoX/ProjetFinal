@@ -41,7 +41,7 @@ public class InputPlayer : MonoBehaviour
     public void GetClickMouse()
     {
         m_clickMouseLeft = Input.GetMouseButton(0);
-        m_clickMouseLeft = Input.GetMouseButton(1);
+        m_clickMouseRight = Input.GetMouseButton(1);
     }
     public void m_GetMousePositionWorld()
     {
