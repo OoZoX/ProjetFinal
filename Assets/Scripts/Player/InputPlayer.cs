@@ -8,6 +8,7 @@ public class InputPlayer : MonoBehaviour
 
 
     public bool m_clickMouseLeft = false;
+    public bool m_clickMouseRight = false;
 
     public Vector3 m_posSourisWorld;
     public Vector3 m_posMouseScreen;
@@ -40,6 +41,7 @@ public class InputPlayer : MonoBehaviour
     public void GetClickMouse()
     {
         m_clickMouseLeft = Input.GetMouseButton(0);
+        m_clickMouseLeft = Input.GetMouseButton(1);
     }
     public void m_GetMousePositionWorld()
     {

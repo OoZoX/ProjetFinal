@@ -2,22 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectionZone : MonoBehaviour
+public class SelectionTank : MonoBehaviour
 {
     //[SerializeField]
     //private GameValue _gameValue;
     [SerializeField]
     LayerMask layerMask;
 
-    public bool _firstClick = false;
+    
     private Vector3 _posMouseScreen;
     private Vector3 _posSquare;
-    private List<Collider2D> collider2DsTank = new List<Collider2D>();
+
+
+    public List<Collider2D> collider2DsTank = new List<Collider2D>();
+
     private List<Collider2D> collider2DsTankCopy = new List<Collider2D>();
     private List<Collider2D> collider2DsTankDelete = new List<Collider2D>();
 
-    public bool m_isClickLeft = false;
+    
 
+    public bool m_isClickLeft = false;
+    public bool _firstClick = false;
+
+    public static SelectionTank Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
