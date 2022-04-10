@@ -10,7 +10,7 @@ public class MouvementCamera : MonoBehaviour
     private GameObject _camera;
 
     [SerializeField]
-    GameValue _gameStats;
+    MyGameValue _gameStats;
     [SerializeField]
     private int _zoneDepCam = 20;
     [SerializeField]

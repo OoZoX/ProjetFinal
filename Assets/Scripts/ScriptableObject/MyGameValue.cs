@@ -4,15 +4,16 @@ using UnityEngine;
 
 
 [CreateAssetMenu]
-public class GameValue : ScriptableObject
+public class MyGameValue : ScriptableObject
 {
     [Header("GameObject")]
 
     [Tooltip("GameObject camera a move")]
     public GameObject m_camera;
 
-    [Tooltip("GameObject Carre detection")]
-    public GameObject m_carreDetection;
+    [Tooltip("Grid Collider")]
+    public GameObject m_grid;
+
     
 
 }

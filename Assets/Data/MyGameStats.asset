@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2b9fcaf84d418a45a7806bc75a360f5, type: 3}
-  m_Name: GameStats
+  m_Name: MyGameStats
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
