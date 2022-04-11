@@ -5,62 +5,83 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
+    //Gameobjects
     [SerializeField] private SpriteRenderer _tankSprite;
     [SerializeField] private GameObject _turret;
-    [SerializeField] private bool _shoot;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private Animator _TankAnimator;
     [SerializeField] private GameObject _projectile;
-    [SerializeField] public float _speed, _areaRadius, _fireRate;
-    [SerializeField] public float _health;
-    [SerializeField] public float rotationSpeed;
-    [SerializeField] public Animator _TankAnimator;
-    [SerializeField] public Slider _slider;
-    [SerializeField] public Canvas _canvas;
-    private Quaternion lookRotation;
-    private Vector3 directionTurret;
-    private float _counter;
-    private bool _click = false;
-    private Vector3 _Shootposition;
-    private float MaxHealth = 5;
-    private float testcalcul;
+    [SerializeField] private Transform _ShellStartPosition;
+
+    //stats
+    [SerializeField] private bool _CanShoot;
+    [SerializeField] private float _speed, _areaRadius, _fireRate;
+    [SerializeField] private float _health;
+    [SerializeField] private float _MaxHealth;
+    [SerializeField] private float _TurretRotationSpeed;
+    [SerializeField] private float _CaptureSpeed;
+    [SerializeField] private float _ShellDammage;
+
+    //variables
+    private Quaternion LookRotation;
+    private Vector3 Shootposition;
+    private Vector3 DirectionTurret;
+    private float ShootCooldown;
+    private bool ShootClick;
+    public bool IsBot; 
+
     // Start is called before the first frame update
     void Start()
     {
-        _counter = 0;
-        MaxHealth = 5;
+        ShootCooldown = 0;
+        ShootClick = false;
+        _CanShoot = false;
         ActualizeHealthBar();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         ActualizeHealthBar();
-
-        if (_health == 0)
+        OrientationTurret();
+        CanShoot();
+        if (IsBot == false)
         {
-            _TankAnimator.SetBool("Explosing", true);
-            StartCoroutine(Explosion());
-        }
-         OrientationTurret();
-
-        if(_shoot == true)
-        {
-           // InputPlayer.Instance.GetClickMouse();
-            //_click = InputPlayer.Instance.m_clickMouseRight;
-            //Debug.Log("_click " + _click);
-            if (_click == true)
+            InputPlayer.Instance.m_GetMousePositionWorld();
+            Shootposition = InputPlayer.Instance.m_posSourisWorld;
+            if (_CanShoot == true)
             {
-                InputPlayer.Instance.m_GetMousePositionWorld();
-                _Shootposition = InputPlayer.Instance.m_posSourisWorld;
-                //Debug.Log("_Shootposition " + _Shootposition);
+                InputPlayer.Instance.GetClickMouse();
+                ShootClick = InputPlayer.Instance.m_clickMouseRight;
+
+                if (ShootClick == true)
+                {
+                    ThrowProjectile();
+                }
             }
         }
+        else
+        {
+
+        }
     }
-    private IEnumerator Explosion()
+    private void CanShoot()
+    {
+        if (ShootCooldown > _fireRate)
+        {
+            _CanShoot = true;
+        }
+        else
+        {
+            ShootCooldown += Time.deltaTime;
+        }
+    }
+    private IEnumerator DeathExplosion()
     {
         _turret.SetActive(false);
         Destroy(gameObject, 0.9f);
-        _canvas.enabled = false;
+        _canvas.gameObject.SetActive(false);
         _tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
         yield return new WaitForSeconds(0.6f);
         _tankSprite.transform.localScale = new Vector2(0.9f, 0.9f);
@@ -69,68 +90,45 @@ public class Tank : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.gameObject.CompareTag("Shell"))
         {
             _health = _health - 1;
             Debug.Log("hit _health : " + _health);
         }
-
     }
 
-    private void FixedUpdate()
-    {
-        if (_shoot)
-        {
-            ThrowProjectile();
-
-        }
-
-
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Zone"))
         {
-            CaptureZone.CaptureActuelle = CaptureZone.CaptureActuelle + 1f;
-            Debug.Log("CaptureActuelle : " + CaptureZone.CaptureActuelle);
-            Debug.Log("CaptureMax : " + CaptureZone.CaptureMax);
+            CaptureZone.Instance.CaptureActuelle = CaptureZone.Instance.CaptureActuelle + _CaptureSpeed;
         }
     }
     private void ThrowProjectile()
     {
-        if (_counter > _fireRate)
-        {
-            Debug.Log("shoot");
-            GameObject clone = Instantiate(_projectile, new Vector3(_turret.transform.position.x , _turret.transform.position.y  , _turret.transform.position.z) ,Quaternion.Euler(0,0,- 90) * _turret.transform.rotation );
-            Vector3 aimedPoint = _Shootposition;
-            Debug.Log(_turret.transform.rotation.z + " _turret.transform.rotation.z ");
-            clone.GetComponent<Obus>().LaunchProjectile(aimedPoint);
-            _counter = 0f;
-        }
-        else
-        {
-            _counter += Time.deltaTime;
-        }
-         
+        GameObject clone = Instantiate(_projectile, new Vector3(_ShellStartPosition.position.x, _ShellStartPosition.position.y, _ShellStartPosition.position.z), Quaternion.Euler(0, 0, -90) * _turret.transform.rotation);
+        Vector3 aimedPoint = Shootposition;
+        clone.GetComponent<Obus>().LaunchProjectile(aimedPoint);
+        ShootCooldown = 0f;
+        _CanShoot = false;
     }
 
     private void OrientationTurret()
     {
-        
-        directionTurret = (_Shootposition - _turret.transform.position).normalized;
-        Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * directionTurret;
-        lookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
-        _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        DirectionTurret = (Shootposition - _ShellStartPosition.position).normalized;
+        Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
+        LookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
+        _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);
+        Debug.Log("_turret.transform.rotation " + _turret.transform.rotation);
     }
 
     public void ActualizeHealthBar()
     {
-        _slider.value = _health / MaxHealth;
-
+        _slider.value = _health / _MaxHealth;
+        if (_health == 0)
+        {
+            _TankAnimator.SetBool("Explosing", true);
+            StartCoroutine(DeathExplosion());
+        }
     }
 }

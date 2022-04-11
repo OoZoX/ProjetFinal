@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2d991232f0e4bed4a97eaa18697ebc41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -128,16 +128,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tankSprite: {fileID: 709094831417110301}
   _turret: {fileID: 709094831713999647}
-  _shoot: 1
+  _slider: {fileID: 3121128295654669958}
+  _canvas: {fileID: 8646525377070796501}
+  _TankAnimator: {fileID: 5037598031924538427}
   _projectile: {fileID: 8611045978538915862, guid: 9a42d93489f86c3409e61bc095edd8d6, type: 3}
+  _ShellStartPosition: {fileID: 656160426371829691}
+  _CanShoot: 0
   _speed: 1
   _areaRadius: 1
   _fireRate: 3
   _health: 5
-  rotationSpeed: 60
-  _TankAnimator: {fileID: 5037598031924538427}
-  _slider: {fileID: 3121128295654669958}
-  _canvas: {fileID: 8646525377070796501}
+  _MaxHealth: 5
+  _TurretRotationSpeed: 60
+  _CaptureSpeed: 1
+  _ShellDammage: 1
+  IsBot: 1
 --- !u!95 &5037598031924538427
 Animator:
   serializedVersion: 3
@@ -205,7 +210,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.022, y: 0.004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 656160426371829691}
   m_Father: {fileID: 709094831417110290}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,7 +254,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3c017c13531d20841a40cffafc48fa7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -335,6 +341,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3284242073419911374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 656160426371829691}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &656160426371829691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284242073419911374}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.585, y: 0.031, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 709094831713999644}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3851919347675052638
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +593,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2277641447731731796
 MonoBehaviour:

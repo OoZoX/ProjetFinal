@@ -5,14 +5,14 @@ using UnityEngine;
 public class Obus : MonoBehaviour
 {
     
-      [SerializeField] private float _projectileSpeed = 1f;
-      [SerializeField] private Rigidbody2D _projectileRg2D;
-      [SerializeField] private float _lifeTime = 3f;
-    Quaternion toRotation;
-      public void Start()
-      {
+     [SerializeField] private float _projectileSpeed = 1f;
+     [SerializeField] private Rigidbody2D _projectileRg2D;
+     [SerializeField] private float _lifeTime = 3f;
+     Quaternion toRotation;
+     public void Start()
+     {
 
-      }
+     }
      void Update()
      {
 
@@ -20,19 +20,15 @@ public class Obus : MonoBehaviour
     public void LaunchProjectile(Vector3 aimedPoint)
     {
         StartCoroutine(Fire(aimedPoint));
-
-
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision ");
         if (collision.gameObject.CompareTag("Tank"))
         {
-            Debug.Log("obus to tank " );
+            Debug.Log("obus hit tank " );
             Destroy(gameObject);
-        }
-        
+        }     
     }
     
     private IEnumerator Fire(Vector3 aimedPoint)
