@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetGrid : MonoBehaviour
+public class SetGameObjectVariable : MonoBehaviour
 {
+
     [SerializeField]
-    MyGameValue _gameValue;
+    GameObjectVariable gameValue;
+
+
 
     private void Awake()
     {
-        _gameValue.m_grid = transform.gameObject;
+        gameValue.m_value = gameObject;
     }
 
 

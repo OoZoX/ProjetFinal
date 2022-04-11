@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MouvementCamera : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class MouvementCamera : MonoBehaviour
     private GameObject _camera;
 
     [SerializeField]
-    MyGameValue _gameStats;
+    GameObjectVariable GameObjectCamera;
     [SerializeField]
     private int _zoneDepCam = 20;
     [SerializeField]
@@ -41,7 +42,7 @@ public class MouvementCamera : MonoBehaviour
     }
     void Start()
     {
-        _camera = _gameStats.m_camera;
+        _camera = GameObjectCamera.m_value;
     }
 
 

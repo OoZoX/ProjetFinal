@@ -6,7 +6,9 @@ using UnityEngine.Tilemaps;
 public class ManagerGraph : MonoBehaviour
 {
     [SerializeField]
-    MyGameValue _gameValue;
+    GameObjectVariable GameObjectTileMap;
+    [SerializeField]
+    GameObjectVariable GameObjectScanMap;
 
     [SerializeField]
     LayerMask _layerMask;
@@ -30,9 +32,9 @@ public class ManagerGraph : MonoBehaviour
 
     void Start()
     {
-        m_GetTileMapCollider();
-        Debug.Log(_gameValue.m_grid.GetComponent<Tilemap>().size);
-        Debug.Log(_gameValue.m_grid.GetComponent<Tilemap>().transform.position) ;
+        m_ScanMapCollider();
+        Debug.Log(GameObjectTileMap.m_value.GetComponent<Tilemap>().size);
+        Debug.Log(GameObjectTileMap.m_value.GetComponent<Tilemap>().transform.position) ;
     }
 
     // Update is called once per frame
@@ -43,12 +45,16 @@ public class ManagerGraph : MonoBehaviour
     }
 
 
-    public void m_GetTileMapCollider()
+    public void m_ScanMapCollider()
     {
-        ContactFilter2D contactFilter = new ContactFilter2D();
-        contactFilter.SetLayerMask(_layerMask);
+        ContactFilter2D contactFilter2D = new ContactFilter2D();
+        contactFilter2D.layerMask = _layerMask;
+        List<RaycastHit2D> resultRayCast = new List<RaycastHit2D>();
 
-        _gameValue.m_grid.GetComponent<TilemapCollider2D>().OverlapCollider(contactFilter, m_tileCollider2D);
+        Physics2D.Raycast(GameObjectScanMap.m_value.transform.position, Vector2.right, contactFilter2D, resultRayCast);
+
         
     }
+
+    
 }
