@@ -228,7 +228,8 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  m_tileCollider2D: []
+  m_positionStart_X: -8.5
+  m_positionStart_Y: -4.5
 --- !u!4 &1023887267
 Transform:
   m_ObjectHideFlags: 0
