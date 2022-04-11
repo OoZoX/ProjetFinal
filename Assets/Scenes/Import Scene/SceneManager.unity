@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792f2c1ce374b92439e72d11ef5ab27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameStats: {fileID: 11400000, guid: 6220a2325bc762e4da1fe2ec648e90c8, type: 2}
+  GameObjectCamera: {fileID: 11400000, guid: 6220a2325bc762e4da1fe2ec648e90c8, type: 2}
   _zoneDepCam: 100
   _vitesseDepCam: 5
   m_depCamHaut: 0
@@ -223,7 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd6d0d66b7843549a69e178f3c241a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameValue: {fileID: 11400000, guid: 6220a2325bc762e4da1fe2ec648e90c8, type: 2}
+  GameObjectTileMap: {fileID: 11400000, guid: bc09a5f2960b4bd47b1073dcfbb91270, type: 2}
+  GameObjectScanMap: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
