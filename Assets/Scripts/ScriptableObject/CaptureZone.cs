@@ -37,7 +37,7 @@ public class CaptureZone : MonoBehaviour
             _Text.text = CaptureActuelle.ToString();
             //_Text.transform.localScale =new Vector3(0.4f,0.4f ,0.4f);
             _Text.color = Color.red;
-            Scale = 10;
+           // Scale = 10;
         }
         _Fill.transform.localScale = new Vector3(Scale, Scale, 1);
         //_Capture.color = new Color(_Capture.color.r, _Capture.color.g, _Capture.color.b, _Capture.color.a);
