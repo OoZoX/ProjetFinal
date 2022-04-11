@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameObjectTileMap: {fileID: 11400000, guid: bc09a5f2960b4bd47b1073dcfbb91270, type: 2}
-  GameObjectScanMap: {fileID: 0}
+  GameObjectScanMap: {fileID: 11400000, guid: ae134f9346b0ac14dab44f318e201e39, type: 2}
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
