@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8611045978538915859}
   - component: {fileID: -1074688631963324456}
   - component: {fileID: 4253047742616659943}
+  - component: {fileID: -7711035190591671034}
   m_Layer: 16
-  m_Name: Obus
+  m_Name: Shell
   m_TagString: Shell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b88ed2cbeee8458ffd495307542c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpeed: 10
+  _projectileSpeed: 6
   _projectileRg2D: {fileID: 4253047742616659943}
+  _ShellColliderRg2D: {fileID: 8611045978538915859}
+  _ShellAnimator: {fileID: -7711035190591671034}
   _lifeTime: 3
 --- !u!61 &8611045978538915859
 BoxCollider2D:
@@ -114,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: -6107155909932373041, guid: 9284d96f446dbc44bb530d6b849d0c1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -147,3 +150,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-7711035190591671034
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611045978538915862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c19ce88e62aaa864694a7c79c6c99c15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
