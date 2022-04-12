@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 709094831417110290}
   - component: {fileID: 709094831417110301}
   - component: {fileID: 2107275903009344264}
-  - component: {fileID: 599204048015708206}
   - component: {fileID: 5037598031924538427}
   - component: {fileID: -4265304630751111716}
+  - component: {fileID: 4730007349980786783}
   m_Layer: 15
-  m_Name: TankBlanc
+  m_Name: IATank
   m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,37 +114,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0850105, y: 0.7210301}
   m_EdgeRadius: 0
---- !u!114 &599204048015708206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709094831417110300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5733ab656d191744f8ba12a0fbee0624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tankSprite: {fileID: 709094831417110301}
-  _turret: {fileID: 709094831713999647}
-  _slider: {fileID: 3121128295654669958}
-  _canvas: {fileID: 8646525377070796501}
-  _TankAnimator: {fileID: 5037598031924538427}
-  _Shell: {fileID: 8611045978538915862, guid: 9a42d93489f86c3409e61bc095edd8d6, type: 3}
-  _ShellStartPosition: {fileID: 656160426371829691}
-  _DetectionRange: {fileID: 5388549282701437452}
-  _TankCollider: {fileID: 2107275903009344264}
-  _CanShoot: 0
-  _Speed: 1
-  _FireRate: 3
-  _Health: 5
-  _MaxHealth: 5
-  _TurretRotationSpeed: 60
-  _CaptureSpeed: 1
-  _UnCaptureSpeed: -1
-  _ShellDammage: 1
-  IsBot: 1
 --- !u!95 &5037598031924538427
 Animator:
   serializedVersion: 3
@@ -185,6 +154,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4730007349980786783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709094831417110300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8069b36e272a4fa899eb7c3dbcce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tankSprite: {fileID: 709094831417110301}
+  _turret: {fileID: 709094831713999647}
+  _slider: {fileID: 3121128295654669958}
+  _canvas: {fileID: 8646525377070796501}
+  _TankAnimator: {fileID: 5037598031924538427}
+  _Shell: {fileID: 8611045978538915862, guid: 9a42d93489f86c3409e61bc095edd8d6, type: 3}
+  _ShellStartPosition: {fileID: 656160426371829691}
+  _DetectionRange: {fileID: 5388549282701437452}
+  _TankCollider: {fileID: 2107275903009344264}
+  _CanShoot: 0
+  _Speed: 0
+  _FireRate: 0
+  _Health: 0
+  _MaxHealth: 0
+  _TurretRotationSpeed: 0
+  _CaptureSpeed: 0
+  _ShellDammage: 0
 --- !u!1 &709094831713999647
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +195,7 @@ GameObject:
   - component: {fileID: 709094831713999645}
   - component: {fileID: 5388549282701437452}
   m_Layer: 15
-  m_Name: tourelleBlanche
+  m_Name: IATurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

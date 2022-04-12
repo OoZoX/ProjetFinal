@@ -47,7 +47,6 @@ public class Shell : MonoBehaviour
     private IEnumerator Destroy()
     {
         _ShellAnimator.SetBool("Explosing", true);
-        //_projectileRg2D.AddForce( -(dir * _projectileSpeed), ForceMode2D.Force);
         _projectileRg2D.velocity = Vector2.zero;
         _projectileRg2D.constraints = RigidbodyConstraints2D.FreezeAll;
         Destroy(this.gameObject, 0.5f);
@@ -59,8 +58,7 @@ public class Shell : MonoBehaviour
     }
 
     private IEnumerator Fire(Vector3 aimedPoint)
-    {
-        
+    {  
         Vector2 dir = transform.up;
         _projectileRg2D.AddForce(dir * _projectileSpeed, ForceMode2D.Impulse);
         StartCoroutine(DestroyProjectile());
