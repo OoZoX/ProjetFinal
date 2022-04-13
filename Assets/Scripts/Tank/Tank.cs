@@ -34,7 +34,7 @@ public class Tank : MonoBehaviour
     protected float ShootCooldown;
     protected bool DeathTrigger;
 
-
+    public static Tank Instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,7 @@ public class Tank : MonoBehaviour
     {
 
     }
-    public void CanShoot()
+    protected void CanShoot()
     {
         if (ShootCooldown > _FireRate)
         {
@@ -57,7 +57,7 @@ public class Tank : MonoBehaviour
             ShootCooldown += Time.deltaTime;
         }
     }
-    public IEnumerator DeathExplosion()
+    protected IEnumerator DeathExplosion()
     {
         DeathTrigger = true;
         Debug.Log("Begin Animation Tank Death");
@@ -72,15 +72,8 @@ public class Tank : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Debug.Log("End Animation Tank Death" );
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
-        {
-            _Health = _Health - _ShellDammage;
-            Debug.Log("hit _health : " + _Health);
-        }
-    }
-    public void ThrowProjectile()
+
+    protected void ThrowProjectile()
     {
         GameObject ShellClone = Instantiate(_Shell, new Vector3(_ShellStartPosition.position.x, _ShellStartPosition.position.y, _ShellStartPosition.position.z), Quaternion.Euler(0, 0, -90) * _turret.transform.rotation);
         Vector3 aimedPoint = Shootposition;
@@ -89,7 +82,7 @@ public class Tank : MonoBehaviour
         _CanShoot = false;
     }
 
-    public void OrientationTurret()
+    protected void OrientationTurret()
     {
         DirectionTurret = (Shootposition - _ShellStartPosition.position).normalized;
         Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
@@ -97,13 +90,40 @@ public class Tank : MonoBehaviour
         _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);
     }
 
-    public void ActualizeHealthBar()
+    protected void ActualizeHealthBar()
     {
         _slider.value = _Health / _MaxHealth;
         if (_Health == 0 && DeathTrigger == false)
         {
             _TankAnimator.SetBool("Explosing", true);
             StartCoroutine(DeathExplosion());
+        }
+    }
+    protected void CapturingZone(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
+        {
+            CaptureZone.Instance.CaptureActuelle = CaptureZone.Instance.CaptureActuelle + _CaptureSpeed;
+        }
+    }
+    protected void GetHitShell(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
+        {
+            _Health = _Health - _ShellDammage;
+        }
+    }
+    protected void GetHeal(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Heal") && _TankCollider.bounds.Intersects(collision.bounds))
+        {
+            _Health = _Health + 1;
+            Destroy(collision.gameObject);
+            if (_Health > _MaxHealth)
+            {
+                _Health = _MaxHealth;
+            }
+            Debug.Log("hit _health : " + _Health);
         }
     }
 }

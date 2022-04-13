@@ -11,6 +11,7 @@ TagManager:
   - HealthPickup
   - Shield
   - Ennemy
+  - Heal
   layers:
   - Default
   - TransparentFX

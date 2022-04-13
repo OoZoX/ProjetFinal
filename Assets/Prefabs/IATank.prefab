@@ -176,13 +176,13 @@ MonoBehaviour:
   _DetectionRange: {fileID: 5388549282701437452}
   _TankCollider: {fileID: 2107275903009344264}
   _CanShoot: 0
-  _Speed: 0
-  _FireRate: 0
-  _Health: 0
-  _MaxHealth: 0
-  _TurretRotationSpeed: 0
-  _CaptureSpeed: 0
-  _ShellDammage: 0
+  _Speed: 1
+  _FireRate: 3
+  _Health: 3
+  _MaxHealth: 5
+  _TurretRotationSpeed: 60
+  _CaptureSpeed: -1
+  _ShellDammage: 1
 --- !u!1 &709094831713999647
 GameObject:
   m_ObjectHideFlags: 0

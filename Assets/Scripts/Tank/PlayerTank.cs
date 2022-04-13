@@ -39,17 +39,11 @@ public class PlayerTank : Tank
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
-        {
-            _Health = _Health - _ShellDammage;
-            Debug.Log("hit _health : " + _Health);
-        }
+        GetHitShell(collision);
+        GetHeal(collision);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
-        {
-            CaptureZone.Instance.CaptureActuelle = CaptureZone.Instance.CaptureActuelle + _CaptureSpeed;
-        }
+        CapturingZone(collision);
     }
 }

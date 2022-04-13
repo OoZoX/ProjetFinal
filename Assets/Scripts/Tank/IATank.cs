@@ -49,11 +49,8 @@ public class IATank : Tank
             _CanShoot = false;
             EnnemyInRange = true;
         }
-        if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
-        {
-            _Health = _Health - _ShellDammage;
-            Debug.Log("hit _health : " + _Health);
-        }
+        GetHitShell(collision);
+        GetHeal(collision);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -62,10 +59,10 @@ public class IATank : Tank
             Shootposition = collision.transform.position;
             EnnemyInRange = true;
         }
+        CapturingZone(collision);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         EnnemyInRange = false;
     }
-   
 }
