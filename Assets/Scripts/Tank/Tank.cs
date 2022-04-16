@@ -52,7 +52,6 @@ public class Tank : MonoBehaviour
             Shootposition = InputPlayer.Instance.m_posSourisWorld;
             if (_CanShoot == true)
             {
-                InputPlayer.Instance.GetClickMouse();
                 ShootClick = InputPlayer.Instance.m_clickMouseRight;
 
                 if (ShootClick == true)

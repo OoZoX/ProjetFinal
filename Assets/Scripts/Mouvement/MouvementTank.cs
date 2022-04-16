@@ -10,6 +10,9 @@ public class MouvementTank : MonoBehaviour
     [SerializeField]
     GameParameters _gameParameters;
 
+ 
+    private Vector3 _cible;
+
 
     void Start()
     {
@@ -19,11 +22,30 @@ public class MouvementTank : MonoBehaviour
     
     void Update()
     {
-
+        if (InputPlayer.Instance.m_clickMouseRight)
+        {
+            InputPlayer.Instance.m_GetMousePositionWorld();
+            _cible = InputPlayer.Instance.m_posMouseScreen;
+            Mouvement();
+        }
     }
 
-    public void Deplacment(Vector2 Cible)
+    private void Mouvement()
     {
+        ManagerGraph.Instance.m_StartParcourChemin(_cible);
         
+        foreach(var tank in SelectionTank.Instance.m_collider2DsTank)
+        {
+            TraceChemin(ManagerGraph.Instance.m_listCaseMap);
+        }
+
+
     }
+
+    private void TraceChemin(Case[,] AllCaseMap)
+    {
+
+    }
+
+
 }

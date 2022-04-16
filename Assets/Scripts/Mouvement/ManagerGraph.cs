@@ -15,6 +15,8 @@ public struct Case
     public Vector3 m_pos { get; set; }
     public TypeCase m_typeCase { get; set; }
     public Collider2D m_collider { get; set; }
+    public int m_distance { get; set; }
+    public Vector2 m_parentSearch { get; set; }
 
 }
 public class ManagerGraph : MonoBehaviour
@@ -27,11 +29,15 @@ public class ManagerGraph : MonoBehaviour
     [SerializeField]
     LayerMask _layerMask;
 
-    public float m_positionStart_X;
-    public float m_positionStart_Y;
     private Vector3 _sizeMap;
 
-    [SerializeField]
+    public bool m_flowFild = true;
+
+    public float m_positionStart_X;
+    public float m_positionStart_Y;
+    
+
+    
     public Case[,] m_listCaseMap;
 
     public static ManagerGraph Instance;
@@ -55,14 +61,19 @@ public class ManagerGraph : MonoBehaviour
         m_listCaseMap = new Case[(int)_sizeMap.x, (int)_sizeMap.y];
 
         m_ScanMapCollider();
-        Debug.Log("fini");
+        
         
     }
 
-    void Update()
+    public void m_StartParcourChemin(Vector2 Cible)
     {
-        
+        if (m_flowFild)
+        {
+            FlowBirth.Instance.ParcourtCarte(Cible);
+        }
     }
+
+
 
     /// <summary>
     /// Scan la map pour crer un tableau [,] de toutes les cases
@@ -70,7 +81,7 @@ public class ManagerGraph : MonoBehaviour
     public void m_ScanMapCollider()
     {
         
-        Debug.Log(_sizeMap);
+        
         for (int i = 0; i < _sizeMap.x; i++)
         {
             for (int u = 0; u < _sizeMap.y; u++)
@@ -83,7 +94,7 @@ public class ManagerGraph : MonoBehaviour
                 Case CaseTemp = new Case();
 
 
-                if (raycast.collider)
+                if (raycast.collider != null)
                 {
                     if (raycast.collider.isTrigger)
                     {
@@ -107,15 +118,13 @@ public class ManagerGraph : MonoBehaviour
                 }
 
 
-                m_listCaseMap[i,u] = CaseTemp;
+                m_listCaseMap[i + (int) _sizeMap.x,u + (int) _sizeMap.y] = CaseTemp;
+
+                
                 
             }
         }
         
-
-
-
-
         
     }
 

@@ -38,7 +38,7 @@ public class InputPlayer : MonoBehaviour
         GetKeyBoard();
     }
 
-    public void GetClickMouse()
+    private void GetClickMouse()
     {
         m_clickMouseLeft = Input.GetMouseButton(0);
         m_clickMouseRight = Input.GetMouseButton(1);

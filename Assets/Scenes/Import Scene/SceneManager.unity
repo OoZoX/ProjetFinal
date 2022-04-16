@@ -204,6 +204,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1023887267}
   - component: {fileID: 1023887266}
+  - component: {fileID: 1023887269}
+  - component: {fileID: 1023887268}
   m_Layer: 0
   m_Name: ManagerMouvement
   m_TagString: Untagged
@@ -228,6 +230,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  m_flowFild: 1
   m_positionStart_X: -8.5
   m_positionStart_Y: -4.5
 --- !u!4 &1023887267
@@ -244,3 +247,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023887268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023887265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f161f08ccb526b64c99b62b0ebd3d8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameParameters: {fileID: 11400000, guid: c7af04d7648f1874d971bac052fe6d39, type: 2}
+--- !u!114 &1023887269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023887265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4941e5275ea8843ba4a0d631e71842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

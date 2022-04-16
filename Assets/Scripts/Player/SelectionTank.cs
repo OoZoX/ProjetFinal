@@ -14,7 +14,7 @@ public class SelectionTank : MonoBehaviour
     private Vector3 _posSquare;
 
 
-    public List<Collider2D> collider2DsTank = new List<Collider2D>();
+    public List<Collider2D> m_collider2DsTank = new List<Collider2D>();
 
     private List<Collider2D> collider2DsTankCopy = new List<Collider2D>();
     private List<Collider2D> collider2DsTankDelete = new List<Collider2D>();
@@ -55,7 +55,6 @@ public class SelectionTank : MonoBehaviour
 
     private void GetInput()
     {
-        InputPlayer.Instance.GetClickMouse();
         m_isClickLeft = InputPlayer.Instance.m_clickMouseLeft;
     }
 
@@ -116,9 +115,9 @@ public class SelectionTank : MonoBehaviour
 
         
 
-        Physics2D.OverlapBox(CenterPoint, Size, 0, contactfliter, collider2DsTank);
+        Physics2D.OverlapBox(CenterPoint, Size, 0, contactfliter, m_collider2DsTank);
 
-        foreach (Collider2D collider in collider2DsTank)
+        foreach (Collider2D collider in m_collider2DsTank)
         {
             if (!collider2DsTankCopy.Contains(collider))
             {
@@ -131,7 +130,7 @@ public class SelectionTank : MonoBehaviour
         }
         foreach (Collider2D collider in collider2DsTankCopy)
         {
-            if (!collider2DsTank.Contains(collider))
+            if (!m_collider2DsTank.Contains(collider))
             {
                 collider2DsTankDelete.Add(collider);
                 collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.0f);
