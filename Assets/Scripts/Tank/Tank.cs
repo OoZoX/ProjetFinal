@@ -44,16 +44,6 @@ public class Tank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ActualizeHealthBar();
-        OrientationTurret();
-        CanShoot();
-        if (IsBot == false)
-        {
-            InputPlayer.Instance.m_GetMousePositionWorld();
-            Shootposition = InputPlayer.Instance.m_posSourisWorld;
-            if (_CanShoot == true)
-            {
-                ShootClick = InputPlayer.Instance.m_clickMouseRight;
 
     }
     protected void CanShoot()
@@ -73,14 +63,14 @@ public class Tank : MonoBehaviour
         Debug.Log("Begin Animation Tank Death");
         this._turret.SetActive(false);
         this._canvas.gameObject.SetActive(false);
-        Destroy(this.gameObject,1f);
+        Destroy(this.gameObject, 1f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        this._tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);   
+        this._tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);
         yield return new WaitForSeconds(0.3f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
         yield return new WaitForSeconds(3f);
-        Debug.Log("End Animation Tank Death" );
+        Debug.Log("End Animation Tank Death");
     }
 
     protected void ThrowProjectile()
