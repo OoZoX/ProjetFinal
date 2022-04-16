@@ -33,16 +33,22 @@ public class CaptureZone : MonoBehaviour
 
         if(CaptureMax > CaptureActuelle)
         {
+            if(CaptureActuelle < 0)
+            {
+                CaptureActuelle = 0;
+            }
             Scale = CaptureActuelle / 10;
             _Text.text = CaptureActuelle.ToString();
             CaptureActuelle = (float)Math.Round(CaptureActuelle);
+            _Text.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+            _Text.color = new Color(0, 0, 0, 0.7f);
         }
         else
         {
             CaptureActuelle = CaptureMax;
             _Text.text = CaptureActuelle.ToString();
-            //_Text.transform.localScale = new Vector3(0.4f,0.4f ,0.4f);
-            _Text.color = Color.red;
+            _Text.transform.localScale = new Vector3(0.3f,0.3f ,0.3f);
+            _Text.color = new Color(1, 0, 0, 1); 
         }
         _Fill.transform.localScale = new Vector3(Scale, Scale, 1);
     }
