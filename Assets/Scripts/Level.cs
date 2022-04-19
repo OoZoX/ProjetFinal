@@ -12,8 +12,8 @@ public class Level : MonoBehaviour
     [SerializeField] private List<CollectableItem> CollectableItemList;
     [SerializeField] private int MaxTimeGame;
 
-    private List<Vector2> SpawnIA;
-    private List<Vector2> SpawnPlayer;
+    private List<Vector3> SpawnIA;
+    private List<Vector3> SpawnPlayer;
 
     private int NbTotalIATank;
     private int NbTotalPlayerTank;
@@ -24,7 +24,7 @@ public class Level : MonoBehaviour
     [SerializeField] private float IARespawnRate;
     [SerializeField] private float PlayerRespawnRate;
 
-    private Stopwatch _GameTimer;
+    private Stopwatch _GameTimer = new Stopwatch();
     
     private int rnd;
     private enum StateLevel
@@ -40,15 +40,15 @@ public class Level : MonoBehaviour
     {   
         foreach (Tank tank in IATankList)
         {
-           // SpawnIA.Add(tank.gameObject.transform.position);
+          // SpawnIA.Add(tank.gameObject.transform.position);
         }        
         foreach (Tank tank in PlayerTankList)
         {
-            //SpawnPlayer.Add(tank.gameObject.transform.position);
+           // SpawnPlayer.Add(tank.gameObject.transform.position);
         }
         NbTotalIATank = IATankList.Count();
         NbTotalPlayerTank = PlayerTankList.Count();
-        //_GameTimer.Start();
+        _GameTimer.Start();
     }
 
     // Update is called once per frame

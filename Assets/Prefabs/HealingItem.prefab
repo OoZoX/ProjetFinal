@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aeff57eca573ba468d5a0ab3f8bb6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CollectableItemCollider: {fileID: 0}
   _HealingValue: 1
-  _HealingCollider: {fileID: 2750075498559081430}
 --- !u!1 &5605109420210663149
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.29803923}
   m_FlipX: 0

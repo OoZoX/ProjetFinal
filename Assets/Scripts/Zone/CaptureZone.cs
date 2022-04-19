@@ -27,18 +27,7 @@ public class CaptureZone : MonoBehaviour
         CapturedPlayer
     }
     public ZoneState _ZoneState;
-    public static CaptureZone Instance;
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+
     void Start()
     {
         _ZoneState = ZoneState.Empty;
