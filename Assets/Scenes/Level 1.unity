@@ -185,8 +185,8 @@ GameObject:
   - component: {fileID: 489868629}
   - component: {fileID: 489868628}
   m_Layer: 10
-  m_Name: sol (1)
-  m_TagString: Untagged
+  m_Name: Dirty Road
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3616,8 +3616,8 @@ GameObject:
   - component: {fileID: 656353086}
   - component: {fileID: 656353085}
   m_Layer: 10
-  m_Name: sol (2)
-  m_TagString: Untagged
+  m_Name: Sandy Road
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4576,8 +4576,8 @@ GameObject:
   - component: {fileID: 972242712}
   - component: {fileID: 972242711}
   m_Layer: 10
-  m_Name: sol
-  m_TagString: Untagged
+  m_Name: Dirt
+  m_TagString: Dirt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11217,7 +11217,7 @@ GameObject:
   - component: {fileID: 1197026892}
   - component: {fileID: 1197026891}
   m_Layer: 10
-  m_Name: sol (4)
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11528,8 +11528,8 @@ GameObject:
   - component: {fileID: 1364220004}
   - component: {fileID: 1364220003}
   m_Layer: 10
-  m_Name: sol (3)
-  m_TagString: Untagged
+  m_Name: Sand
+  m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
