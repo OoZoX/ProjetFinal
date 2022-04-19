@@ -8,7 +8,7 @@ public class InputPlayer : MonoBehaviour
     [SerializeField]
     private LayerMask _layerRayCastTank;
     [SerializeField]
-    private string _tagTankAllie;
+    //private string _tagTankAllie;
 
 
     public bool m_touchTankAllie = false;
@@ -48,8 +48,12 @@ public class InputPlayer : MonoBehaviour
     {
         m_GetMousePositionWorld();
         RaycastHit2D raycast = Physics2D.Raycast(m_posSourisWorld, Vector2.right, 0.1f, _layerRayCastTank);
-        if (raycast.collider.gameObject.CompareTag(_tagTankAllie))
-            m_touchTankAllie = true;
+        if(raycast.collider != null)
+        {
+            if (raycast.collider.gameObject.CompareTag("Player"))
+                m_touchTankAllie = true;
+        }
+        
         else
             m_touchTankAllie = false;
     }
