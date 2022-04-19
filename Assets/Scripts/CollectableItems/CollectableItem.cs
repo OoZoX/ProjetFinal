@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealingItem : MonoBehaviour
+public class CollectableItem : MonoBehaviour
 {
-    [SerializeField] public int _HealingValue;
-    [SerializeField] public BoxCollider2D _HealingCollider;
-    public static HealingItem Instance;
+    [SerializeField] public BoxCollider2D _CollectableItemCollider;
 
+    public static CollectableItem Instance;
     // Start is called before the first frame update
     void Start()
     {

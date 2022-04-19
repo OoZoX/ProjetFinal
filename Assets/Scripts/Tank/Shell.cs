@@ -36,10 +36,15 @@ public class Shell : MonoBehaviour
         {
             StartCoroutine(Destroy());
         }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Tank") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
+        {
+            StartCoroutine(Destroy());
+        }
+        if (collision.gameObject.CompareTag("Shell") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
         {
             StartCoroutine(Destroy());
         }

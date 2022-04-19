@@ -157,9 +157,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Fill: {fileID: 2154761582844761873}
   _Text: {fileID: 1516167108288749464}
+  _SpriteFill: {fileID: 5074940810625822276}
   CaptureMax: 100
+  CaptureMin: -100
   CaptureActuelle: 0
   Scale: 0
+  _ZoneState: 0
 --- !u!1 &2154761582844761873
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +241,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.91539794, g: 0.9622642, b: 0, a: 0.2}
+  m_Color: {r: 1, g: 0.43214107, b: 0, a: 0.7647059}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
