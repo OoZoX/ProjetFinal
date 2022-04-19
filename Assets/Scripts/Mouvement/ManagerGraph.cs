@@ -20,6 +20,7 @@ public struct Case
     public Vector2 m_parentSearch { get; set; }
 
 }
+
 public class ManagerGraph : MonoBehaviour
 {
     [SerializeField]
@@ -64,7 +65,7 @@ public class ManagerGraph : MonoBehaviour
         m_decalageX = (int)_sizeMap.x;
         m_decalageY = (int)_sizeMap.y;
         m_listCaseMap = new Case[(int)_sizeMap.x + m_decalageX, (int)_sizeMap.y + m_decalageY];
-        Debug.Log(_sizeMap);
+        //Debug.Log(_sizeMap);
 
 
         m_ScanMapCollider();
@@ -122,7 +123,7 @@ public class ManagerGraph : MonoBehaviour
 
                 m_listCaseMap[(int) NewPos.x + m_decalageX, (int) NewPos.y + m_decalageY] = CaseTemp;
 
-                Debug.Log($"<color=red>" + i + " and " + u + "</color>");
+                //Debug.Log($"<color=red>" + i + " and " + u + "</color>");
                 
             }
         }

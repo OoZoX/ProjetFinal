@@ -105,7 +105,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -135,14 +135,19 @@ MonoBehaviour:
   _ShellStartPosition: {fileID: 656160426371829691}
   _DetectionRange: {fileID: 5388549282701437452}
   _TankCollider: {fileID: 2107275903009344264}
+  _gameParameters: {fileID: 11400000, guid: c7af04d7648f1874d971bac052fe6d39, type: 2}
   _CanShoot: 0
   _Speed: 1
   _FireRate: 3
   _Health: 5
   _MaxHealth: 5
-  _TurretRotationSpeed: 60
+  _tankRotationSpeed: 180
+  _TurretRotationSpeed: 720
   _CaptureSpeed: 1
   _ShellDammage: 1
+  m_startDep: 0
+  m_isMoving: 0
+  m_cheminDep: []
 --- !u!95 &5037598031924538427
 Animator:
   serializedVersion: 3

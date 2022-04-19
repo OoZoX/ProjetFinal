@@ -16,8 +16,8 @@ public class SelectionTank : MonoBehaviour
 
     public List<Collider2D> m_collider2DsTank = new List<Collider2D>();
 
-    private List<Collider2D> collider2DsTankCopy = new List<Collider2D>();
-    private List<Collider2D> collider2DsTankDelete = new List<Collider2D>();
+    private List<Collider2D> _collider2DsTankCopy = new List<Collider2D>();
+    private List<Collider2D> _collider2DsTankDelete = new List<Collider2D>();
 
     
 
@@ -109,6 +109,8 @@ public class SelectionTank : MonoBehaviour
 
         ContactFilter2D contactfliter = new ContactFilter2D();
         contactfliter.SetLayerMask(layerMask);
+        
+        
 
         Vector2 Size = new Vector2 (Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y));
         Vector2 CenterPoint = new Vector2(_posSquare.x + (transform.localScale.x/2), _posSquare.y + (transform.localScale.y/2));
@@ -117,32 +119,43 @@ public class SelectionTank : MonoBehaviour
 
         Physics2D.OverlapBox(CenterPoint, Size, 0, contactfliter, m_collider2DsTank);
 
+        for (int i = 0; i < m_collider2DsTank.Count; i++)
+        {
+            if(!m_collider2DsTank[i].CompareTag("Player"))
+                _collider2DsTankDelete.Add(m_collider2DsTank[i]);
+        }
+        foreach (var tank in _collider2DsTankDelete)
+        {
+            m_collider2DsTank.Remove(tank);
+        }
+        _collider2DsTankDelete.Clear();
+
         foreach (Collider2D collider in m_collider2DsTank)
         {
-            if (!collider2DsTankCopy.Contains(collider))
+            if (!_collider2DsTankCopy.Contains(collider))
             {
-                Debug.Log("pas dedans");
-                collider2DsTankCopy.Add(collider);
+                
+                _collider2DsTankCopy.Add(collider);
                 collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.03f);
             }
 
 
         }
-        foreach (Collider2D collider in collider2DsTankCopy)
+        foreach (Collider2D collider in _collider2DsTankCopy)
         {
             if (!m_collider2DsTank.Contains(collider))
             {
-                collider2DsTankDelete.Add(collider);
+                _collider2DsTankDelete.Add(collider);
                 collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.0f);
             }
         }
 
-        foreach(Collider2D collider in collider2DsTankDelete)
+        foreach(Collider2D collider in _collider2DsTankDelete)
         {
-            collider2DsTankCopy.Remove(collider);
+            _collider2DsTankCopy.Remove(collider);
         }
 
-        collider2DsTankDelete.Clear();
+        _collider2DsTankDelete.Clear();
 
 
         
