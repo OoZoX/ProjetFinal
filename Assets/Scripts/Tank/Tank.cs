@@ -107,7 +107,8 @@ public class Tank : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
         {
-            CaptureZone.Instance.CaptureActuelle = CaptureZone.Instance.CaptureActuelle + _CaptureSpeed;
+            var zone = collision.transform.parent.GetComponent<CaptureZone>();
+            zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
         }
     }
     protected void GetHitShell(Collider2D collision)
