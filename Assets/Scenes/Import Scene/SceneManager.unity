@@ -153,6 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ace1f7baae5c7479b409fdd7bbf582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerRayCastTank:
+    serializedVersion: 2
+    m_Bits: 32768
+  _tagTankAllie: Player
+  m_touchTankAllie: 0
   m_clickMouseLeft: 0
   m_clickMouseRight: 0
   m_posSourisWorld: {x: 0, y: 0, z: 0}
