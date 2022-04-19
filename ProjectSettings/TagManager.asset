@@ -12,6 +12,9 @@ TagManager:
   - Shield
   - Ennemy
   - Heal
+  - Dirt
+  - Road
+  - Sand
   layers:
   - Default
   - TransparentFX
