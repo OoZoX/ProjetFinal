@@ -5,8 +5,13 @@ using UnityEngine;
 public class InputPlayer : MonoBehaviour
 {
     private Camera _Camera;
+    [SerializeField]
+    private LayerMask _layerRayCastTank;
+    [SerializeField]
+    private string _tagTankAllie;
 
 
+    public bool m_touchTankAllie = false;
     public bool m_clickMouseLeft = false;
     public bool m_clickMouseRight = false;
 
@@ -36,12 +41,29 @@ public class InputPlayer : MonoBehaviour
     {
         GetClickMouse();
         GetKeyBoard();
+
+    }
+
+    private void RayCastClick()
+    {
+        m_GetMousePositionWorld();
+        RaycastHit2D raycast = Physics2D.Raycast(m_posSourisWorld, Vector2.right, 0.1f, _layerRayCastTank);
+        if (raycast.collider.gameObject.CompareTag(_tagTankAllie))
+            m_touchTankAllie = true;
+        else
+            m_touchTankAllie = false;
     }
 
     private void GetClickMouse()
     {
         m_clickMouseLeft = Input.GetMouseButton(0);
         m_clickMouseRight = Input.GetMouseButton(1);
+        if (m_clickMouseRight)
+            RayCastClick();
+        else 
+            m_touchTankAllie = false;
+        
+        
     }
     public void m_GetMousePositionWorld()
     {

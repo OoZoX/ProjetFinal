@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4265304630751111716}
   m_Layer: 15
   m_Name: PlayerTank
-  m_TagString: Tank
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,9 +142,7 @@ MonoBehaviour:
   _MaxHealth: 5
   _TurretRotationSpeed: 60
   _CaptureSpeed: 1
-  _UnCaptureSpeed: -1
   _ShellDammage: 1
-  IsBot: 1
 --- !u!95 &5037598031924538427
 Animator:
   serializedVersion: 3
