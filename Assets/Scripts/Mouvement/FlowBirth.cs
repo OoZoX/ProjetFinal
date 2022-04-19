@@ -50,13 +50,15 @@ public class FlowBirth : MonoBehaviour
         _listCalculateFinish = new List<Vector2>();
         _listTempCaseMap = ManagerGraph.Instance.m_listCaseMap;
         Vector2 CibleActu;
-         
-        int _decalageX = ManagerGraph.Instance.m_decalageX;
-        int _decalageY = ManagerGraph.Instance.m_decalageY;
+
+        Cible = new Vector2(
+                                Cible.x - ManagerGraph.Instance.m_positionStart_X, 
+                                Cible.y - ManagerGraph.Instance.m_positionStart_Y
+                           );
 
 
-        m_listToCalculate.Add(new Vector4(Cible.x + _decalageX, Cible.y + _decalageY, Cible.x + _decalageX, Cible.y + _decalageY));
-        m_listToCalculateCompare.Add(new Vector4(Cible.x + _decalageX, Cible.y + _decalageY, Cible.x + _decalageX, Cible.y + _decalageY));
+        m_listToCalculate.Add(new Vector4(Cible.x, Cible.y, Cible.x, Cible.y));
+        m_listToCalculateCompare.Add(new Vector4(Cible.x, Cible.y, Cible.x, Cible.y));
         _searchFinish = false;
 
         while (!_searchFinish)
@@ -70,8 +72,9 @@ public class FlowBirth : MonoBehaviour
             {
                 if(_listCalculateFinish.Count == 0)
                 {
-                    _listTempCaseMap[(int)Cible.x + _decalageX, (int)Cible.y + _decalageY].m_parentSearch = new Vector2((int)Cible.x, (int)Cible.y);
-                    _listTempCaseMap[(int)Cible.x + _decalageX, (int)Cible.y + _decalageY].m_distance = 0;
+                    Debug.Log($"<color=red>" + Cible + "</color>");
+                    _listTempCaseMap[(int)Cible.x, (int)Cible.y].m_parentSearch = new Vector2((int)Cible.x, (int)Cible.y);
+                    _listTempCaseMap[(int)Cible.x, (int)Cible.y].m_distance = 0;
                     
                     _listCalculateFinish.Add(new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y));
                 }
@@ -122,7 +125,7 @@ public class FlowBirth : MonoBehaviour
             }
         }
 
-        ManagerGraph.Instance.m_listCaseMap = _listTempCaseMap;
+        //ManagerGraph.Instance.m_listCaseMap = _listTempCaseMap;
 
     }
 

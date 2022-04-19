@@ -57,8 +57,6 @@ public class PlayerTank : Tank
                 Vector2 Force = new Vector2(_tankMoveSpeed, 0);
                 transform.GetComponent<Rigidbody2D>().AddForce(Force);
 
-
-
             }
 
             yield return null;

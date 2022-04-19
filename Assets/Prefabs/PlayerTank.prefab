@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a765be4f5e116f488fe912c7c086dc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   _MaxHealth: 5
   _tankRotationSpeed: 180
   _TurretRotationSpeed: 720
+  _tankMoveSpeed: 0
   _CaptureSpeed: 1
   _ShellDammage: 1
   m_startDep: 0

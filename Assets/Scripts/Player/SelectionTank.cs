@@ -13,6 +13,9 @@ public class SelectionTank : MonoBehaviour
     private Vector3 _posMouseScreen;
     private Vector3 _posSquare;
 
+    [SerializeField] Material _materialOutline;
+    [SerializeField] Material _materialNormal;
+
 
     public List<Collider2D> m_collider2DsTank = new List<Collider2D>();
 
@@ -62,7 +65,7 @@ public class SelectionTank : MonoBehaviour
     {
         if (m_isClickLeft && !_firstClick)
         {
-            Debug.Log($"<color=green> Start Detection Zone </color>");
+            //Debug.Log($"<color=green> Start Detection Zone </color>");
             _firstClick = true;
          
             InputPlayer.Instance.m_GetMousePositionWorld();
@@ -96,7 +99,7 @@ public class SelectionTank : MonoBehaviour
         if(!m_isClickLeft && _firstClick) {
             {
 
-                Debug.Log($"<color=red> Stop Detection Zone </color>");
+                //Debug.Log($"<color=red> Stop Detection Zone </color>");
                 _firstClick = false;
                 transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 Vector3 LoacalVectorScale = new Vector3(0,0,0);
@@ -136,7 +139,7 @@ public class SelectionTank : MonoBehaviour
             {
                 
                 _collider2DsTankCopy.Add(collider);
-                collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.03f);
+                collider.gameObject.GetComponent<SpriteRenderer>().material = _materialOutline;
             }
 
 
@@ -146,7 +149,7 @@ public class SelectionTank : MonoBehaviour
             if (!m_collider2DsTank.Contains(collider))
             {
                 _collider2DsTankDelete.Add(collider);
-                collider.gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineWidth", 0.0f);
+                collider.gameObject.GetComponent<SpriteRenderer>().material = _materialNormal;
             }
         }
 

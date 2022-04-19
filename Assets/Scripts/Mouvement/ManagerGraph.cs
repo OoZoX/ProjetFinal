@@ -32,8 +32,6 @@ public class ManagerGraph : MonoBehaviour
     LayerMask _layerMask;
 
     private Vector3 _sizeMap;
-    public int m_decalageX;
-    public int m_decalageY;
 
     public bool m_flowFild = true;
 
@@ -62,9 +60,7 @@ public class ManagerGraph : MonoBehaviour
     void Start()
     {
         _sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
-        m_decalageX = (int)_sizeMap.x;
-        m_decalageY = (int)_sizeMap.y;
-        m_listCaseMap = new Case[(int)_sizeMap.x + m_decalageX, (int)_sizeMap.y + m_decalageY];
+        m_listCaseMap = new Case[(int)_sizeMap.x, (int)_sizeMap.y];
         //Debug.Log(_sizeMap);
 
 
@@ -94,15 +90,15 @@ public class ManagerGraph : MonoBehaviour
         {
             for (int u = 0; u < _sizeMap.y; u++)
             {
-                Vector3 NewPos = new Vector3(i + m_positionStart_X, u + m_positionStart_Y, 0);
+                Vector3 NewPos = new Vector3(i, u, 0);
                 GameObjectScanMap.m_value.transform.position = NewPos;
 
                 RaycastHit2D raycast = Physics2D.Raycast(GameObjectScanMap.m_value.transform.position, Vector2.right, 0.1f, _layerMask);
 
                 Case CaseTemp = new Case();
 
-                CaseTemp.m_pos = new Vector3(NewPos.x, NewPos.y, 0);
-                CaseTemp.m_posTab = new Vector3(NewPos.x + m_decalageX, NewPos.y + m_decalageY, 0);
+                CaseTemp.m_pos = new Vector3(NewPos.x - m_positionStart_X, NewPos.y - m_positionStart_Y, 0);
+                CaseTemp.m_posTab = NewPos;
                 if (raycast.collider != null)
                 {
                     
@@ -121,7 +117,7 @@ public class ManagerGraph : MonoBehaviour
                     CaseTemp.m_typeCase = TypeCase.VIDE;
                 }
 
-                m_listCaseMap[(int) NewPos.x + m_decalageX, (int) NewPos.y + m_decalageY] = CaseTemp;
+                m_listCaseMap[(int) NewPos.x, (int) NewPos.y] = CaseTemp;
 
                 //Debug.Log($"<color=red>" + i + " and " + u + "</color>");
                 
