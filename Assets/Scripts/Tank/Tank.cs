@@ -16,13 +16,16 @@ public class Tank : MonoBehaviour
     [SerializeField] public CircleCollider2D _DetectionRange;
     [SerializeField] public BoxCollider2D _TankCollider;
 
+    [SerializeField] private GameParameters _gameParameters;
     //stats
     [SerializeField] public bool _CanShoot;
     [SerializeField] public float _Speed;
     [SerializeField] public float _FireRate;
     [SerializeField] public float _Health;
     [SerializeField] public float _MaxHealth;
+    [SerializeField] public float _tankRotationSpeed;
     [SerializeField] public float _TurretRotationSpeed;
+    [SerializeField] public float _tankMoveSpeed;
     [SerializeField] public float _CaptureSpeed;
     [SerializeField] public float _ShellDammage;
 
@@ -34,18 +37,19 @@ public class Tank : MonoBehaviour
     protected float ShootCooldown;
     protected bool DeathTrigger;
 
+    public bool m_startDep = false;
+    public bool m_isMoving = false;
+    public List<Vector2> m_cheminDep;
+
     public static Tank Instance;
     // Start is called before the first frame update
     void Start()
     {
+        _tankRotationSpeed = _gameParameters.TankTurnSpeed;
+        _tankMoveSpeed = _gameParameters.TankSpeed;
         DeathTrigger = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     protected void CanShoot()
     {
         if (ShootCooldown > _FireRate)

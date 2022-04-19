@@ -36,16 +36,52 @@ public class MouvementTank : MonoBehaviour
         
         foreach(var tank in SelectionTank.Instance.m_collider2DsTank)
         {
-            TraceChemin(ManagerGraph.Instance.m_listCaseMap);
+            TraceCheminFlowFild(ManagerGraph.Instance.m_listCaseMap);
         }
 
 
     }
 
-    private void TraceChemin(Case[,] AllCaseMap)
+    private void TraceCheminFlowFild(Case[,] AllCaseMap)
     {
+        foreach (var tank in SelectionTank.Instance.m_collider2DsTank)
+        {
+            Vector2 posTank = new Vector2(
+                                            (int)tank.transform.position.x + ManagerGraph.Instance.m_decalageX, 
+                                            (int) tank.transform.position.y + ManagerGraph.Instance.m_decalageY
+                                         );
 
+            
+            Case LastCase;
+
+            tank.GetComponent<PlayerTank>().m_cheminDep.Add(AllCaseMap[(int)posTank.x, (int)posTank.y].m_pos);
+            LastCase = AllCaseMap[(int)posTank.x, (int)posTank.y];
+            int DistanceCible = LastCase.m_distance;
+
+
+
+            
+        }
     }
+
+    //private IEnumerator CalculeChemin()
+    //{
+    //    while (DistanceCible > 0)
+    //    {
+    //        tank.GetComponent<PlayerTank>().m_cheminDep.Add(AllCaseMap[
+    //                                                                    (int)LastCase.m_parentSearch.x,
+    //                                                                    (int)LastCase.m_parentSearch.y
+    //                                                                  ].m_pos);
+
+    //        LastCase = AllCaseMap[
+    //                                (int)LastCase.m_parentSearch.x,
+    //                                (int)LastCase.m_parentSearch.y
+    //                             ];
+
+    //        DistanceCible = LastCase.m_distance;
+
+    //    }
+    //}
 
 
 }
