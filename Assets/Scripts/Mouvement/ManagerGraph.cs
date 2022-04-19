@@ -13,6 +13,7 @@ public struct Case
 {
     
     public Vector3 m_pos { get; set; }
+    public Vector3 m_posTab { get; set; }
     public TypeCase m_typeCase { get; set; }
     public Collider2D m_collider { get; set; }
     public int m_distance { get; set; }
@@ -30,6 +31,8 @@ public class ManagerGraph : MonoBehaviour
     LayerMask _layerMask;
 
     private Vector3 _sizeMap;
+    public int m_decalageX;
+    public int m_decalageY;
 
     public bool m_flowFild = true;
 
@@ -58,10 +61,14 @@ public class ManagerGraph : MonoBehaviour
     void Start()
     {
         _sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
-        m_listCaseMap = new Case[(int)_sizeMap.x, (int)_sizeMap.y];
+        m_decalageX = (int)_sizeMap.x;
+        m_decalageY = (int)_sizeMap.y;
+        m_listCaseMap = new Case[(int)_sizeMap.x + m_decalageX, (int)_sizeMap.y + m_decalageY];
+        Debug.Log(_sizeMap);
+
 
         m_ScanMapCollider();
-        
+
         
     }
 
@@ -93,34 +100,29 @@ public class ManagerGraph : MonoBehaviour
 
                 Case CaseTemp = new Case();
 
-
+                CaseTemp.m_pos = new Vector3(NewPos.x, NewPos.y, 0);
+                CaseTemp.m_posTab = new Vector3(NewPos.x + m_decalageX, NewPos.y + m_decalageY, 0);
                 if (raycast.collider != null)
                 {
+                    
                     if (raycast.collider.isTrigger)
                     {
-                        CaseTemp.m_pos = new Vector3(i + _sizeMap.x, u + _sizeMap.y, 0);
                         CaseTemp.m_typeCase = TypeCase.SOL;
-
                     }
                     else
                     {
-                        CaseTemp.m_pos = new Vector3(i + _sizeMap.x, u + _sizeMap.y, 0);
                         CaseTemp.m_typeCase = TypeCase.COLLIDER;
                         CaseTemp.m_collider = raycast.collider;
                     }
-                    
                 }
-                
                 else
                 {
-                    CaseTemp.m_pos = new Vector3(i + _sizeMap.x, u + _sizeMap.y, 0);
                     CaseTemp.m_typeCase = TypeCase.VIDE;
                 }
 
+                m_listCaseMap[(int) NewPos.x + m_decalageX, (int) NewPos.y + m_decalageY] = CaseTemp;
 
-                m_listCaseMap[i + (int) _sizeMap.x,u + (int) _sizeMap.y] = CaseTemp;
-
-                
+                Debug.Log($"<color=red>" + i + " and " + u + "</color>");
                 
             }
         }

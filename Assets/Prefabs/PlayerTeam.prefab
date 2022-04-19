@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 709094831417110301, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2639d01d11a85949b9c399dbfb9dcb7, type: 2}
     - target: {fileID: 5156264629492762381, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -158,6 +162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 709094831417110301, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05726506a17390247aa630b69ffca751, type: 2}
     - target: {fileID: 5156264629492762381, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -228,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 709094831417110301, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
     - target: {fileID: 5156264629492762381, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

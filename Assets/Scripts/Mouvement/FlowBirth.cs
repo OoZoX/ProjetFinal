@@ -51,11 +51,12 @@ public class FlowBirth : MonoBehaviour
         _listTempCaseMap = ManagerGraph.Instance.m_listCaseMap;
         Vector2 CibleActu;
          
+        int _decalageX = ManagerGraph.Instance.m_decalageX;
+        int _decalageY = ManagerGraph.Instance.m_decalageY;
 
 
-
-        m_listToCalculate.Add(new Vector4(Cible.x, Cible.y, Cible.x, Cible.y));
-        m_listToCalculateCompare.Add(new Vector4(Cible.x, Cible.y, Cible.x, Cible.y));
+        m_listToCalculate.Add(new Vector4(Cible.x + _decalageX, Cible.y + _decalageY, Cible.x + _decalageX, Cible.y + _decalageY));
+        m_listToCalculateCompare.Add(new Vector4(Cible.x + _decalageX, Cible.y + _decalageY, Cible.x + _decalageX, Cible.y + _decalageY));
         _searchFinish = false;
 
         while (!_searchFinish)
@@ -69,8 +70,8 @@ public class FlowBirth : MonoBehaviour
             {
                 if(_listCalculateFinish.Count == 0)
                 {
-                    _listTempCaseMap[(int)Cible.x, (int)Cible.y].m_parentSearch = new Vector2((int)Cible.x, (int)Cible.y);
-                    _listTempCaseMap[(int)Cible.x, (int)Cible.y].m_distance = 0;
+                    _listTempCaseMap[(int)Cible.x + _decalageX, (int)Cible.y + _decalageY].m_parentSearch = new Vector2((int)Cible.x, (int)Cible.y);
+                    _listTempCaseMap[(int)Cible.x + _decalageX, (int)Cible.y + _decalageY].m_distance = 0;
                     
                     _listCalculateFinish.Add(new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y));
                 }
@@ -116,6 +117,7 @@ public class FlowBirth : MonoBehaviour
                     }
 
                 }
+                m_listToCalculate.RemoveAt(0);
 
             }
         }
@@ -125,23 +127,23 @@ public class FlowBirth : MonoBehaviour
     }
 
 
-    private void VerifyDoubles()
-    {
-        for (int i = 0; i < m_listToCalculate.Count; i++)
-        {
-            Vector2 testCase = new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y);
-            if (_listCalculateFinish.Contains(testCase))
-            {
-                m_listToCalculate.Remove(m_listToCalculate[0]);
-                m_listToCalculateCompare.Remove(m_listToCalculate[0]);
-            }
-            else
-            {
+    //private void VerifyDoubles()
+    //{
+    //    for (int i = 0; i < m_listToCalculate.Count; i++)
+    //    {
+    //        Vector2 testCase = new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y);
+    //        if (_listCalculateFinish.Contains(testCase))
+    //        {
+    //            m_listToCalculate.Remove(m_listToCalculate[0]);
+    //            m_listToCalculateCompare.Remove(m_listToCalculate[0]);
+    //        }
+    //        else
+    //        {
 
-                break;
-            }
-        }
-    }
+    //            break;
+    //        }
+    //    }
+    //}
 
 }                                           
                                              
