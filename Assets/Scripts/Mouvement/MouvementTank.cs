@@ -35,10 +35,10 @@ public class MouvementTank : MonoBehaviour
         Debug.Log("<color=green>" + _cible + "</color>");
         ManagerGraph.Instance.m_StartParcourChemin(_cible);
 
-        TraceCheminFlowFild(ManagerGraph.Instance.m_listCaseMap);
+        TraceCheminFlowFild(ManagerGraph.Instance.m_tabCellMap);
     }
 
-    private void TraceCheminFlowFild(Case[,] AllCaseMap)
+    private void TraceCheminFlowFild(Cell[,] AllCaseMap)
     {
         foreach (var tank in SelectionTank.Instance.m_collider2DsTank)
         {
@@ -48,7 +48,7 @@ public class MouvementTank : MonoBehaviour
         }
     }
 
-    private IEnumerator CalculeChemin(Collider2D tank, Case[,] AllCaseMap)
+    private IEnumerator CalculeChemin(Collider2D tank, Cell[,] AllCaseMap)
     {
         Vector2 posTank = new Vector2(
                                             (int)tank.transform.position.x - ManagerGraph.Instance.m_positionStart_X,
@@ -56,9 +56,9 @@ public class MouvementTank : MonoBehaviour
                                          );
 
 
-        Case LastCase;
+        Cell LastCase;
 
-        tank.GetComponent<PlayerTank>().m_cheminDep.Add(AllCaseMap[(int)posTank.x, (int)posTank.y].m_pos);
+        tank.GetComponent<PlayerTank>().m_cheminDep.Add(AllCaseMap[(int)posTank.x, (int)posTank.y].m_posWorld);
         LastCase = AllCaseMap[(int)posTank.x, (int)posTank.y];
         int DistanceCible = LastCase.m_distance; 
 
@@ -67,7 +67,7 @@ public class MouvementTank : MonoBehaviour
             tank.GetComponent<PlayerTank>().m_cheminDep.Add(AllCaseMap[
                                                                         (int)LastCase.m_parentSearch.x,
                                                                         (int)LastCase.m_parentSearch.y
-                                                                      ].m_pos);
+                                                                      ].m_posWorld);
 
             LastCase = AllCaseMap[
                                     (int)LastCase.m_parentSearch.x,
