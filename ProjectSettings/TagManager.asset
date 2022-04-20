@@ -15,6 +15,7 @@ TagManager:
   - Dirt
   - Road
   - Sand
+  - PostEffect
   layers:
   - Default
   - TransparentFX
@@ -46,7 +47,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PostEffect
   - Player
   m_SortingLayers:
   - name: Default
