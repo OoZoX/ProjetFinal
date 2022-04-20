@@ -6,31 +6,43 @@ public enum FlowFieldDisplayType { None, AllIcons, DestinationIcon, CostField, I
 
 public class GridDebug : MonoBehaviour
 {
-	public GridController gridController;
 	public bool displayGrid;
 
 	public FlowFieldDisplayType curDisplayType;
 
 	private Vector2Int gridSize;
 	private float cellRadius;
-	private FlowField curFlowField;
+	
 
 	private Sprite[] ffIcons;
 
-	private void Start()
+	public static GridDebug Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+			Instance = this;
+        }
+        else
+        {
+			Destroy(gameObject);
+        }
+    }
+
+    private void Start()
 	{
 		ffIcons = Resources.LoadAll<Sprite>("Sprites/FFicons");
+		//curFlowField = newFlowField;
+		cellRadius = ManagerGraph.Instance.m_cellRadius;
+		gridSize = ManagerGraph.Instance.m_sizeGrid;
 	}
 
-	public void SetFlowField(FlowField newFlowField)
-	{
-		curFlowField = newFlowField;
-		cellRadius = newFlowField.cellRadius;
-		gridSize = newFlowField.gridSize;
-	}
 	
 	public void DrawFlowField()
 	{
+		cellRadius = ManagerGraph.Instance.m_cellRadius;
+		gridSize = ManagerGraph.Instance.m_sizeGrid;
 		ClearCellDisplay();
 
 		switch (curDisplayType)
@@ -50,8 +62,8 @@ public class GridDebug : MonoBehaviour
 
 	private void DisplayAllCells()
 	{
-		if (curFlowField == null) { return; }
-		foreach (CellCopy curCell in curFlowField.grid)
+		
+		foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
 		{
 			DisplayCell(curCell);
 		}
@@ -59,72 +71,72 @@ public class GridDebug : MonoBehaviour
 
 	private void DisplayDestinationCell()
 	{
-		if (curFlowField == null) { return; }
-		DisplayCell(curFlowField.destinationCell);
+		if (ManagerGraph.Instance.m_tabCellMap == null) { return; }
+		DisplayCell(ManagerGraph.Instance.m_cibleCell);
 	}
 
-	private void DisplayCell(CellCopy cell)
+	private void DisplayCell(Cell cell)
 	{
 		GameObject iconGO = new GameObject();
 		SpriteRenderer iconSR = iconGO.AddComponent<SpriteRenderer>();
 		iconGO.transform.parent = transform;
-		iconGO.transform.position = cell.worldPos;
+		iconGO.transform.position = cell.m_posWorld;
 
-		if (cell.cost == 0)
+		if (cell.m_cost == 0)
 		{
 			iconSR.sprite = ffIcons[3];
 			Quaternion newRot = Quaternion.Euler(90, 0, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.cost == byte.MaxValue)
+		else if (cell.m_cost == byte.MaxValue)
 		{
 			iconSR.sprite = ffIcons[2];
 			Quaternion newRot = Quaternion.Euler(90, 0, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.North)
+		else if (cell.m_bestDirection == GridDirection.North)
 		{
 			iconSR.sprite = ffIcons[0];
 			Quaternion newRot = Quaternion.Euler(90, 0, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.South)
+		else if (cell.m_bestDirection == GridDirection.South)
 		{
 			iconSR.sprite = ffIcons[0];
 			Quaternion newRot = Quaternion.Euler(90, 180, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.East)
+		else if (cell.m_bestDirection == GridDirection.East)
 		{
 			iconSR.sprite = ffIcons[0];
 			Quaternion newRot = Quaternion.Euler(90, 90, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.West)
+		else if (cell.m_bestDirection == GridDirection.West)
 		{
 			iconSR.sprite = ffIcons[0];
 			Quaternion newRot = Quaternion.Euler(90, 270, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.NorthEast)
+		else if (cell.m_bestDirection == GridDirection.NorthEast)
 		{
 			iconSR.sprite = ffIcons[1];
 			Quaternion newRot = Quaternion.Euler(90, 0, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.NorthWest)
+		else if (cell.m_bestDirection == GridDirection.NorthWest)
 		{
 			iconSR.sprite = ffIcons[1];
 			Quaternion newRot = Quaternion.Euler(90, 270, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.SouthEast)
+		else if (cell.m_bestDirection == GridDirection.SouthEast)
 		{
 			iconSR.sprite = ffIcons[1];
 			Quaternion newRot = Quaternion.Euler(90, 90, 0);
 			iconGO.transform.rotation = newRot;
 		}
-		else if (cell.bestDirection == GridDirection.SouthWest)
+		else if (cell.m_bestDirection == GridDirection.SouthWest)
 		{
 			iconSR.sprite = ffIcons[1];
 			Quaternion newRot = Quaternion.Euler(90, 180, 0);
@@ -140,7 +152,7 @@ public class GridDebug : MonoBehaviour
 	{
 		foreach (Transform t in transform)
 		{
-			GameObject.Destroy(t.gameObject);
+			Destroy(t.gameObject);
 		}
 	}
 	
@@ -148,17 +160,11 @@ public class GridDebug : MonoBehaviour
 	{
 		if (displayGrid)
 		{
-			if (curFlowField == null)
-			{
-				DrawGrid(gridController.gridSize, Color.yellow, gridController.cellRadius);
-			}
-			else
-			{
-				DrawGrid(gridSize, Color.green, cellRadius);
-			}
+
+			DrawGrid(gridSize, Color.green, cellRadius);
 		}
 		
-		if (curFlowField == null) { return; }
+		
 
 		GUIStyle style = new GUIStyle(GUI.skin.label);
 		style.alignment = TextAnchor.MiddleCenter;
@@ -167,17 +173,17 @@ public class GridDebug : MonoBehaviour
 		{
 			case FlowFieldDisplayType.CostField:
 
-				foreach (CellCopy curCell in curFlowField.grid)
+				foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
 				{
-					Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
+					Handles.Label(curCell.m_posWorld, curCell.m_cost.ToString(), style);
 				}
 				break;
 				
 			case FlowFieldDisplayType.IntegrationField:
 
-				foreach (CellCopy curCell in curFlowField.grid)
+				foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
 				{
-					Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
+					Handles.Label(curCell.m_posWorld, curCell.m_bestCost.ToString(), style);
 				}
 				break;
 				
@@ -194,7 +200,8 @@ public class GridDebug : MonoBehaviour
 		{
 			for (int y = 0; y < drawGridSize.y; y++)
 			{
-				Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius, 0, drawCellRadius * 2 * y + drawCellRadius);
+				Vector3 center = new Vector3(ManagerGraph.Instance.m_tabCellMap[x,y].m_posWorld.x, ManagerGraph.Instance.m_tabCellMap[x, y].m_posWorld.y, 0);
+				//Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius + ManagerGraph.Instance.m_positionStart_X, drawCellRadius * 2 * y + drawCellRadius + ManagerGraph.Instance.m_positionStart_Y,0 );
 				Vector3 size = Vector3.one * drawCellRadius * 2;
 				Gizmos.DrawWireCube(center, size);
 			}

@@ -20,9 +20,9 @@ public struct Cell
     public byte m_cost { get; set; }
     public ushort m_bestCost { get; set; }
     public TypeCase m_typeCase { get; set; }
-    public Collider2D m_collider { get; set; }
     public int m_distance { get; set; }
     public Vector2 m_parentSearch { get; set; }
+    public GridDirection m_bestDirection { get; set; }
 
 }
 
@@ -53,11 +53,14 @@ public class ManagerGraph : MonoBehaviour
     public float m_positionStart_X;
     public float m_positionStart_Y;
 
-    
-    
 
-    
+
+
+    public Cell m_cibleCell;
     public Cell[,] m_tabCellMap;
+
+
+    public bool refresh = false;
 
     public static ManagerGraph Instance;
 
@@ -80,6 +83,15 @@ public class ManagerGraph : MonoBehaviour
         m_ScanMapCollider();
     }
 
+    private void FixedUpdate()
+    {
+        if (refresh)
+        {
+            CreateGrid();
+            m_ScanMapCollider();
+        }
+    }
+
     private void CreateGrid()
     {
         m_sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
@@ -91,7 +103,7 @@ public class ManagerGraph : MonoBehaviour
             for (int y = 0; y < m_sizeGrid.y; y++)
             {
                 //Possible beug world pos
-                Vector3 WorldPos = new Vector3(m_cellDiameter * x + m_cellRadius - m_positionStart_X, m_cellDiameter * y + m_cellRadius - m_positionStart_Y);
+                Vector3 WorldPos = new Vector3(m_cellDiameter * x + m_positionStart_X, m_cellDiameter * y + m_positionStart_Y);
                 Cell cell = new Cell();
 
                 cell.m_posWorld = WorldPos;
@@ -157,7 +169,7 @@ public class ManagerGraph : MonoBehaviour
         
     }
 
-    public Cell GetCellFromPosWorld(Vector3 worldPos)
+    public Cell m_GetCellFromPosWorld(Vector3 worldPos)
     {
         float percentX = worldPos.x / (m_sizeGrid.x * m_cellDiameter);
         float percentY = worldPos.z / (m_sizeGrid.y * m_cellDiameter);
@@ -167,14 +179,19 @@ public class ManagerGraph : MonoBehaviour
 
         int x = Mathf.Clamp(Mathf.FloorToInt((m_sizeGrid.x) * percentX), 0, m_sizeGrid.x - 1);
         int y = Mathf.Clamp(Mathf.FloorToInt((m_sizeGrid.y) * percentY), 0, m_sizeGrid.y - 1);
+
+        m_cibleCell = m_tabCellMap[x, y];
         return m_tabCellMap[x, y];
     }
 
-    public void m_StartParcourChemin(Vector2 Cible)
+
+
+    public void m_StartParcourChemin(Cell Cible)
     {
         if (m_flowFild)
         {
-            FlowBirth.Instance.ParcourtCarte(Cible);
+            AlgoFlowField.Instance.m_CalculCost(Cible);
+            AlgoFlowField.Instance.m_CreateFlowField();
         }
     }
 

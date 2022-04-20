@@ -30,12 +30,16 @@ public class MouvementTank : MonoBehaviour
         }
     }
 
+
+
     private void Mouvement()
     {
-        Debug.Log("<color=green>" + _cible + "</color>");
-        ManagerGraph.Instance.m_StartParcourChemin(_cible);
+        
 
-        TraceCheminFlowFild(ManagerGraph.Instance.m_tabCellMap);
+
+        Cell CellCible = ManagerGraph.Instance.m_GetCellFromPosWorld(_cible);
+        ManagerGraph.Instance.m_StartParcourChemin(CellCible);
+        GridDebug.Instance.DrawFlowField();
     }
 
     private void TraceCheminFlowFild(Cell[,] AllCaseMap)
