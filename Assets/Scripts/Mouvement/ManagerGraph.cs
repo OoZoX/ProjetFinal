@@ -157,6 +157,19 @@ public class ManagerGraph : MonoBehaviour
         
     }
 
+    public Cell GetCellFromPosWorld(Vector3 worldPos)
+    {
+        float percentX = worldPos.x / (m_sizeGrid.x * m_cellDiameter);
+        float percentY = worldPos.z / (m_sizeGrid.y * m_cellDiameter);
+
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.Clamp(Mathf.FloorToInt((m_sizeGrid.x) * percentX), 0, m_sizeGrid.x - 1);
+        int y = Mathf.Clamp(Mathf.FloorToInt((m_sizeGrid.y) * percentY), 0, m_sizeGrid.y - 1);
+        return m_tabCellMap[x, y];
+    }
+
     public void m_StartParcourChemin(Vector2 Cible)
     {
         if (m_flowFild)
