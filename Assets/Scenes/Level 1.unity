@@ -152,11 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.81
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.386318
+      value: 7.92
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3716,11 +3716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.64
+      value: -16.35
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.33
+      value: -9.65
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4867,7 +4867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 599204048015708206, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: _Health
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: m_RootOrder
@@ -13138,9 +13138,13 @@ MonoBehaviour:
   CollectableItemList:
   - {fileID: 2081010356}
   - {fileID: 246371139}
+  IATeam: {fileID: 1837111567}
+  PlayerTeam: {fileID: 1928539140}
   MaxTimeGame: 50000
-  IARespawnRate: 2
-  PlayerRespawnRate: 2
+  IARespawnRate: 5
+  PlayerRespawnRate: 5
+  TankPlayers: {fileID: 599204048015708206, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+  TankIAs: {fileID: 4730007349980786783, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
 --- !u!4 &1659169118
 Transform:
   m_ObjectHideFlags: 0

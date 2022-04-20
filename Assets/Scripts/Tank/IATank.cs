@@ -20,6 +20,7 @@ public class IATank : Tank
     {
         ActualizeHealthBar();
         CanShoot();
+        ParticulesOnMouvement();
         if (EnnemyInRange == false)
         {
             IddleTank();

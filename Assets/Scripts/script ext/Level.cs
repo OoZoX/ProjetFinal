@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,17 +11,22 @@ public class Level : MonoBehaviour
     [SerializeField] private List<PlayerTank> PlayerTankList;
     [SerializeField] private List<CaptureZone> ZoneCaptureList;
     [SerializeField] private List<CollectableItem> CollectableItemList;
+    [SerializeField] private GameObject IATeam;
+    [SerializeField] private GameObject PlayerTeam;
     [SerializeField] private int MaxTimeGame;
+
 
     private List<Vector3> SpawnIA;
     private List<Vector3> SpawnPlayer;
 
+  
     private int NbTotalIATank;
     private int NbTotalPlayerTank;
     private int NbCaptureZone;
 
     private float IARespawnCooldown;
     private float PlayerRespawnCooldown;
+
     [SerializeField] private float IARespawnRate;
     [SerializeField] private float PlayerRespawnRate;
 
@@ -34,63 +40,116 @@ public class Level : MonoBehaviour
         Defeat,
         OutofTime
     }
+    private enum StateRespawn
+    {
+        Full,
+        Checking,
+        WaitingForRespawn
+    }
     private StateLevel _StateLevel;
+    private StateRespawn _StatePlayerTeam;
+    private StateRespawn _StateIATeam;
+    public PlayerTank TankPlayers;
+    public IATank TankIAs;
+    
+
     // Start is called before the first frame update
     void Start()
     {   
-        foreach (Tank tank in IATankList)
+        SpawnIA = new List<Vector3>();
+        SpawnPlayer = new List<Vector3>();
+        foreach (IATank tank in IATankList)
         {
-          // SpawnIA.Add(tank.gameObject.transform.position);
+            SpawnIA.Add(tank.gameObject.transform.position);
         }        
-        foreach (Tank tank in PlayerTankList)
+        foreach (PlayerTank tank in PlayerTankList)
         {
-           // SpawnPlayer.Add(tank.gameObject.transform.position);
+            SpawnPlayer.Add(tank.gameObject.transform.position);
         }
         NbTotalIATank = IATankList.Count();
         NbTotalPlayerTank = PlayerTankList.Count();
+        _StateLevel = StateLevel.InGame;
+        _StatePlayerTeam = StateRespawn.Full;
+        _StateIATeam = StateRespawn.Full;
         _GameTimer.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ManageTankRespawn();
         EndGameVerification();
-
+        CheckLists();
     }
-
-    public void ManageTankRespawn()
+    public void CheckLists()
     {
-        if(IARespawnRate >= IARespawnCooldown)
+        foreach (PlayerTank tank in PlayerTankList)
         {
-            if (IATankList.Count < NbTotalIATank)
+            if (tank.gameObject.active == false)
             {
-                IATank NewTank = new IATank();
-                NewTank.transform.position = SpawnIA[Mathf.RoundToInt(NbTotalIATank)];
+                PlayerTankList.Remove(tank);
+                _StatePlayerTeam = StateRespawn.WaitingForRespawn;
+                StartCoroutine(ManagePlayerTankRespawn());
             }
-            IARespawnCooldown = 0;
         }
-        else
+        foreach (IATank tank in IATankList)
         {
-            IARespawnCooldown = IARespawnCooldown + Time.deltaTime;
-        }
-
-        if (PlayerRespawnRate >= PlayerRespawnCooldown)
-        {
-            if (PlayerTankList.Count < NbTotalPlayerTank)
+            if (tank.gameObject.active == false)
             {
-                PlayerTank NewTank = new PlayerTank();
-                rnd = Random.Range(0, NbTotalPlayerTank);
-                NewTank.transform.position = SpawnPlayer[rnd];
+                IATankList.Remove(tank);
+                _StateIATeam = StateRespawn.WaitingForRespawn;
+                StartCoroutine(ManageIATankRespawn());
             }
-            PlayerRespawnCooldown = 0;
-        }
-        else
-        {
-            PlayerRespawnCooldown = PlayerRespawnCooldown + Time.deltaTime;
         }
     }
 
+
+    public IEnumerator ManagePlayerTankRespawn()
+    {
+
+        while (_StatePlayerTeam == StateRespawn.WaitingForRespawn )
+        {
+            if (PlayerRespawnRate <= PlayerRespawnCooldown)
+            {
+
+                rnd = Random.Range(0, NbTotalPlayerTank);
+                PlayerTank NewPlayerTank = Instantiate(TankPlayers, SpawnPlayer[rnd], Quaternion.Euler(0, 0, 0));
+                NewPlayerTank.transform.parent = PlayerTeam.transform;
+                NewPlayerTank.transform.position = SpawnPlayer[rnd];
+                PlayerTankList.Add(NewPlayerTank);
+                _StatePlayerTeam = StateRespawn.Checking;
+                PlayerRespawnCooldown = 0;
+            }
+            else
+            {
+                PlayerRespawnCooldown = PlayerRespawnCooldown + Time.deltaTime;
+            }
+            yield return null;
+        }
+    }
+
+    public IEnumerator ManageIATankRespawn()
+    {
+
+        while (_StateIATeam == StateRespawn.WaitingForRespawn)
+        {
+            if (IARespawnRate <= IARespawnCooldown)
+            {
+
+                rnd = Random.Range(0, NbTotalIATank);
+                IATank NewIATank = Instantiate(TankIAs, SpawnIA[rnd], Quaternion.Euler(0, 0, 0));
+                NewIATank.transform.parent = PlayerTeam.transform;
+                NewIATank.transform.position = SpawnIA[rnd];
+                IATankList.Add(NewIATank);
+                _StateIATeam = StateRespawn.Checking;
+                IARespawnCooldown = 0;
+            }
+            else
+            {
+                IARespawnCooldown = IARespawnCooldown + Time.deltaTime;
+            }
+            yield return null;
+        }
+    }
     public void EndGameVerification()
     {
         foreach(CaptureZone captureZone in ZoneCaptureList)
@@ -112,11 +171,10 @@ public class Level : MonoBehaviour
                 _StateLevel = StateLevel.InGame;
             }
         }
-        /*
+        
         if(_GameTimer.Elapsed.TotalSeconds > MaxTimeGame)
         {
             _StateLevel = StateLevel.OutofTime;
-        }
-        */
+        }      
     }
 }

@@ -15,6 +15,8 @@ public class Tank : MonoBehaviour
     [SerializeField] public Transform _ShellStartPosition;
     [SerializeField] public CircleCollider2D _DetectionRange;
     [SerializeField] public BoxCollider2D _TankCollider;
+    [SerializeField] public ParticleSystem _TankParticules;
+    [SerializeField] public Rigidbody2D _TankBody;
 
     [SerializeField] private GameParameters _gameParameters;
     //stats
@@ -36,6 +38,8 @@ public class Tank : MonoBehaviour
     protected GameObject EnnemyTank;
     protected float ShootCooldown;
     protected bool DeathTrigger;
+
+
 
     public bool m_startDep = false;
     public bool m_isMoving = false;
@@ -67,14 +71,14 @@ public class Tank : MonoBehaviour
         Debug.Log("Begin Animation Tank Death");
         this._turret.SetActive(false);
         this._canvas.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
         Destroy(this.gameObject, 1f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
         this._tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);
         yield return new WaitForSeconds(0.3f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
-        yield return new WaitForSeconds(3f);
-        Debug.Log("End Animation Tank Death");
+        yield return new WaitForSeconds(0.2f);
     }
 
     protected void ThrowProjectile()
@@ -130,5 +134,18 @@ public class Tank : MonoBehaviour
             }
             Debug.Log("hit _health : " + _Health);
         }
+    }
+
+    protected void ParticulesOnMouvement()
+    {
+        if (_TankBody.velocity.y ==  0 && _TankBody.velocity.x == 0)
+        {
+            _TankParticules.enableEmission = false;
+        }
+        else
+        {
+            _TankParticules.enableEmission = true;
+        }
+
     }
 }
