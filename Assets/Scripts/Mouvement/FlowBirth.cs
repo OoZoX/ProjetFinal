@@ -28,7 +28,7 @@ public class FlowBirth : MonoBehaviour
     private HashSet<Vector4> m_listToCalculateCompare;
     private List<Vector4> m_listToCalculate;
     private List<Vector2> _listCalculateFinish;
-    private Case[,] _listTempCaseMap;
+    private Cell[,] _listTempCaseMap;
 
 
     private void Awake()
@@ -48,7 +48,7 @@ public class FlowBirth : MonoBehaviour
         m_listToCalculateCompare = new HashSet<Vector4>(new CaseCompareur());
         m_listToCalculate = new List<Vector4>();
         _listCalculateFinish = new List<Vector2>();
-        _listTempCaseMap = ManagerGraph.Instance.m_listCaseMap;
+        _listTempCaseMap = ManagerGraph.Instance.m_tabCellMap;
         Vector2 CibleActu;
 
         Cible = new Vector2(
@@ -83,7 +83,9 @@ public class FlowBirth : MonoBehaviour
                     CibleActu = new Vector2((int)m_listToCalculate[0].x, (int)m_listToCalculate[0].y);
                     _listTempCaseMap[(int)CibleActu.x, (int)CibleActu.y].m_parentSearch = new Vector2((int)m_listToCalculate[0].z, (int)m_listToCalculate[0].w);
                     _listTempCaseMap[(int)CibleActu.x, (int)CibleActu.y].m_distance = _listTempCaseMap[(int)m_listToCalculate[0].z, (int)m_listToCalculate[0].w].m_distance + 1;
+                    
                 }
+
 
 
                 for (int i = 0; i < 4; i++)
@@ -104,10 +106,11 @@ public class FlowBirth : MonoBehaviour
                     }
                     else if(i == 3)
                     {
+
                         NewCible = new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y - 1);
                     }
                     
-                    if (!_listCalculateFinish.Contains(NewCible))
+                    if (!_listCalculateFinish.Contains(NewCible) && NewCible.x > 0 && NewCible.x < ManagerGraph.Instance.m_sizeMap.x && NewCible.y > 0 && NewCible.y < ManagerGraph.Instance.m_sizeMap.y)
                     {
                         if(_listTempCaseMap[(int)NewCible.x, (int)NewCible.y].m_typeCase == TypeCase.SOL)
                         {
@@ -125,28 +128,10 @@ public class FlowBirth : MonoBehaviour
             }
         }
 
-        //ManagerGraph.Instance.m_listCaseMap = _listTempCaseMap;
+        Debug.Log("fini");
 
     }
 
-
-    //private void VerifyDoubles()
-    //{
-    //    for (int i = 0; i < m_listToCalculate.Count; i++)
-    //    {
-    //        Vector2 testCase = new Vector2(m_listToCalculate[0].x, m_listToCalculate[0].y);
-    //        if (_listCalculateFinish.Contains(testCase))
-    //        {
-    //            m_listToCalculate.Remove(m_listToCalculate[0]);
-    //            m_listToCalculateCompare.Remove(m_listToCalculate[0]);
-    //        }
-    //        else
-    //        {
-
-    //            break;
-    //        }
-    //    }
-    //}
 
 }                                           
                                              

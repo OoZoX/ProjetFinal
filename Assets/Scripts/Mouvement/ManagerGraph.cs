@@ -7,13 +7,18 @@ public enum TypeCase
 {
     VIDE,
     SOL,
-    COLLIDER
+    COLLIDER,
+    HERBE,
+    ROUTE,
+    SABLE
 }
-public struct Case
+public struct Cell
 {
     
-    public Vector3 m_pos { get; set; }
-    public Vector3 m_posTab { get; set; }
+    public Vector3 m_posWorld { get; set; }
+    public Vector2Int m_gridIndex { get; set; }
+    public byte m_cost { get; set; }
+    public ushort m_bestCost { get; set; }
     public TypeCase m_typeCase { get; set; }
     public Collider2D m_collider { get; set; }
     public int m_distance { get; set; }
@@ -31,16 +36,28 @@ public class ManagerGraph : MonoBehaviour
     [SerializeField]
     LayerMask _layerMask;
 
-    private Vector3 _sizeMap;
+
+
+    private float m_cellDiameter;
+
+
+
+    public Vector3Int m_sizeMap;
+    public Vector2Int m_sizeGrid;
+    public float m_cellRadius;
+
+
 
     public bool m_flowFild = true;
 
     public float m_positionStart_X;
     public float m_positionStart_Y;
+
+    
     
 
     
-    public Case[,] m_listCaseMap;
+    public Cell[,] m_tabCellMap;
 
     public static ManagerGraph Instance;
 
@@ -59,13 +76,84 @@ public class ManagerGraph : MonoBehaviour
 
     void Start()
     {
-        _sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
-        m_listCaseMap = new Case[(int)_sizeMap.x, (int)_sizeMap.y];
-        //Debug.Log(_sizeMap);
-
-
+        CreateGrid();
         m_ScanMapCollider();
+    }
 
+    private void CreateGrid()
+    {
+        m_sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
+
+        m_cellDiameter = m_cellRadius * 2f;
+        m_tabCellMap = new Cell[m_sizeGrid.x, m_sizeGrid.y];
+        for (int x = 0; x < m_sizeGrid.x; x++)
+        {
+            for (int y = 0; y < m_sizeGrid.y; y++)
+            {
+                //Possible beug world pos
+                Vector3 WorldPos = new Vector3(m_cellDiameter * x + m_cellRadius - m_positionStart_X, m_cellDiameter * y + m_cellRadius - m_positionStart_Y);
+                Cell cell = new Cell();
+
+                cell.m_posWorld = WorldPos;
+                cell.m_gridIndex = new Vector2Int(x, y);
+                cell.m_cost = byte.MaxValue;
+                m_tabCellMap[x, y] = cell;
+                
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Calcule le cout de chaque case
+    /// </summary>
+    public void m_ScanMapCollider()
+    {
+        
+        
+        for (int x = 0; x < m_sizeGrid.x; x++)
+        {
+            for (int y = 0; y < m_sizeGrid.y; y++)
+            {
+                Vector2 NewPos = new Vector2(x - m_positionStart_X, y - m_positionStart_Y);
+                Cell CurrentCell = m_tabCellMap[x, y];
+                Vector2 CellExtend = Vector3.one * m_cellRadius;
+                ContactFilter2D contactFilter = new ContactFilter2D();
+                contactFilter.SetLayerMask(_layerMask);
+                List<Collider2D> collidersList = new List<Collider2D>();
+                Physics2D.OverlapBox(CurrentCell.m_posWorld, CellExtend, 0, contactFilter, collidersList) ;
+
+                bool checkRoute = false;
+                foreach (Collider2D collider in collidersList)
+                {
+                    if(!checkRoute && collider.gameObject.layer == 6)//herbe
+                    {
+                        CurrentCell.m_cost = 2;
+                    } 
+                    else if(!checkRoute && collider.gameObject.layer == 7) //sable
+                    {
+                        CurrentCell.m_cost = 3;
+                    }
+                    else if(collider.gameObject.layer == 10) //collider
+                    {
+                        CurrentCell.m_cost = byte.MaxValue;
+                        break;
+                    }
+                    else if (collider.gameObject.layer == 8) // route
+                    {
+                        CurrentCell.m_cost = 1;
+                        checkRoute = true;
+                    }
+
+                }
+
+                m_tabCellMap[x,y] = CurrentCell;
+
+                //Debug.Log($"<color=red>" + i + " and " + u + "</color>");
+                
+            }
+        }
+        
         
     }
 
@@ -78,54 +166,4 @@ public class ManagerGraph : MonoBehaviour
     }
 
 
-
-    /// <summary>
-    /// Scan la map pour crer un tableau [,] de toutes les cases
-    /// </summary>
-    public void m_ScanMapCollider()
-    {
-        
-        
-        for (int i = 0; i < _sizeMap.x; i++)
-        {
-            for (int u = 0; u < _sizeMap.y; u++)
-            {
-                Vector3 NewPos = new Vector3(i, u, 0);
-                GameObjectScanMap.m_value.transform.position = NewPos;
-
-                RaycastHit2D raycast = Physics2D.Raycast(GameObjectScanMap.m_value.transform.position, Vector2.right, 0.1f, _layerMask);
-
-                Case CaseTemp = new Case();
-
-                CaseTemp.m_pos = new Vector3(NewPos.x - m_positionStart_X, NewPos.y - m_positionStart_Y, 0);
-                CaseTemp.m_posTab = NewPos;
-                if (raycast.collider != null)
-                {
-                    
-                    if (raycast.collider.isTrigger)
-                    {
-                        CaseTemp.m_typeCase = TypeCase.SOL;
-                    }
-                    else
-                    {
-                        CaseTemp.m_typeCase = TypeCase.COLLIDER;
-                        CaseTemp.m_collider = raycast.collider;
-                    }
-                }
-                else
-                {
-                    CaseTemp.m_typeCase = TypeCase.VIDE;
-                }
-
-                m_listCaseMap[(int) NewPos.x, (int) NewPos.y] = CaseTemp;
-
-                //Debug.Log($"<color=red>" + i + " and " + u + "</color>");
-                
-            }
-        }
-        
-        
-    }
-
-    
 }
