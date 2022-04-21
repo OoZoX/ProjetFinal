@@ -7,7 +7,6 @@ public class UITank : MonoBehaviour
 {
     [SerializeField] public Slider _slider;
     [SerializeField] public Tank _Tank;
-    [SerializeField] public ParticleSystem _TankParticules;
 
     private bool DeathTrigger;
     // Start is called before the first frame update
@@ -42,11 +41,11 @@ public class UITank : MonoBehaviour
     {
         if (_Tank._TankBody.velocity.y == 0 && _Tank._TankBody.velocity.x == 0)
         {
-            _TankParticules.enableEmission = false;
+            _Tank._TankParticules.enableEmission = false;
         }
         else
         {
-            _TankParticules.enableEmission = true;
+            _Tank._TankParticules.enableEmission = true;
         }
 
     }

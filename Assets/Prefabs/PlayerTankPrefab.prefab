@@ -168,7 +168,7 @@ Transform:
   m_Children:
   - {fileID: 2357165529986054036}
   m_Father: {fileID: 5221038345429654109}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &370481180277815702
 SpriteRenderer:
@@ -268,12 +268,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1602187123621700655}
+  m_Father: {fileID: 5221038345429654109}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -194.346}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.15100007, y: -0.756}
+  m_AnchoredPosition: {x: 0.17, y: 0.00999999}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &1853800516983703728
@@ -5154,7 +5154,7 @@ RectTransform:
   - {fileID: 3448708925332758961}
   - {fileID: 5156264629492762381}
   m_Father: {fileID: 1602187123621700655}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -5226,7 +5226,6 @@ GameObject:
   - component: {fileID: 4392625502784492504}
   - component: {fileID: 3189031547781023489}
   - component: {fileID: 8505266954757267057}
-  - component: {fileID: 2774930845378435538}
   m_Layer: 15
   m_Name: PlayerTank
   m_TagString: Player
@@ -5245,6 +5244,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6979493725441558346}
   - {fileID: 8371171092392564835}
   - {fileID: 4101392140623707031}
   m_Father: {fileID: 709094831417110290}
@@ -5345,7 +5345,7 @@ MonoBehaviour:
   _FullPrefab: {fileID: 709094831417110300}
   _TankAnimator: {fileID: 3189031547781023489}
   _TankCollider: {fileID: 6582691632971597805}
-  _TankParticules: {fileID: 0}
+  _TankParticules: {fileID: 1853800516983703728}
   _TankBody: {fileID: 8505266954757267057}
   _Speed: 1
   _Health: 5
@@ -5398,23 +5398,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2774930845378435538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5554712159037991723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c056b1f8e8309524cbf90f0e83484d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _viewMeshFilter: {fileID: 0}
-  _rayCount: 360
-  _edgeResolveIterations: 6
-  _edgeDstThreshold: 0.5
-  _maskCutawayDistance: 0.25
 --- !u!1 &7319934715488251355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5447,7 +5430,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6979493725441558346}
   - {fileID: 7667801193962687464}
   m_Father: {fileID: 709094831417110290}
   m_RootOrder: 0
@@ -5532,7 +5514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slider: {fileID: 3121128295654669958}
   _Tank: {fileID: 4392625502784492504}
-  _TankParticules: {fileID: 1853800516983703728}
 --- !u!50 &737126383501779593
 Rigidbody2D:
   serializedVersion: 4
@@ -5585,7 +5566,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5221038345429654109}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1959852510782905265
 MonoBehaviour:
