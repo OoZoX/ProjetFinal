@@ -6,16 +6,15 @@ using UnityEngine;
 public class Tank : MonoBehaviour
 {
     //Gameobjects
-    [SerializeField] public SpriteRenderer _tankSprite;
+    [SerializeField] public GameObject _tankSprite;
     [SerializeField] public Turret _turret;
-    [SerializeField] public Slider _slider;
-    [SerializeField] public Canvas _canvas;
+    [SerializeField] public UITank _UITank;
+
     [SerializeField] public Animator _TankAnimator;
     [SerializeField] public BoxCollider2D _TankCollider;
     [SerializeField] public ParticleSystem _TankParticules;
     [SerializeField] public Rigidbody2D _TankBody;
 
-    [SerializeField] private GameParameters _gameParameters;
     //stats
     [SerializeField] public float _Speed;
     [SerializeField] public float _Health;
@@ -39,17 +38,16 @@ public class Tank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _tankRotationSpeed = _gameParameters.TankTurnSpeed;
         DeathTrigger = false;
     }
 
 
-    protected IEnumerator DeathExplosion()
+    public IEnumerator DeathExplosion()
     {
         DeathTrigger = true;
         Debug.Log("Begin Animation Tank Death");
         //_turret.gameObject.SetActive(false);
-        this._canvas.gameObject.SetActive(false);
+        this._UITank.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         Destroy(this.gameObject, 1f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
@@ -64,20 +62,58 @@ public class Tank : MonoBehaviour
     {
         _Health -= domage;
         
-
     }
 
-
-    protected void ActualizeHealthBar()
+    public void Rotation(Vector3 Direction)
     {
-        _slider.value = _Health / _MaxHealth;
 
-        if (_Health <= 0 && DeathTrigger == false)
-        {
-            _TankAnimator.SetBool("Explosing", true);
-            StartCoroutine(DeathExplosion());
-        }
+        //Vector3 Direction = (CellDirection.m_bestDirection - transform.position).normalized;
+        Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * Direction;
+        Quaternion Rotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
+        _tankSprite.gameObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, Rotation, Time.deltaTime * _tankRotationSpeed);
     }
+    public IEnumerator Deplacement()
+    {
+        while (true)
+        {
+            Cell cellBelow = ManagerGraph.Instance.m_GetCellFromPosWorld(transform.position);
+            Vector3 Direction = new Vector3(cellBelow.m_bestDirection.Vector.x, cellBelow.m_bestDirection.Vector.y, 0);
+            Rotation(Direction);
+            _UITank.transform.position = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.8f, transform.position.z);
+            RaycastHit2D rayCast = Physics2D.Raycast(transform.position, new Vector2(0, 0), 0.1f, m_layerMask);
+
+            Vector2 ForceSpeed = new Vector2();
+            if (rayCast.collider)
+            {
+                if (rayCast.collider.gameObject.layer == 6)
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed * 0.75f;
+                }
+                else if (rayCast.collider.gameObject.layer == 7)
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed * 0.5f;
+                }
+                else
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed;
+                }
+            }
+            else
+            {
+                ForceSpeed = Direction * _tankMoveSpeed;
+            }
+
+
+
+            Rigidbody2D tank = transform.GetComponent<Rigidbody2D>();
+
+            tank.AddForce(ForceSpeed);
+
+            yield return new WaitForFixedUpdate();
+        }
+
+    }
+
     protected void CapturingZone(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
@@ -106,17 +142,5 @@ public class Tank : MonoBehaviour
         }
     }
 
-    protected void ParticulesOnMouvement()
-    {
-        if (_TankBody.velocity.y ==  0 && _TankBody.velocity.x == 0)
-        {
-            _TankParticules.enableEmission = false;
-        }
-        else
-        {
-            _TankParticules.enableEmission = true;
-        }
-
-    }
 
 }
