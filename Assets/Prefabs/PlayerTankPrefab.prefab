@@ -5226,7 +5226,6 @@ GameObject:
   - component: {fileID: 4392625502784492504}
   - component: {fileID: 3189031547781023489}
   - component: {fileID: 8505266954757267057}
-  - component: {fileID: 2774930845378435538}
   m_Layer: 15
   m_Name: PlayerTank
   m_TagString: Player
@@ -5398,23 +5397,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2774930845378435538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5554712159037991723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c056b1f8e8309524cbf90f0e83484d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _viewMeshFilter: {fileID: 0}
-  _rayCount: 360
-  _edgeResolveIterations: 6
-  _edgeDstThreshold: 0.5
-  _maskCutawayDistance: 0.25
 --- !u!1 &7319934715488251355
 GameObject:
   m_ObjectHideFlags: 0

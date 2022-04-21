@@ -8,7 +8,7 @@ public class FovSetActive : MonoBehaviour
 {
     List<Collider2D> _colliderList;
     List<Collider2D> _colliderVisible;
-    List<Collider2D> _colliderToDelete;
+
     ContactFilter2D _contactFilter;
 
     [SerializeField]
@@ -18,7 +18,6 @@ public class FovSetActive : MonoBehaviour
     {
         _contactFilter.SetLayerMask(_layerMask);
         _colliderVisible = new List<Collider2D>();
-        _colliderToDelete = new List<Collider2D>();
         _colliderList = new List<Collider2D>();
     }
 
