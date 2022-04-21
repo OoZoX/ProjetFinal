@@ -9,7 +9,7 @@ public class InputPlayer : MonoBehaviour
     private LayerMask _layerRayCastTank;
     [SerializeField]
     //private string _tagTankAllie;
-
+    public bool m_KeyboardN = false;
 
     public bool m_touchTankAllie = false;
     public bool m_clickMouseLeft = false;
@@ -40,7 +40,7 @@ public class InputPlayer : MonoBehaviour
     {
         GetClickMouse();
         GetKeyBoard();
-
+        GetKeyN();
     }
 
     private void RayCastClick()
@@ -56,7 +56,10 @@ public class InputPlayer : MonoBehaviour
         else
             m_touchTankAllie = false;
     }
-
+    public void GetKeyN()
+    {
+        m_KeyboardN = Input.GetKey(KeyCode.N);
+    }
     private void GetClickMouse()
     {
         m_clickMouseLeft = Input.GetMouseButton(0);

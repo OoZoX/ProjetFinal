@@ -22,15 +22,15 @@ public class Level : MonoBehaviour
   
     private int NbTotalIATank;
     private int NbTotalPlayerTank;
-    private int NbCaptureZone;
-
+    public int NbCaptureZone;
+    public int score;
     private float IARespawnCooldown;
     private float PlayerRespawnCooldown;
 
     [SerializeField] private float IARespawnRate;
     [SerializeField] private float PlayerRespawnRate;
-
-    private Stopwatch _GameTimer = new Stopwatch();
+    public static Level Instance;
+    public  Stopwatch _GameTimer = new Stopwatch();
     
     private int rnd;
     private enum StateLevel
@@ -51,11 +51,23 @@ public class Level : MonoBehaviour
     private StateRespawn _StateIATeam;
     public GameObject TankPlayers;
     public GameObject TankIAs;
-    
+
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+            Destroy(gameObject);
+    }
+
     void Start()
-    {   
+    {
+        score = 0;
         SpawnIA = new List<Vector3>();
         SpawnPlayer = new List<Vector3>();
         foreach (GameObject tank in IATankList)
@@ -68,6 +80,7 @@ public class Level : MonoBehaviour
         }
         NbTotalIATank = IATankList.Count();
         NbTotalPlayerTank = PlayerTankList.Count();
+        NbCaptureZone = ZoneCaptureList.Count();
         _StateLevel = StateLevel.InGame;
         _StatePlayerTeam = StateRespawn.Full;
         _StateIATeam = StateRespawn.Full;
@@ -86,6 +99,7 @@ public class Level : MonoBehaviour
         {
             if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
+                score = score - 1;
                 PlayerTankList.Remove(tank);
                 _StatePlayerTeam = StateRespawn.WaitingForRespawn;
                 StartCoroutine(ManagePlayerTankRespawn());
@@ -95,6 +109,7 @@ public class Level : MonoBehaviour
         {
             if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
+                score = score + 1;
                 IATankList.Remove(tank);
                 _StateIATeam = StateRespawn.WaitingForRespawn;
                 StartCoroutine(ManageIATankRespawn());
@@ -137,7 +152,7 @@ public class Level : MonoBehaviour
 
                 rnd = Random.Range(0, NbTotalIATank);
                 GameObject NewIATank = Instantiate(TankIAs, SpawnIA[rnd], Quaternion.Euler(0, 0, 0));
-                NewIATank.transform.parent = PlayerTeam.transform;
+                NewIATank.transform.parent = IATeam.transform;
                 NewIATank.transform.position = SpawnIA[rnd];
                 IATankList.Add(NewIATank);
                 _StateIATeam = StateRespawn.Checking;
@@ -175,6 +190,7 @@ public class Level : MonoBehaviour
         if(_GameTimer.Elapsed.TotalSeconds > MaxTimeGame)
         {
             _StateLevel = StateLevel.OutofTime;
-        }      
+        }
+        UnityEngine.Debug.Log("_StateLevel " + _StateLevel);
     }
 }
