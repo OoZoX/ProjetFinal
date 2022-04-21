@@ -60,13 +60,19 @@ public class Tank : MonoBehaviour
         yield return new WaitForSeconds(3f);
     }
 
+    public void Domage(int domage)
+    {
+        _Health -= domage;
+        
 
+    }
 
 
     protected void ActualizeHealthBar()
     {
         _slider.value = _Health / _MaxHealth;
-        if (_Health == 0 && DeathTrigger == false)
+
+        if (_Health <= 0 && DeathTrigger == false)
         {
             _TankAnimator.SetBool("Explosing", true);
             StartCoroutine(DeathExplosion());

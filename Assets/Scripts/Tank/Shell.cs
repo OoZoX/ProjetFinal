@@ -9,7 +9,7 @@ public class Shell : MonoBehaviour
      [SerializeField] private BoxCollider2D _ShellColliderRg2D;
      [SerializeField] private Animator _ShellAnimator;
      [SerializeField] private float _lifeTime;
-     [SerializeField] public float _ShellDammage;
+     [SerializeField] public int _ShellDammage;
 
      Quaternion toRotation;
      private bool IsDestroy;
@@ -30,35 +30,31 @@ public class Shell : MonoBehaviour
         StartCoroutine(Fire(aimedPoint));
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && _ShellColliderRg2D.bounds.Intersects(collision.collider.bounds))
-        {
-            StartCoroutine(Destroy());
-        }
-        if (collision.gameObject.CompareTag("Tank") && _ShellColliderRg2D.bounds.Intersects(collision.collider.bounds))
-        {
-            StartCoroutine(Destroy());
-        }
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Tank") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
+        if (collision.CompareTag("Ennemy"))
+        {
+            StartCoroutine(Destroy());
+            collision.GetComponent<Tank>().Domage(_ShellDammage);
+
+        }
+        if (collision.CompareTag("Player"))
+        {
+            StartCoroutine(Destroy());
+            collision.GetComponent<Tank>().Domage(_ShellDammage);
+
+        }
+        if (collision.CompareTag("Shell"))
+        {
+            StartCoroutine(Destroy());
+            
+        }
+        if (collision.CompareTag("Collider"))
         {
             StartCoroutine(Destroy());
         }
-        if (collision.gameObject.CompareTag("Player") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
-        {
-            StartCoroutine(Destroy());
-        }
-        if (collision.gameObject.CompareTag("Shell") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
-        {
-            StartCoroutine(Destroy());
-        }
-        if (collision.gameObject.CompareTag("Collider") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
-        {
-            StartCoroutine(Destroy());
-        }
+
     }
     private IEnumerator Destroy()
     {
