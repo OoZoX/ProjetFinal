@@ -170,27 +170,27 @@ public class GridDebug : MonoBehaviour
 		GUIStyle style = new GUIStyle(GUI.skin.label);
 		style.alignment = TextAnchor.MiddleCenter;
 
-		switch (curDisplayType)
-		{
-			case FlowFieldDisplayType.CostField:
+		//switch (curDisplayType)
+		//{
+		//	case FlowFieldDisplayType.CostField:
 
-				foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
-				{
-					Handles.Label(curCell.m_posWorld, curCell.m_cost.ToString(), style);
-				}
-				break;
+		//		foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
+		//		{
+		//			Handles.Label(curCell.m_posWorld, curCell.m_cost.ToString(), style);
+		//		}
+		//		break;
 				
-			case FlowFieldDisplayType.IntegrationField:
+		//	case FlowFieldDisplayType.IntegrationField:
 
-				foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
-				{
-					Handles.Label(curCell.m_posWorld, curCell.m_bestCost.ToString(), style);
-				}
-				break;
+		//		foreach (Cell curCell in ManagerGraph.Instance.m_tabCellMap)
+		//		{
+		//			Handles.Label(curCell.m_posWorld, curCell.m_bestCost.ToString(), style);
+		//		}
+		//		break;
 				
-			default:
-				break;
-		}
+		//	default:
+		//		break;
+		//}
 		
 	}
 
