@@ -115,17 +115,23 @@ public class Tank : MonoBehaviour
 
     protected void CapturingZone(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
+        if (collision.gameObject.CompareTag("Zone"))
         {
+            Debug.Log("Heal");
+
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
+            Debug.Log("_CaptureSpeed " + _CaptureSpeed);
+
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
+            Debug.Log("CaptureActuelle " + zone.CaptureActuelle);
+
         }
     }
     protected void GetHeal(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Heal") && _TankCollider.bounds.Intersects(collision.bounds))
+        if (collision.gameObject.CompareTag("Heal"))
         {
-            _Health = _Health + collision.transform.parent.GetComponent<HealingItem>()._HealingValue; ;
+            _Health = _Health + collision.transform.GetComponent<HealingItem>()._HealingValue; 
             Destroy(collision.gameObject);
             if (_Health > _MaxHealth)
             {

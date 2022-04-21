@@ -37,6 +37,7 @@ public class CaptureZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log("CaptureActuelle " + CaptureActuelle);
         if(CaptureActuelle < 0 && CaptureActuelle > CaptureMin)
         {
             _ZoneState = ZoneState.CapturingAI;
