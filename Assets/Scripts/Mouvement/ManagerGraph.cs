@@ -42,7 +42,7 @@ public class ManagerGraph : MonoBehaviour
 
 
 
-    public Vector3Int m_sizeMap;
+    //public Vector3Int m_sizeMap;
     public Vector2Int m_sizeGrid;
     public float m_cellRadius;
 
@@ -89,26 +89,32 @@ public class ManagerGraph : MonoBehaviour
         {
             CreateGrid();
             m_ScanMapCollider();
+            GridDebug.Instance.m_gridSize = m_sizeGrid;
+
         }
     }
 
     private void CreateGrid()
     {
-        m_sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
+        //m_sizeMap = GameObjectTileMap.m_value.GetComponent<Tilemap>().size;
 
         m_cellDiameter = m_cellRadius * 2f;
-        m_tabCellMap = new Cell[m_sizeGrid.x, m_sizeGrid.y];
+        Cell[,] NewTab = new Cell[m_sizeGrid.x, m_sizeGrid.y];
+        m_tabCellMap = NewTab;
         for (int x = 0; x < m_sizeGrid.x; x++)
         {
             for (int y = 0; y < m_sizeGrid.y; y++)
             {
                 //Possible beug world pos
-                Vector3 WorldPos = new Vector3(m_cellDiameter * x + m_positionStart_X, m_cellDiameter * y + m_positionStart_Y);
+                Vector3 WorldPos = new Vector3(m_cellDiameter * x + m_positionStart_X - 0.5f + m_cellRadius, m_cellDiameter * y + m_positionStart_Y - 0.5f + m_cellRadius);
                 Cell cell = new Cell();
 
                 cell.m_posWorld = WorldPos;
                 cell.m_gridIndex = new Vector2Int(x, y);
                 cell.m_cost = byte.MaxValue;
+                cell.m_bestCost = ushort.MaxValue;
+                cell.m_bestDirection = GridDirection.None;
+
                 m_tabCellMap[x, y] = cell;
                 
             }
@@ -132,6 +138,7 @@ public class ManagerGraph : MonoBehaviour
                 Vector2 CellExtend = Vector3.one * m_cellRadius;
                 ContactFilter2D contactFilter = new ContactFilter2D();
                 contactFilter.SetLayerMask(_layerMask);
+                contactFilter.useTriggers = true;
                 List<Collider2D> collidersList = new List<Collider2D>();
                 Physics2D.OverlapBox(CurrentCell.m_posWorld, CellExtend, 0, contactFilter, collidersList) ;
 
@@ -141,6 +148,7 @@ public class ManagerGraph : MonoBehaviour
                     if(!checkRoute && collider.gameObject.layer == 6)//herbe
                     {
                         CurrentCell.m_cost = 2;
+                        Debug.Log("herbe");
                     } 
                     else if(!checkRoute && collider.gameObject.layer == 7) //sable
                     {
@@ -149,7 +157,9 @@ public class ManagerGraph : MonoBehaviour
                     else if(collider.gameObject.layer == 10) //collider
                     {
                         CurrentCell.m_cost = byte.MaxValue;
+
                         break;
+                        
                     }
                     else if (collider.gameObject.layer == 8) // route
                     {
@@ -171,8 +181,8 @@ public class ManagerGraph : MonoBehaviour
 
     public Cell m_GetCellFromPosWorld(Vector3 worldPos)
     {
-        float percentX = worldPos.x / (m_sizeGrid.x * m_cellDiameter);
-        float percentY = worldPos.z / (m_sizeGrid.y * m_cellDiameter);
+        float percentX = (worldPos.x - m_positionStart_X +0.5f) / (m_sizeGrid.x * m_cellDiameter);
+        float percentY = (worldPos.y - m_positionStart_Y +0.5f) / (m_sizeGrid.y * m_cellDiameter);
 
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);

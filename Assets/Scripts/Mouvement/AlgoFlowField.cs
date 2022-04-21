@@ -24,7 +24,7 @@ public class AlgoFlowField : MonoBehaviour
     
     
 
-    private bool _searchFinish = false;
+    
     private HashSet<Vector4> m_listToCalculateCompare;
     private List<Vector4> m_listToCalculate;
     private List<Vector2> _listCalculateFinish;
@@ -51,6 +51,7 @@ public class AlgoFlowField : MonoBehaviour
         _listTempCellMap = ManagerGraph.Instance.m_tabCellMap;
         CellCible.m_cost = 0;
         CellCible.m_bestCost = 0;
+        _listTempCellMap[CellCible.m_gridIndex.x, CellCible.m_gridIndex.y].m_bestCost = 0;
 
         cellsToCheck = new List<Cell>();
 
@@ -70,10 +71,13 @@ public class AlgoFlowField : MonoBehaviour
                 if(Neighbor.m_cost + CurrentCell.m_bestCost < Neighbor.m_bestCost)
                 {
                     _listTempCellMap[Neighbor.m_gridIndex.x, Neighbor.m_gridIndex.y].m_bestCost = (ushort)(Neighbor.m_cost + CurrentCell.m_bestCost);
-                    cellsToCheck.Add(Neighbor);
+
+                    cellsToCheck.Add(_listTempCellMap[Neighbor.m_gridIndex.x, Neighbor.m_gridIndex.y]);
                 }
             }
         }
+
+        ManagerGraph.Instance.m_tabCellMap = _listTempCellMap;
 
     }
 

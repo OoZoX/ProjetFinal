@@ -43,14 +43,12 @@ public class Tank : MonoBehaviour
 
     public bool m_startDep = false;
     public bool m_isMoving = false;
-    public List<Vector2> m_cheminDep;
 
     public static Tank Instance;
     // Start is called before the first frame update
     void Start()
     {
         _tankRotationSpeed = _gameParameters.TankTurnSpeed;
-        _tankMoveSpeed = _gameParameters.TankSpeed;
         DeathTrigger = false;
     }
 

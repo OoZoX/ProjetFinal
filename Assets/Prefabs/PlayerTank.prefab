@@ -146,12 +146,11 @@ MonoBehaviour:
   _MaxHealth: 5
   _tankRotationSpeed: 180
   _TurretRotationSpeed: 720
-  _tankMoveSpeed: 0
+  _tankMoveSpeed: 5
   _CaptureSpeed: 1
   _ShellDammage: 1
   m_startDep: 0
   m_isMoving: 0
-  m_cheminDep: []
 --- !u!95 &5037598031924538427
 Animator:
   serializedVersion: 3
@@ -184,8 +183,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 4
+  m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0

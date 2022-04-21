@@ -36,42 +36,62 @@ public class PlayerTank : Tank
                 }
             }
         }
-        if (m_cheminDep.Count > 0 && m_isMoving)
+        if (m_startDep)
         {
+            StopAllCoroutines();
             StartCoroutine(Deplacement());
+            m_startDep = false;
         }
     }
 
     
     private IEnumerator Deplacement()
     {
-        while (m_isMoving)
+        while (true)
         {
+            Cell cellBelow = ManagerGraph.Instance.m_GetCellFromPosWorld(transform.position);
+            Vector3 Direction = new Vector3(cellBelow.m_bestDirection.Vector.x, cellBelow.m_bestDirection.Vector.y, 0);
+            Rotation(Direction);
             
-            if((int)transform.position.x == m_cheminDep[1].x && (int)transform.position.y == m_cheminDep[1].y)
-                m_cheminDep.RemoveAt(0);
+            Vector2 ForceSpeed = Direction * _tankMoveSpeed;
+            Rigidbody2D tank = transform.GetComponent<Rigidbody2D>();
 
-            if (m_cheminDep.Count <= 1)
-                m_isMoving = false;
-            else
-            {
-                Rotation();
+            tank.AddForce(ForceSpeed);
 
-                Vector2 Force = new Vector2(_tankMoveSpeed, 0);
-                transform.GetComponent<Rigidbody2D>().AddForce(Force);
-
-            }
-
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
-        
+
+
+
+        //while (m_isMoving)
+        //{
+
+        //    if((int)transform.position.x == m_cheminDep[1].x && (int)transform.position.y == m_cheminDep[1].y)
+        //        m_cheminDep.RemoveAt(0);
+
+        //    if (m_cheminDep.Count <= 1)
+        //        m_isMoving = false;
+        //    else
+        //    {
+        //        Rotation();
+
+        //        Vector2 Force = new Vector2(_tankMoveSpeed, 0);
+        //        transform.GetComponent<Rigidbody2D>().AddForce(Force);
+
+        //    }
+
+        //    yield return null;
+        //}
+
     }
 
-    private void Rotation()
+    private void Rotation(Vector3 Direction)
     {
-        Vector3 Direction = (m_cheminDep[1] - m_cheminDep[0]).normalized;
+
+        //Vector3 Direction = (CellDirection.m_bestDirection - transform.position).normalized;
         Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * Direction;
         Quaternion Rotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
+        
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Rotation, Time.deltaTime * _tankRotationSpeed);
     }
 

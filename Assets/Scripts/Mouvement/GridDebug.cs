@@ -6,11 +6,11 @@ public enum FlowFieldDisplayType { None, AllIcons, DestinationIcon, CostField, I
 
 public class GridDebug : MonoBehaviour
 {
-	public bool displayGrid;
+	public bool displayGrid = false;
 
 	public FlowFieldDisplayType curDisplayType;
 
-	private Vector2Int gridSize;
+	public Vector2Int m_gridSize;
 	private float cellRadius;
 	
 
@@ -32,17 +32,18 @@ public class GridDebug : MonoBehaviour
 
     private void Start()
 	{
+		displayGrid = false;
 		ffIcons = Resources.LoadAll<Sprite>("Sprites/FFicons");
 		//curFlowField = newFlowField;
 		cellRadius = ManagerGraph.Instance.m_cellRadius;
-		gridSize = ManagerGraph.Instance.m_sizeGrid;
+		m_gridSize = ManagerGraph.Instance.m_sizeGrid;
 	}
 
 	
 	public void DrawFlowField()
 	{
 		cellRadius = ManagerGraph.Instance.m_cellRadius;
-		gridSize = ManagerGraph.Instance.m_sizeGrid;
+		m_gridSize = ManagerGraph.Instance.m_sizeGrid;
 		ClearCellDisplay();
 
 		switch (curDisplayType)
@@ -158,10 +159,10 @@ public class GridDebug : MonoBehaviour
 	
 	private void OnDrawGizmos()
 	{
-		if (displayGrid)
+		if (displayGrid && ManagerGraph.Instance.m_sizeGrid == m_gridSize)
 		{
 
-			DrawGrid(gridSize, Color.green, cellRadius);
+			DrawGrid(ManagerGraph.Instance.m_sizeGrid, Color.green, ManagerGraph.Instance.m_cellRadius);
 		}
 		
 		
