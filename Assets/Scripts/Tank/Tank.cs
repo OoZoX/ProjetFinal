@@ -116,19 +116,24 @@ public class Tank : MonoBehaviour
             tank.AddForce(ForceSpeed);
 
             yield return new WaitForFixedUpdate();
-            Moving = ConditionStopMove();
+            Moving = ConditionStopMove(_destionation);
         }
 
     }
 
-    private bool ConditionStopMove()
+    private bool ConditionStopMove(Cell Destination)
     {
-        if ((int)transform.position.x == )
+        if ((int)transform.position.x == (int)Destination.m_posWorld.x && (int)transform.position.y == (int)Destination.m_posWorld.y)
         {
-
+            m_startDep = true;
+            return false;
+        }
+        else
+        {
+            return true;
         }
         
-        return true
+        
     }
 
     protected void CapturingZone(Collider2D collision)

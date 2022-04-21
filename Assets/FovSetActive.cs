@@ -8,6 +8,7 @@ public class FovSetActive : MonoBehaviour
 {
     List<Collider2D> _colliderList;
     List<Collider2D> _colliderVisible;
+    List<Collider2D> _colliderRemove;
 
     ContactFilter2D _contactFilter;
 
@@ -19,6 +20,7 @@ public class FovSetActive : MonoBehaviour
         _contactFilter.SetLayerMask(_layerMask);
         _colliderVisible = new List<Collider2D>();
         _colliderList = new List<Collider2D>();
+        _colliderRemove = new List<Collider2D>();
     }
 
     // Update is called once per frame
@@ -48,8 +50,14 @@ public class FovSetActive : MonoBehaviour
                 collider.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 collider.gameObject.GetComponent<IATank>()._UITank.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().enabled = false;
                 collider.gameObject.GetComponent<IATank>()._UITank.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().enabled = false;
-                _colliderVisible.Remove(collider);
+                _colliderRemove.Add(collider);
             }
         }
+
+        foreach(Collider2D collider in _colliderRemove)
+        {
+            _colliderVisible.Remove(collider);
+        }
+        _colliderRemove.Clear();
     }
 }
