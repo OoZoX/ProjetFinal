@@ -62,11 +62,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Ease: 0
-    - _FalloffStrength: 1
+    - _FalloffStrength: 1.73
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _InnerRadius: 0.666
+    - _InnerRadius: 0
     - _Intensity: 1.2
     - _Metallic: 0
     - _Mode: 0
@@ -76,7 +76,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StencilRef: 1
+    - _StencilRef: 26
     - _UVSec: 0
     - _UseTex: 0
     - _ZWrite: 1
