@@ -4968,7 +4968,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8454410690338148233}
   - component: {fileID: 913948144038382108}
-  - component: {fileID: 8198045550485923272}
   - component: {fileID: 4759518782793715370}
   m_Layer: 15
   m_Name: IATurret
@@ -4989,6 +4988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2025567912990819135}
+  - {fileID: 6409396748985031942}
   m_Father: {fileID: 4376401861156388118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5043,22 +5043,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &8198045550485923272
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4026398697358037517}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
 --- !u!114 &4759518782793715370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,11 +5057,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shootposition: {x: 0, y: 0, z: 0}
   _CanShoot: 1
-  _DetectionRange: {fileID: 8198045550485923272}
   _ShellStartPosition: {fileID: 2025567912990819135}
   _Shell: {fileID: 8611045978538915858, guid: 9a42d93489f86c3409e61bc095edd8d6, type: 3}
   _FireRate: 3
   _TurretRotationSpeed: 360
+--- !u!1 &5236339761836412559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6409396748985031942}
+  - component: {fileID: 7983717367132000453}
+  - component: {fileID: 1817830922414253659}
+  m_Layer: 15
+  m_Name: CircleCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6409396748985031942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236339761836412559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8454410690338148233}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &7983717367132000453
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236339761836412559}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!114 &1817830922414253659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236339761836412559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad110a96c9be9549b9dec413a8711ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerInRange: 0
+  m_posPlayer: {x: 0, y: 0, z: 0}
 --- !u!1 &6594396853755407102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5252,7 +5297,7 @@ MonoBehaviour:
   _TankCollider: {fileID: 4332488390844375203}
   _TankParticules: {fileID: 6108619055263210783}
   _TankBody: {fileID: 5241940158656851969}
-  _gameParameters: {fileID: 0}
+  _gameParameters: {fileID: 11400000, guid: c7af04d7648f1874d971bac052fe6d39, type: 2}
   _Speed: 1
   _Health: 5
   _MaxHealth: 5
@@ -5261,9 +5306,13 @@ MonoBehaviour:
   _tankRotationSpeed: 0
   m_layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   m_startDep: 0
   m_isMoving: 0
+  m_detectionZone: {fileID: 1817830922414253659}
+  m_layerMaskPlayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7453788131725016669
 GameObject:
   m_ObjectHideFlags: 0

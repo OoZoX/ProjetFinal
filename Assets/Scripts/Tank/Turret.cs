@@ -7,11 +7,11 @@ public class Turret : MonoBehaviour
     protected Quaternion LookRotation;
     public Vector3 Shootposition;
     protected Vector3 DirectionTurret;
-    protected float ShootCooldown;
+    protected float ShootCooldown = 0;
     public bool _CanShoot;
 
 
-    [SerializeField] public CircleCollider2D _DetectionRange;
+    
     [SerializeField] public Transform _ShellStartPosition;
     [SerializeField] public Shell _Shell;
     [SerializeField] public float _FireRate;
@@ -19,38 +19,21 @@ public class Turret : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        ShootCooldown = 0;
-    }
-
     // Update is called once per frame
     void Update()
     {
         CanShoot();
 
     }
-    public void SetShootPosition()
+
+    public void OrientationTurret(Vector3 shootPosition)
     {
-        Shootposition = InputPlayer.Instance.m_posSourisWorld;
-
-    }
-    public void OrientationTurret()
-    {
-        Debug.Log("Shootposition1" + Shootposition);
-
-        DirectionTurret = (Shootposition - _ShellStartPosition.position).normalized;
-        Debug.Log("Shootposition2" + Shootposition);
-
+        DirectionTurret = (shootPosition - _ShellStartPosition.position).normalized;
         Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
-        Debug.Log("Shootposition3" + Shootposition);
-
         LookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
-        Debug.Log("Shootposition4" + Shootposition);
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);
     }
+
     public void CanShoot()
     {
         if (ShootCooldown > _FireRate)
@@ -65,14 +48,19 @@ public class Turret : MonoBehaviour
 
     public void ThrowProjectile()
     {
-        Shell ShellClone = Instantiate(_Shell, new Vector3(_ShellStartPosition.position.x, _ShellStartPosition.position.y, _ShellStartPosition.position.z), Quaternion.Euler(0, 0, -90) * transform.rotation);
-        Vector3 aimedPoint = Shootposition;
-        ShellClone.GetComponent<Shell>().LaunchProjectile(aimedPoint);
-        ResetShootCooldown();
-        _CanShoot = false;
+        if (_CanShoot)
+        {
+            Shell ShellClone = Instantiate(_Shell, new Vector3(_ShellStartPosition.position.x, _ShellStartPosition.position.y, _ShellStartPosition.position.z), Quaternion.Euler(0, 0, -90) * transform.rotation);
+            Vector3 aimedPoint = Shootposition;
+            ShellClone.GetComponent<Shell>().LaunchProjectile(aimedPoint);
+            ResetShootCooldown();
+            _CanShoot = false;
+        }
     }
     public void ResetShootCooldown()
     {
         ShootCooldown = 0f;
     }
+
+
 }

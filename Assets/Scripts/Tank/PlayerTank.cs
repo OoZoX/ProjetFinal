@@ -18,13 +18,13 @@ public class PlayerTank : Tank
     void Update()
     {
         ActualizeHealthBar();
-        _turret.OrientationTurret();
+        //_turret.OrientationTurret();
         _turret.CanShoot();
         ParticulesOnMouvement();
         if (InputPlayer.Instance != null)
         {
             InputPlayer.Instance.m_GetMousePositionWorld();
-            _turret.SetShootPosition();
+            //_turret.SetShootPosition();
             if (_turret._CanShoot == true)
             {
                 ShootClick = InputPlayer.Instance.m_clickMouseRight;
