@@ -16,6 +16,7 @@ TagManager:
   - Road
   - Sand
   - PostEffect
+  - Collider
   layers:
   - Default
   - TransparentFX

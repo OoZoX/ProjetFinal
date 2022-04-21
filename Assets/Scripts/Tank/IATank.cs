@@ -9,9 +9,6 @@ public class IATank : Tank
     // Start is called before the first frame update
     void Start()
     {
-        EnnemyInRange = false;
-        ShootCooldown = 0;
-        _CanShoot = false;
         ActualizeHealthBar();
     }
 
@@ -19,35 +16,27 @@ public class IATank : Tank
     void Update()
     {
         ActualizeHealthBar();
-        CanShoot();
         ParticulesOnMouvement();
         if (EnnemyInRange == false)
         {
-            IddleTank();
+           
         }
         else
         {
-             OrientationTurret();
-            if (_CanShoot == true)
+            _turret.OrientationTurret();
+            if (_turret._CanShoot == true)
             {
-                ThrowProjectile();
+                _turret.ThrowProjectile();
             }
         }     
-    }
-    private void IddleTank()
-    {
-        //DirectionTurret = (Shootposition - _ShellStartPosition.position).normalized;
-        //Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
-        //LookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
-        //_turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Shootposition = collision.transform.position;
-            ShootCooldown = 0f;
-            _CanShoot = false;
+            _turret.Shootposition = collision.transform.position;
+            _turret.ResetShootCooldown();
+            _turret._CanShoot = false;
             EnnemyInRange = true;
         }
         GetHitShell(collision);
@@ -57,7 +46,7 @@ public class IATank : Tank
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Shootposition = collision.transform.position;
+            _turret.Shootposition = collision.transform.position;
             EnnemyInRange = true;
         }
         CapturingZone(collision);

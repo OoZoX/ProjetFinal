@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Shell : MonoBehaviour
-{
-    
+{ 
      [SerializeField] private float _projectileSpeed;
      [SerializeField] private Rigidbody2D _projectileRg2D;
      [SerializeField] private BoxCollider2D _ShellColliderRg2D;
      [SerializeField] private Animator _ShellAnimator;
      [SerializeField] private float _lifeTime;
+     [SerializeField] public float _ShellDammage;
 
      Quaternion toRotation;
      private bool IsDestroy;
@@ -40,7 +40,6 @@ public class Shell : MonoBehaviour
         {
             StartCoroutine(Destroy());
         }
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -53,6 +52,10 @@ public class Shell : MonoBehaviour
             StartCoroutine(Destroy());
         }
         if (collision.gameObject.CompareTag("Shell") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
+        {
+            StartCoroutine(Destroy());
+        }
+        if (collision.gameObject.CompareTag("Collider") && _ShellColliderRg2D.bounds.Intersects(collision.bounds))
         {
             StartCoroutine(Destroy());
         }

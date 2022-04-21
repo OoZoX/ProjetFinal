@@ -6,13 +6,11 @@ using UnityEngine;
 public class PlayerTank : Tank
 {
     protected bool ShootClick;
-
+    //public Vector3 Shootposition;
     // Start is called before the first frame update
     void Start()
     {
-        ShootCooldown = 0;
         ShootClick = false;
-        _CanShoot = false;
         ActualizeHealthBar();
     }
 
@@ -20,19 +18,19 @@ public class PlayerTank : Tank
     void Update()
     {
         ActualizeHealthBar();
-        OrientationTurret();
-        CanShoot();
+        _turret.OrientationTurret();
+        _turret.CanShoot();
         ParticulesOnMouvement();
         if (InputPlayer.Instance != null)
         {
             InputPlayer.Instance.m_GetMousePositionWorld();
-            Shootposition = InputPlayer.Instance.m_posSourisWorld;
-            if (_CanShoot == true)
+            _turret.SetShootPosition();
+            if (_turret._CanShoot == true)
             {
                 ShootClick = InputPlayer.Instance.m_clickMouseRight;
                 if (ShootClick == true)
                 {
-                    ThrowProjectile();
+                    _turret.ThrowProjectile();
                 }
             }
         }
