@@ -25,13 +25,16 @@ public class Tank : MonoBehaviour
     [SerializeField] public float _tankRotationSpeed;
 
     //variables
+    
 
     protected GameObject EnnemyTank;
 
     protected bool DeathTrigger;
 
-
+    private Cell[,] _Cell;
+    private Cell _destionation;
     public LayerMask m_layerMask;
+
     public bool m_startDep = false;
     public bool m_isMoving = false;
 
@@ -73,9 +76,13 @@ public class Tank : MonoBehaviour
     }
     public IEnumerator Deplacement()
     {
-        while (true)
+        bool Moving = true;
+        _Cell = ManagerGraph.Instance.m_tabCellMap;
+        _destionation = ManagerGraph.Instance.m_cibleCell;
+        while (Moving)
         {
             Cell cellBelow = ManagerGraph.Instance.m_GetCellFromPosWorld(transform.position);
+            cellBelow = _Cell[cellBelow.m_gridIndex.x, cellBelow.m_gridIndex.y];
             Vector3 Direction = new Vector3(cellBelow.m_bestDirection.Vector.x, cellBelow.m_bestDirection.Vector.y, 0);
             Rotation(Direction);
             _UITank.transform.position = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.8f, transform.position.z);
@@ -109,8 +116,19 @@ public class Tank : MonoBehaviour
             tank.AddForce(ForceSpeed);
 
             yield return new WaitForFixedUpdate();
+            Moving = ConditionStopMove();
         }
 
+    }
+
+    private bool ConditionStopMove()
+    {
+        if ((int)transform.position.x == )
+        {
+
+        }
+        
+        return true
     }
 
     protected void CapturingZone(Collider2D collision)
