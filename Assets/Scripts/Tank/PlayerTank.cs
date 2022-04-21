@@ -33,7 +33,6 @@ public class PlayerTank : Tank
     {
         InputPlayer.Instance.m_GetMousePositionWorld();
         Vector3 posMouse = InputPlayer.Instance.m_posSourisWorld;
-        Debug.Log(posMouse);
         _turret.OrientationTurret(posMouse);
     }
     private void Shoot()
@@ -50,7 +49,6 @@ public class PlayerTank : Tank
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GetHitShell(collision);
         GetHeal(collision);
     }
     private void OnTriggerStay2D(Collider2D collision)

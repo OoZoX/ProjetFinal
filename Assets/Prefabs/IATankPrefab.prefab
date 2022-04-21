@@ -5313,6 +5313,7 @@ MonoBehaviour:
   _tankSprite: {fileID: 6594396853755407102}
   _turret: {fileID: 4759518782793715370}
   _UITank: {fileID: 7932198506589299501}
+  _FullPrefab: {fileID: 709094831417110300}
   _TankAnimator: {fileID: 324480453981138053}
   _TankCollider: {fileID: 4332488390844375203}
   _TankParticules: {fileID: 6108619055263210783}

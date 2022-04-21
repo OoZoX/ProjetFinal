@@ -9,6 +9,7 @@ public class Tank : MonoBehaviour
     [SerializeField] public GameObject _tankSprite;
     [SerializeField] public Turret _turret;
     [SerializeField] public UITank _UITank;
+    [SerializeField] public GameObject _FullPrefab;
 
     [SerializeField] public Animator _TankAnimator;
     [SerializeField] public BoxCollider2D _TankCollider;
@@ -38,30 +39,28 @@ public class Tank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DeathTrigger = false;
+
     }
 
 
     public IEnumerator DeathExplosion()
     {
-        DeathTrigger = true;
         Debug.Log("Begin Animation Tank Death");
-        //_turret.gameObject.SetActive(false);
+        this._TankAnimator.SetBool("Explosing", true);
+        this._turret.gameObject.SetActive(false);
         this._UITank.gameObject.SetActive(false);
-        this.gameObject.SetActive(false);
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 1.1f);
+        Destroy(this._FullPrefab.gameObject, 1.1f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
         yield return new WaitForSeconds(0.5f);
         this._tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);
         yield return new WaitForSeconds(0.3f);
-        this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
-        yield return new WaitForSeconds(3f);
+        this._tankSprite.transform.localScale = new Vector2(0.3f, 0.3f);   
     }
 
     public void Domage(int domage)
     {
-        _Health -= domage;
-        
+        _Health -= domage;     
     }
 
     public void Rotation(Vector3 Direction)
@@ -120,13 +119,6 @@ public class Tank : MonoBehaviour
         {
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
-        }
-    }
-    protected void GetHitShell(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
-        {
-            _Health = _Health -collision.GetComponent<Shell>()._ShellDammage;
         }
     }
     protected void GetHeal(Collider2D collision)

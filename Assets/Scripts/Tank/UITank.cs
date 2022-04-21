@@ -9,26 +9,34 @@ public class UITank : MonoBehaviour
     [SerializeField] public Tank _Tank;
     [SerializeField] public ParticleSystem _TankParticules;
 
-
+    private bool DeathTrigger;
     // Start is called before the first frame update
     void Start()
     {
-        
+        DeathTrigger = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         ActualizeHealthBar();
-        ParticulesOnMouvement(); 
+        ParticulesOnMouvement();
+        CheckHealth();
     }
 
-
+    public void CheckHealth()
+    {
+        if(_Tank._Health <= 0 && DeathTrigger == false)
+        {
+            StartCoroutine(_Tank.DeathExplosion()); 
+            DeathTrigger = true;
+        }
+    }
 
     protected void ActualizeHealthBar()
     {
         _slider.value = (float)_Tank._Health / (float)_Tank._MaxHealth;
-        Debug.Log(_Tank._Health + "  " + _Tank._MaxHealth + "  " + _slider.value);
+        transform.position = new Vector3(_Tank.gameObject.transform.position.x + 0.02f, _Tank.gameObject.transform.position.y + 0.8f, transform.position.z);
     }
     protected void ParticulesOnMouvement()
     {
