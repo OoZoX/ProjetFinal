@@ -40,7 +40,7 @@ public class Tank : MonoBehaviour
     protected bool DeathTrigger;
 
 
-
+    public LayerMask m_layerMask;
     public bool m_startDep = false;
     public bool m_isMoving = false;
 

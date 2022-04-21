@@ -52,8 +52,32 @@ public class PlayerTank : Tank
             Cell cellBelow = ManagerGraph.Instance.m_GetCellFromPosWorld(transform.position);
             Vector3 Direction = new Vector3(cellBelow.m_bestDirection.Vector.x, cellBelow.m_bestDirection.Vector.y, 0);
             Rotation(Direction);
-            
-            Vector2 ForceSpeed = Direction * _tankMoveSpeed;
+
+            RaycastHit2D rayCast = Physics2D.Raycast(transform.position, new Vector2(0,0), 0.1f, m_layerMask);
+
+            Vector2 ForceSpeed = new Vector2();
+            if (rayCast.collider)
+            {
+                if (rayCast.collider.gameObject.layer == 6)
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed * 0.75f;
+                }
+                else if (rayCast.collider.gameObject.layer == 7)
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed * 0.5f;
+                }
+                else
+                {
+                    ForceSpeed = Direction * _tankMoveSpeed;
+                }
+            }
+            else
+            {
+                ForceSpeed = Direction * _tankMoveSpeed;
+            }
+
+
+
             Rigidbody2D tank = transform.GetComponent<Rigidbody2D>();
 
             tank.AddForce(ForceSpeed);

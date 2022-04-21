@@ -149,6 +149,9 @@ MonoBehaviour:
   _tankMoveSpeed: 5
   _CaptureSpeed: 1
   _ShellDammage: 1
+  m_layerMask:
+    serializedVersion: 2
+    m_Bits: 192
   m_startDep: 0
   m_isMoving: 0
 --- !u!95 &5037598031924538427
