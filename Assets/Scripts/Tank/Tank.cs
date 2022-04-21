@@ -7,36 +7,27 @@ public class Tank : MonoBehaviour
 {
     //Gameobjects
     [SerializeField] public SpriteRenderer _tankSprite;
-    [SerializeField] public GameObject _turret;
+    [SerializeField] public Turret _turret;
     [SerializeField] public Slider _slider;
     [SerializeField] public Canvas _canvas;
     [SerializeField] public Animator _TankAnimator;
-    [SerializeField] public GameObject _Shell;
-    [SerializeField] public Transform _ShellStartPosition;
-    [SerializeField] public CircleCollider2D _DetectionRange;
     [SerializeField] public BoxCollider2D _TankCollider;
     [SerializeField] public ParticleSystem _TankParticules;
     [SerializeField] public Rigidbody2D _TankBody;
 
     [SerializeField] private GameParameters _gameParameters;
     //stats
-    [SerializeField] public bool _CanShoot;
     [SerializeField] public float _Speed;
-    [SerializeField] public float _FireRate;
     [SerializeField] public float _Health;
     [SerializeField] public float _MaxHealth;
-    [SerializeField] public float _tankRotationSpeed;
-    [SerializeField] public float _TurretRotationSpeed;
     [SerializeField] public float _tankMoveSpeed;
     [SerializeField] public float _CaptureSpeed;
-    [SerializeField] public float _ShellDammage;
+    [SerializeField] public float _tankRotationSpeed;
 
     //variables
-    protected Quaternion LookRotation;
-    protected Vector3 Shootposition;
-    protected Vector3 DirectionTurret;
+
     protected GameObject EnnemyTank;
-    protected float ShootCooldown;
+
     protected bool DeathTrigger;
 
 
@@ -52,22 +43,12 @@ public class Tank : MonoBehaviour
         DeathTrigger = false;
     }
 
-    protected void CanShoot()
-    {
-        if (ShootCooldown > _FireRate)
-        {
-            _CanShoot = true;
-        }
-        else
-        {
-            ShootCooldown += Time.deltaTime;
-        }
-    }
+
     protected IEnumerator DeathExplosion()
     {
         DeathTrigger = true;
         Debug.Log("Begin Animation Tank Death");
-        this._turret.SetActive(false);
+        //_turret.gameObject.SetActive(false);
         this._canvas.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
         Destroy(this.gameObject, 1f);
@@ -76,25 +57,11 @@ public class Tank : MonoBehaviour
         this._tankSprite.transform.localScale = new Vector2(0.7f, 0.7f);
         yield return new WaitForSeconds(0.3f);
         this._tankSprite.transform.localScale = new Vector2(0.5f, 0.5f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(3f);
     }
 
-    protected void ThrowProjectile()
-    {
-        GameObject ShellClone = Instantiate(_Shell, new Vector3(_ShellStartPosition.position.x, _ShellStartPosition.position.y, _ShellStartPosition.position.z), Quaternion.Euler(0, 0, -90) * _turret.transform.rotation);
-        Vector3 aimedPoint = Shootposition;
-        ShellClone.GetComponent<Shell>().LaunchProjectile(aimedPoint);
-        ShootCooldown = 0f;
-        _CanShoot = false;
-    }
 
-    protected void OrientationTurret()
-    {
-        DirectionTurret = (Shootposition - _ShellStartPosition.position).normalized;
-        Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
-        LookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
-        _turret.transform.rotation = Quaternion.RotateTowards(_turret.transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);
-    }
+
 
     protected void ActualizeHealthBar()
     {
@@ -117,20 +84,19 @@ public class Tank : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Shell") && _TankCollider.bounds.Intersects(collision.bounds))
         {
-            _Health = _Health - _ShellDammage;
+            _Health = _Health -collision.GetComponent<Shell>()._ShellDammage;
         }
     }
     protected void GetHeal(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Heal") && _TankCollider.bounds.Intersects(collision.bounds))
         {
-            _Health = _Health + 1;
+            _Health = _Health + collision.transform.parent.GetComponent<HealingItem>()._HealingValue; ;
             Destroy(collision.gameObject);
             if (_Health > _MaxHealth)
             {
                 _Health = _MaxHealth;
             }
-            Debug.Log("hit _health : " + _Health);
         }
     }
 
@@ -146,4 +112,5 @@ public class Tank : MonoBehaviour
         }
 
     }
+
 }

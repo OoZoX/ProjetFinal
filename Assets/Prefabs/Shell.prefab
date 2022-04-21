@@ -4857,6 +4857,7 @@ MonoBehaviour:
   _ShellColliderRg2D: {fileID: 8611045978538915859}
   _ShellAnimator: {fileID: -7711035190591671034}
   _lifeTime: 3
+  _ShellDammage: 1
 --- !u!61 &8611045978538915859
 BoxCollider2D:
   m_ObjectHideFlags: 0
