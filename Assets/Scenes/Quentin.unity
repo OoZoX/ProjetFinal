@@ -10067,6 +10067,14 @@ PrefabInstance:
       propertyPath: m_detectionZone
       value: 
       objectReference: {fileID: 519976902}
+    - target: {fileID: 8647605338661288157, guid: 96620c9f2197c1744ae31f405a9103fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647605338661288157, guid: 96620c9f2197c1744ae31f405a9103fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.06
+      objectReference: {fileID: 0}
     - target: {fileID: 8867991714936962531, guid: 96620c9f2197c1744ae31f405a9103fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.97
