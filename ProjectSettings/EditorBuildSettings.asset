@@ -6,15 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Quentin.unity
-    guid: 7800516229bb821498b904c34d50d688
-  - enabled: 1
     path: Assets/Scenes/Import Scene/SceneManager.unity
     guid: 0859bcc776515404ea5b490277a20098
   - enabled: 1
     path: Assets/Scenes/Import Scene/UI.unity
     guid: 5bddf53af518838469c46d4ade0b5276
   - enabled: 1
-    path: Assets/Scenes/Labs.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/BootStrap.unity
+    guid: 731b3edf9f49c924faff88bdacf0cf5a
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: bcca5294c6ecd7b4280e05372be7164d
+  - enabled: 1
+    path: Assets/Scenes/Level Final.unity
+    guid: f113735823228e54291d887878ae2fd3
   m_configObjects: {}
