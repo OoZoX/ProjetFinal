@@ -38,7 +38,6 @@ public class Tank : MonoBehaviour
     public bool m_startDep = false;
     public bool m_isMoving = false;
 
-    public static Tank Instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -138,7 +137,7 @@ public class Tank : MonoBehaviour
 
     protected void CapturingZone(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Zone"))
+        if (collision.gameObject.CompareTag("Zone") && _TankCollider.bounds.Intersects(collision.bounds))
         {
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;

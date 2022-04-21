@@ -5351,7 +5351,7 @@ MonoBehaviour:
   _Health: 5
   _MaxHealth: 5
   _tankMoveSpeed: 5
-  _CaptureSpeed: 1.5
+  _CaptureSpeed: 1
   _tankRotationSpeed: 180
   m_layerMask:
     serializedVersion: 2
