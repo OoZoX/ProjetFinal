@@ -48,6 +48,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 32768
+  _materialOutline: {fileID: 2100000, guid: c7dd6e01cfbaa6c4b8a6b85e92ab6682, type: 2}
+  _materialNormal: {fileID: 2100000, guid: 1a765be4f5e116f488fe912c7c086dc0, type: 2}
   m_collider2DsTank: []
   m_isClickLeft: 0
   _firstClick: 0

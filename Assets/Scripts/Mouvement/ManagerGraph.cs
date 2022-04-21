@@ -79,6 +79,8 @@ public class ManagerGraph : MonoBehaviour
 
     void Start()
     {
+        m_positionStart_X = GameObjectScanMap.m_value.transform.position.x;
+        m_positionStart_Y = GameObjectScanMap.m_value.transform.position.y;
         CreateGrid();
         m_ScanMapCollider();
     }

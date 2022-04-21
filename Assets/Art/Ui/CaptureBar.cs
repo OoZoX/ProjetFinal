@@ -20,7 +20,7 @@ public class CaptureBar : MonoBehaviour
 
     void BarCapturFiller()
     {
-        BarCaptur.fillAmount = Mathf.Lerp(BarCaptur.fillAmount, GetComponent<CaptureZone>().CaptureActuelle / GetComponent<CaptureZone>().CaptureMax, lerpspeed);
+        //BarCaptur.fillAmount = Mathf.Lerp(BarCaptur.fillAmount, GetComponent<CaptureZone>().CaptureActuelle / GetComponent<CaptureZone>().CaptureMax, lerpspeed);
     }
 
 }
