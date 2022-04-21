@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private List<IATank> IATankList;
-    [SerializeField] private List<PlayerTank> PlayerTankList;
+    [SerializeField] private List<GameObject> IATankList;
+    [SerializeField] private List<GameObject> PlayerTankList;
     [SerializeField] private List<CaptureZone> ZoneCaptureList;
     [SerializeField] private List<CollectableItem> CollectableItemList;
     [SerializeField] private GameObject IATeam;
@@ -49,8 +49,8 @@ public class Level : MonoBehaviour
     private StateLevel _StateLevel;
     private StateRespawn _StatePlayerTeam;
     private StateRespawn _StateIATeam;
-    public PlayerTank TankPlayers;
-    public IATank TankIAs;
+    public GameObject TankPlayers;
+    public GameObject TankIAs;
     
 
     // Start is called before the first frame update
@@ -58,11 +58,11 @@ public class Level : MonoBehaviour
     {   
         SpawnIA = new List<Vector3>();
         SpawnPlayer = new List<Vector3>();
-        foreach (IATank tank in IATankList)
+        foreach (GameObject tank in IATankList)
         {
             SpawnIA.Add(tank.gameObject.transform.position);
         }        
-        foreach (PlayerTank tank in PlayerTankList)
+        foreach (GameObject tank in PlayerTankList)
         {
             SpawnPlayer.Add(tank.gameObject.transform.position);
         }
@@ -82,18 +82,18 @@ public class Level : MonoBehaviour
     }
     public void CheckLists()
     {
-        foreach (PlayerTank tank in PlayerTankList)
+        foreach (GameObject tank in PlayerTankList)
         {
-            if (tank.gameObject.active == false)
+            if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
                 PlayerTankList.Remove(tank);
                 _StatePlayerTeam = StateRespawn.WaitingForRespawn;
                 StartCoroutine(ManagePlayerTankRespawn());
             }
         }
-        foreach (IATank tank in IATankList)
+        foreach (GameObject tank in IATankList)
         {
-            if (tank.gameObject.active == false)
+            if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
                 IATankList.Remove(tank);
                 _StateIATeam = StateRespawn.WaitingForRespawn;
@@ -112,7 +112,7 @@ public class Level : MonoBehaviour
             {
 
                 rnd = Random.Range(0, NbTotalPlayerTank);
-                PlayerTank NewPlayerTank = Instantiate(TankPlayers, SpawnPlayer[rnd], Quaternion.Euler(0, 0, 0));
+                GameObject NewPlayerTank = Instantiate(TankPlayers, SpawnPlayer[rnd], Quaternion.Euler(0, 0, 0));
                 NewPlayerTank.transform.parent = PlayerTeam.transform;
                 NewPlayerTank.transform.position = SpawnPlayer[rnd];
                 PlayerTankList.Add(NewPlayerTank);
@@ -136,7 +136,7 @@ public class Level : MonoBehaviour
             {
 
                 rnd = Random.Range(0, NbTotalIATank);
-                IATank NewIATank = Instantiate(TankIAs, SpawnIA[rnd], Quaternion.Euler(0, 0, 0));
+                GameObject NewIATank = Instantiate(TankIAs, SpawnIA[rnd], Quaternion.Euler(0, 0, 0));
                 NewIATank.transform.parent = PlayerTeam.transform;
                 NewIATank.transform.position = SpawnIA[rnd];
                 IATankList.Add(NewIATank);

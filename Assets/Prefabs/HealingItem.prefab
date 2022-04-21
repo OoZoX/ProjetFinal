@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CollectableItemCollider: {fileID: 0}
-  _HealingValue: 1
+  _HealingValue: 2
 --- !u!1 &5605109420210663149
 GameObject:
   m_ObjectHideFlags: 0

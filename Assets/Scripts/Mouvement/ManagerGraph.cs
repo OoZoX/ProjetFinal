@@ -153,7 +153,7 @@ public class ManagerGraph : MonoBehaviour
                     if(!checkRoute && collider.gameObject.layer == 6)//herbe
                     {
                         CurrentCell.m_cost = 2;
-                        Debug.Log("herbe");
+                       // Debug.Log("herbe");
                     } 
                     else if(!checkRoute && collider.gameObject.layer == 7) //sable
                     {
