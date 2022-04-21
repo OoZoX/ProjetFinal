@@ -87,11 +87,16 @@ public class ManagerGraph : MonoBehaviour
     {
         if (refresh)
         {
-            CreateGrid();
-            m_ScanMapCollider();
-            GridDebug.Instance.m_gridSize = m_sizeGrid;
 
+            RefreshGrid();
         }
+    }
+
+    public void RefreshGrid()
+    {
+        CreateGrid();
+        m_ScanMapCollider();
+        GridDebug.Instance.m_gridSize = m_sizeGrid;
     }
 
     private void CreateGrid()

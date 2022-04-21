@@ -50,12 +50,29 @@ public class SelectionTank : MonoBehaviour
 
     private void Update()
     {
+        CheckCollidExist();
         GetInput();
         CheckClickStart();
         UpdateSquare();
         CheckClickStop();
     }
 
+    private void CheckCollidExist()
+    {
+        foreach (Collider2D tank in m_collider2DsTank)
+        {
+            if(tank == null)
+            {
+                _collider2DsTankDelete.Add(tank);
+            }
+        }
+        foreach (Collider2D tank in _collider2DsTankDelete)
+        {
+            m_collider2DsTank.Remove(tank);
+            _collider2DsTankCopy.Remove(tank);
+        }
+        _collider2DsTankDelete.Clear();
+    }
     private void GetInput()
     {
         m_isClickLeft = InputPlayer.Instance.m_clickMouseLeft;
