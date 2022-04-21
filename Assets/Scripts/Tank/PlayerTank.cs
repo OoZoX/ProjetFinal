@@ -55,5 +55,6 @@ public class PlayerTank : Tank
     private void OnTriggerStay2D(Collider2D collision)
     {
         CapturingZone(collision);
+        GetHeal(collision);
     }
 }
