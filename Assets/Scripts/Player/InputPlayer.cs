@@ -14,6 +14,7 @@ public class InputPlayer : MonoBehaviour
     public bool m_touchTankAllie = false;
     public bool m_clickMouseLeft = false;
     public bool m_clickMouseRight = false;
+    public bool m_KeyboardN = false;
 
     public Vector3 m_posSourisWorld;
     public Vector3 m_posMouseScreen;
@@ -41,8 +42,10 @@ public class InputPlayer : MonoBehaviour
     {
         GetClickMouse();
         GetKeyBoard();
-
+        GetKeyN();
     }
+
+
 
     private void RayCastClick()
     {
@@ -66,8 +69,7 @@ public class InputPlayer : MonoBehaviour
             RayCastClick();
         else 
             m_touchTankAllie = false;
-        
-        
+         
     }
     public void m_GetMousePositionWorld()
     {
@@ -79,7 +81,10 @@ public class InputPlayer : MonoBehaviour
         m_posMouseScreen = Input.mousePosition;
         //Debug.Log($"<color=yellow>" + m_posSourisScreen.x + "</color> <color=blue>" + m_posSourisScreen.y + "</color>");
     }
-
+    public void GetKeyN()
+    {
+        m_KeyboardN = Input.GetKey(KeyCode.N);
+    }
     private void GetKeyBoard()
     {
         MouvementCamera.Instance.m_depCamHaut = Input.GetKey(KeyCode.Z);
