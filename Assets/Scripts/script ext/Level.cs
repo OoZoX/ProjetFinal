@@ -190,6 +190,7 @@ public class Level : MonoBehaviour
         if(_GameTimer.Elapsed.TotalSeconds > MaxTimeGame)
         {
             _StateLevel = StateLevel.OutofTime;
-        }      
+        }
+        UnityEngine.Debug.Log("_StateLevel " + _StateLevel);
     }
 }

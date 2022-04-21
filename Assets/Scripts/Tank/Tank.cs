@@ -141,11 +141,12 @@ public class Tank : MonoBehaviour
         {
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
+            UnityEngine.Debug.Log("CaptureActuelle " + zone.CaptureActuelle);
         }
     }
     protected void GetHeal(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Heal"))
+        if (collision.gameObject.CompareTag("Heal") && _TankCollider.bounds.Intersects(collision.bounds))
         {
             _Health = _Health + collision.transform.GetComponent<HealingItem>()._HealingValue; 
             Destroy(collision.gameObject);
