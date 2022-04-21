@@ -14,14 +14,11 @@ public class IATank : Tank
     // Start is called before the first frame update
     void Start()
     {
-        ActualizeHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ActualizeHealthBar();
-        ParticulesOnMouvement();
         if (m_detectionZone.m_playerInRange == true)
         {
            _turret.OrientationTurret(m_detectionZone.m_posPlayer);
