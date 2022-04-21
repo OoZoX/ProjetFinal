@@ -9,7 +9,7 @@ public class Level : MonoBehaviour
 {
     [SerializeField] private List<GameObject> IATankList;
     [SerializeField] private List<GameObject> PlayerTankList;
-    [SerializeField] private List<CaptureZone> ZoneCaptureList;
+    [SerializeField] public List<CaptureZone> ZoneCaptureList;
     [SerializeField] private List<CollectableItem> CollectableItemList;
     [SerializeField] private GameObject IATeam;
     [SerializeField] private GameObject PlayerTeam;
