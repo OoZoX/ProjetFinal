@@ -28,7 +28,7 @@ public class Turret : MonoBehaviour
 
     public void OrientationTurret(Vector3 shootPosition)
     {
-        DirectionTurret = (shootPosition - _ShellStartPosition.position).normalized;
+        DirectionTurret = (shootPosition - transform.position).normalized;
         Vector3 upwardsdirection = Quaternion.Euler(0, 0, 90) * DirectionTurret;
         LookRotation = Quaternion.LookRotation(Vector3.forward, upwardsdirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, LookRotation, Time.deltaTime * _TurretRotationSpeed);

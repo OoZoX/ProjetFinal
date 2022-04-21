@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tankSprite: {fileID: 709094831417110301}
-  _turret: {fileID: 709094831713999647}
+  _turret: {fileID: 4355199417160348488}
   _slider: {fileID: 3121128295654669958}
   _canvas: {fileID: 8646525377070796501}
   _TankAnimator: {fileID: 5037598031924538427}
@@ -197,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709094831713999644}
   - component: {fileID: 709094831713999645}
+  - component: {fileID: 4355199417160348488}
   m_Layer: 15
   m_Name: PlayerTurret
   m_TagString: Untagged
@@ -270,6 +271,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4355199417160348488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709094831713999647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262d74ea3fce5744393fb77ec95e9cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shootposition: {x: 0, y: 0, z: 0}
+  _CanShoot: 0
+  _ShellStartPosition: {fileID: 656160426371829691}
+  _Shell: {fileID: 8611045978538915858, guid: 9a42d93489f86c3409e61bc095edd8d6, type: 3}
+  _FireRate: 3
+  _TurretRotationSpeed: 360
 --- !u!1 &1415620333661591962
 GameObject:
   m_ObjectHideFlags: 0

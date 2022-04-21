@@ -12,33 +12,40 @@ public class PlayerTank : Tank
     {
         ShootClick = false;
         ActualizeHealthBar();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         ActualizeHealthBar();
-        //_turret.OrientationTurret();
-        _turret.CanShoot();
         ParticulesOnMouvement();
-        if (InputPlayer.Instance != null)
-        {
-            InputPlayer.Instance.m_GetMousePositionWorld();
-            //_turret.SetShootPosition();
-            if (_turret._CanShoot == true)
-            {
-                ShootClick = InputPlayer.Instance.m_clickMouseRight;
-                if (ShootClick == true)
-                {
-                    _turret.ThrowProjectile();
-                }
-            }
-        }
+
+        Shoot();
+        RotateTurret();
+
         if (m_startDep)
         {
             StopAllCoroutines();
             StartCoroutine(Deplacement());
             m_startDep = false;
+        }
+    }
+
+    private void RotateTurret()
+    {
+        InputPlayer.Instance.m_GetMousePositionWorld();
+        Vector3 posMouse = InputPlayer.Instance.m_posSourisWorld;
+        Debug.Log(posMouse);
+        _turret.OrientationTurret(posMouse);
+    }
+    private void Shoot()
+    {
+
+        ShootClick = InputPlayer.Instance.m_clickMouseRight;
+        if (ShootClick == true)
+        {
+            _turret.ThrowProjectile();
         }
     }
 
