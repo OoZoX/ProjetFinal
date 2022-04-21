@@ -30,29 +30,45 @@ public class MouvementTank : MonoBehaviour
     
     void Update()
     {
-        if (InputPlayer.Instance.m_clickMouseRight)
+        if (InputPlayer.Instance.m_clickMouseRight && SelectionTank.Instance.m_collider2DsTank.Count > 0)
         {
             InputPlayer.Instance.m_GetMousePositionWorld();
             _cible = InputPlayer.Instance.m_posSourisWorld;
-            ManagerGraph.Instance.RefreshGrid();
-            Mouvement();
-            
+            MoveAt(_cible, true);
         }
     }
 
-
-
-    private void Mouvement()
+    /// <summary>
+    /// lancce algo dep, si typeTank == true -> player / si non ennemy
+    /// </summary>
+    /// <param name="Cible"></param>
+    /// <param name="typeTank"></param>
+    public void MoveAt(Vector3 Cible, bool typeTank)
     {
 
-        Cell CellCible = ManagerGraph.Instance.m_GetCellFromPosWorld(_cible);
+        if (typeTank)
+        {
+            ManagerGraph.Instance.RefreshGrid();
+            Mouvement(Cible);
+
+            List<Collider2D> Tanks = SelectionTank.Instance.m_collider2DsTank;
+            foreach (Collider2D tank in Tanks)
+            {
+                tank.GetComponent<PlayerTank>().m_startDep = true;
+            }
+        }
+        
+    }
+
+
+    private void Mouvement(Vector3 Cible)
+    {
+
+        Cell CellCible = ManagerGraph.Instance.m_GetCellFromPosWorld(Cible);
         ManagerGraph.Instance.m_StartParcourChemin(CellCible);
         GridDebug.Instance.DrawFlowField();
-        List<Collider2D> Tanks = SelectionTank.Instance.m_collider2DsTank;
-        foreach (Collider2D tank in Tanks)
-        {
-            tank.GetComponent<PlayerTank>().m_startDep = true;
-        }
+        
+
         
     }
 
