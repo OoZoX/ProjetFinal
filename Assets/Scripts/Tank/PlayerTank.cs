@@ -20,6 +20,7 @@ public class PlayerTank : Tank
 
         Shoot();
         RotateTurret();
+
         if (m_startDep)
         {
             StopAllCoroutines();
@@ -38,7 +39,7 @@ public class PlayerTank : Tank
     {
 
         ShootClick = InputPlayer.Instance.m_clickMouseRight;
-        if (ShootClick == true && InputPlayer.Instance.m_KeyboardN)
+        if (ShootClick == true)
         {
             _turret.ThrowProjectile();
         }
