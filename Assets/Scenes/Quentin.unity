@@ -4050,6 +4050,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8350316547574421702, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: m_Name
+      value: FOV
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350316547574421702, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
 --- !u!43 &971275932
