@@ -52,7 +52,7 @@ public class IATank : Tank
     //            }
 
     //        }
-            
+
     //    }
     //}
 
@@ -63,35 +63,16 @@ public class IATank : Tank
     //    Vector2 direction = (m_detectionZone.m_posPlayer - _turret.transform.position).normalized;
     //    ray.direction = direction;
     //    ray.origin = _turret.transform.position;
-        
+
     //    Gizmos.DrawRay(ray);
     //}
-
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        _turret.Shootposition = collision.transform.position;
-    //        _turret.ResetShootCooldown();
-    //        _turret._CanShoot = false;
-    //        EnnemyInRange = true;
-    //    }
-    //    GetHitShell(collision);
-    //    GetHeal(collision);
-    //}
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        _turret.Shootposition = collision.transform.position;
-    //        EnnemyInRange = true;
-    //    }
-    //    CapturingZone(collision);
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    EnnemyInRange = false;
-    //}
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GetHeal(collision);
+        CapturingZone(collision);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        CapturingZone(collision);
+    }
 }

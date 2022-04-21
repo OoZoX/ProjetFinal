@@ -37,7 +37,6 @@ public class CaptureZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log("CaptureActuelle " + CaptureActuelle);
         if(CaptureActuelle < 0 && CaptureActuelle > CaptureMin)
         {
             _ZoneState = ZoneState.CapturingAI;
@@ -60,7 +59,7 @@ public class CaptureZone : MonoBehaviour
             case ZoneState.CapturingAI:
                 CaptureActuelle = (float)Math.Round(CaptureActuelle);
                 _TextColor = new Color(1, 0.5f, 0, 0.75f); //orange
-                _FillColor = new Color(0, 0, 0, 0.1f);//transparent
+                _FillColor = new Color(0.1f, 0.3f, 0.8f, 0.5f);//transparent
                 break;
             case ZoneState.CapturedAI:
                 CaptureActuelle = CaptureMin;
@@ -80,7 +79,7 @@ public class CaptureZone : MonoBehaviour
 
         }
 
-        FillScale = CaptureActuelle / 10;
+        FillScale = CaptureActuelle / 100;
         if (CaptureActuelle < 0)
         {
             FillScale = FillScale  -(FillScale * 2);

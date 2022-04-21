@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: _Health
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4392625502784492504, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
+      propertyPath: _CaptureSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5156264629492762381, guid: 0e47d573423d1694fb1efc5cc4fa991e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

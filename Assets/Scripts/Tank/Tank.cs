@@ -135,14 +135,8 @@ public class Tank : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zone"))
         {
-            Debug.Log("Heal");
-
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
-            Debug.Log("_CaptureSpeed " + _CaptureSpeed);
-
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
-            Debug.Log("CaptureActuelle " + zone.CaptureActuelle);
-
         }
     }
     protected void GetHeal(Collider2D collision)
