@@ -33,7 +33,7 @@ public class UI : MonoBehaviour
     private void ActualizeScore()
     {
         _TextScore.text = Level.Instance.score.ToString();
-        Debug.Log(" Level.Instance.score.ToString() " + Level.Instance.score.ToString());
+        //Debug.Log(" Level.Instance.score.ToString() " + Level.Instance.score.ToString());
     }
     private void ActualizeTimer()
     {

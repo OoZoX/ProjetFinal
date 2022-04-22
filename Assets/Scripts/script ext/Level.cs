@@ -193,6 +193,6 @@ public class Level : MonoBehaviour
         {
             _StateLevel = StateLevel.OutofTime;
         }
-        UnityEngine.Debug.Log("_StateLevel " + _StateLevel);
+        //UnityEngine.Debug.Log("_StateLevel " + _StateLevel);
     }
 }

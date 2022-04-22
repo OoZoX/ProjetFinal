@@ -9,7 +9,7 @@ public class IATank : Tank
 {
     //protected bool EnnemyInRange;
     [SerializeField] public DetectionZone m_detectionZone;
-    [SerializeField] public bool _PatrolWayX;
+    [SerializeField] public bool _PatrolWayX = false;
     public LayerMask m_layerMaskPlayer;
     private Vector3 PatrolPosition1;
     private Vector3 PatrolPosition2;
@@ -43,7 +43,7 @@ public class IATank : Tank
 
         }
         MakePatrol();
-        UnityEngine.Debug.Log("position " + transform.position);
+        //UnityEngine.Debug.Log("position " + transform.position);
     }
     private void MakePatrol()
     {
