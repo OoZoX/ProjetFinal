@@ -141,7 +141,7 @@ public class Tank : MonoBehaviour
         {
             var zone = collision.transform.parent.GetComponent<CaptureZone>();
             zone.CaptureActuelle = zone.CaptureActuelle + _CaptureSpeed;
-            UnityEngine.Debug.Log("CaptureActuelle " + zone.CaptureActuelle);
+            //UnityEngine.Debug.Log("CaptureActuelle " + zone.CaptureActuelle);
         }
     }
     protected void GetHeal(Collider2D collision)

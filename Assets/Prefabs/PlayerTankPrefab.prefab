@@ -5350,7 +5350,7 @@ MonoBehaviour:
   _Speed: 1
   _Health: 5
   _MaxHealth: 5
-  _tankMoveSpeed: 5
+  _tankMoveSpeed: 8
   _CaptureSpeed: 1
   _tankRotationSpeed: 180
   m_layerMask:
@@ -5596,7 +5596,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3
+  m_PointLightOuterRadius: 4
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -5624,7 +5624,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
 --- !u!114 &4707244069398433042
 MonoBehaviour:
   m_ObjectHideFlags: 0
