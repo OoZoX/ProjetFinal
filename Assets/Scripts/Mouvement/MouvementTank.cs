@@ -57,6 +57,11 @@ public class MouvementTank : MonoBehaviour
                 tank.GetComponent<PlayerTank>().m_startDep = true;
             }
         }
+        else
+        {
+            ManagerGraph.Instance.RefreshGrid();
+            Mouvement(Cible);
+        }
         
     }
 
