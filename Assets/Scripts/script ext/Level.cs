@@ -38,7 +38,6 @@ public class Level : MonoBehaviour
         InGame,
         Victory,
         Defeat,
-        OutofTime
     }
     private enum StateRespawn
     {
@@ -191,7 +190,11 @@ public class Level : MonoBehaviour
         
         if(_GameTimer.Elapsed.TotalSeconds > MaxTimeGame)
         {
-            _StateLevel = StateLevel.OutofTime;
+            _StateLevel = StateLevel.Defeat;
+        }
+        if (-5 > score)
+        {
+            _StateLevel = StateLevel.Defeat;
         }
         //UnityEngine.Debug.Log("_StateLevel " + _StateLevel);
     }
