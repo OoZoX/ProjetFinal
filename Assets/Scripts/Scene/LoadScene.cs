@@ -29,12 +29,26 @@ public class LoadScene : MonoBehaviour
 
     }
 
-
-
-    public void LoadAllScene()
+    private void Update()
     {
-        
+        if(InputPlayer.Instance != null)
+        {
+            if (InputPlayer.Instance.m_KeyBoardEsc)
+            {
+                LoadMenu();
+            }
+        }
+    }
 
+    public async void LoadMenu()
+    {
+        SceneManager.LoadSceneAsync("Menu");
+    }
+
+    public void LoadLevel()
+    {
+
+        _firstSceneUpload = false;
         SceneLoaded = new List<string>();
 
         foreach (var scene in SceneToLoad)
@@ -42,7 +56,7 @@ public class LoadScene : MonoBehaviour
             StartCoroutine(LoadThisScene(scene));
         }
 
-        //UnloadAllScene();
+        
 
     }
 
