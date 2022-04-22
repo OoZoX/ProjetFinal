@@ -5330,6 +5330,7 @@ MonoBehaviour:
   m_isMoving: 0
   m_detectionZone: {fileID: 1817830922414253659}
   _PatrolWayX: 0
+  PatrolSize: 4
   m_layerMaskPlayer:
     serializedVersion: 2
     m_Bits: 0

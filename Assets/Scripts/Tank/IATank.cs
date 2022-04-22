@@ -10,27 +10,27 @@ public class IATank : Tank
     //protected bool EnnemyInRange;
     [SerializeField] public DetectionZone m_detectionZone;
     [SerializeField] public bool _PatrolWayX = false;
+    [SerializeField] private int PatrolSize;
     public LayerMask m_layerMaskPlayer;
     private Vector3 PatrolPosition1;
     private Vector3 PatrolPosition2;
-
-
+    public Stopwatch _PatrolTimer = new Stopwatch();
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        _PatrolTimer.Start();
         if (_PatrolWayX == false)
         {
-            PatrolPosition1 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
-            PatrolPosition2 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z);
+            PatrolPosition1 = new Vector3(transform.position.x + PatrolSize, transform.position.y, transform.position.z);
+            PatrolPosition2 = new Vector3(transform.position.x - PatrolSize, transform.position.y, transform.position.z);
         }
         else
         {
-            PatrolPosition1 = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
-            PatrolPosition2 = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
+            PatrolPosition1 = new Vector3(transform.position.x, transform.position.y + PatrolSize, transform.position.z);
+            PatrolPosition2 = new Vector3(transform.position.x, transform.position.y - PatrolSize, transform.position.z);
         }
-        MouvementTank.Instance.MoveAt(PatrolPosition1, false);
-        StartCoroutine(Deplacement());
+
     }
 
     // Update is called once per frame
@@ -43,23 +43,44 @@ public class IATank : Tank
 
         }
         MakePatrol();
-        //UnityEngine.Debug.Log("position " + transform.position);
+        UnityEngine.Debug.Log("_PatrolWayX " + _PatrolWayX);
     }
     private void MakePatrol()
     {
-        
-        if ((int)PatrolPosition1.x == (int)transform.position.x && (int)PatrolPosition1.y == (int)transform.position.y)
+        UnityEngine.Debug.Log("_PatrolTimer.Elapsed.Seconds  " + _PatrolTimer.Elapsed.Seconds);
+
+        if (_PatrolWayX == true)
         {
-            StopAllCoroutines();
-            MouvementTank.Instance.MoveAt(PatrolPosition2, false);
-            StartCoroutine(Deplacement());
+            if(_PatrolTimer.Elapsed.Seconds < PatrolSize)
+            {
+                transform.position = new Vector3(transform.position.x + (_tankMoveSpeed / 500), transform.position.y, transform.position.z);
+            }
+            else if (_PatrolTimer.Elapsed.Seconds < (int)PatrolSize*2)
+            {
+                transform.position = new Vector3(transform.position.x - (_tankMoveSpeed / 500), transform.position.y, transform.position.z);
+            }else if(_PatrolTimer.Elapsed.Seconds < (int)PatrolSize*3)
+            {
+                _PatrolTimer.Restart();
+            }
         }
-        else if ((int)PatrolPosition2.x == (int)transform.position.x && (int)PatrolPosition2.y == (int)transform.position.y)
+        if (_PatrolWayX == false)
         {
-            StopAllCoroutines();
-            MouvementTank.Instance.MoveAt(PatrolPosition1, false);
-            StartCoroutine(Deplacement());
+            if (_PatrolTimer.Elapsed.Seconds < (int)PatrolSize)
+            {
+                transform.position = new Vector3(transform.position.x , transform.position.y + (_tankMoveSpeed / 500), transform.position.z);
+            }
+            else if (_PatrolTimer.Elapsed.Seconds < (int)PatrolSize * 2)
+            {
+                transform.position = new Vector3(transform.position.x , transform.position.y - (_tankMoveSpeed / 500), transform.position.z);
+            }
+            else if (_PatrolTimer.Elapsed.Seconds < (int)PatrolSize * 3)
+            {
+                _PatrolTimer.Restart();
+            }
         }
+
+
+
     }
     //private void _RayCastPlayer()
     //{
