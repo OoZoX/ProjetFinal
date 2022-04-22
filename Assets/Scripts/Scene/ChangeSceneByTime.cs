@@ -12,7 +12,7 @@ public class ChangeSceneByTime : MonoBehaviour
         time += Time.fixedDeltaTime;
         if(time >= m_maxTime)
         {
-            LoadScene.Instance.LoadMenu();
+            LoadScene.Instance.LoadOneScene("Menu");
         }
     }
 }

@@ -30,7 +30,7 @@ public class MouvementTank : MonoBehaviour
     
     void Update()
     {
-        if (InputPlayer.Instance.m_clickMouseRight && SelectionTank.Instance.m_collider2DsTank.Count > 0)
+        if (InputPlayer.Instance.m_clickMouseRight && SelectionTank.Instance.m_collider2DsTank.Count > 0 && !InputPlayer.Instance.m_KeyboardN)
         {
             InputPlayer.Instance.m_GetMousePositionWorld();
             _cible = InputPlayer.Instance.m_posSourisWorld;

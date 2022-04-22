@@ -29,20 +29,21 @@ public class LoadScene : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if(InputPlayer.Instance != null)
+        if (InputPlayer.Instance != null)
         {
             if (InputPlayer.Instance.m_KeyBoardEsc)
             {
-                LoadMenu();
+                LoadOneScene("Menu");
             }
         }
     }
 
-    public async void LoadMenu()
+
+    public async void LoadOneScene(string scene)
     {
-        SceneManager.LoadSceneAsync("Menu");
+        SceneManager.LoadSceneAsync(scene);
     }
 
     public void LoadLevel()
@@ -56,19 +57,7 @@ public class LoadScene : MonoBehaviour
             StartCoroutine(LoadThisScene(scene));
         }
 
-        
 
-    }
-
-    private void UnloadAllScene()
-    {
-        List<string> TabScene = GetActiveSceneName();
-
-        foreach (string scene in TabScene)
-        {
-            Debug.Log(scene);
-            UnloadThisScene(scene);
-        }
     }
 
     private List<string> GetActiveSceneName()
@@ -112,8 +101,4 @@ public class LoadScene : MonoBehaviour
         }
     }
 
-    private async void UnloadThisScene(string scene)
-    {
-        SceneManager.UnloadSceneAsync(scene);
-    }
 }

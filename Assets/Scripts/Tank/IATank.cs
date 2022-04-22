@@ -43,11 +43,11 @@ public class IATank : Tank
 
         }
         MakePatrol();
-        UnityEngine.Debug.Log("_PatrolWayX " + _PatrolWayX);
+        //UnityEngine.Debug.Log("_PatrolWayX " + _PatrolWayX);
     }
     private void MakePatrol()
     {
-        UnityEngine.Debug.Log("_PatrolTimer.Elapsed.Seconds  " + _PatrolTimer.Elapsed.Seconds);
+        //UnityEngine.Debug.Log("_PatrolTimer.Elapsed.Seconds  " + _PatrolTimer.Elapsed.Seconds);
 
         if (_PatrolWayX == true)
         {

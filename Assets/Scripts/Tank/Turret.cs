@@ -36,7 +36,7 @@ public class Turret : MonoBehaviour
 
     public void CanShoot()
     {
-        if (ShootCooldown > _FireRate)
+        if (ShootCooldown > _FireRate && SelectionTank.Instance.m_collider2DsTank.Contains(transform.parent.GetComponent<Collider2D>()))
         {
             _CanShoot = true;
         }

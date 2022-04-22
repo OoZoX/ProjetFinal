@@ -24,11 +24,11 @@ public class FovSetActive : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         _colliderList.Clear();
-        Physics2D.OverlapCircle(transform.position, transform.GetComponent<Light2D>().pointLightOuterRadius,_contactFilter, _colliderList);
-        foreach(Collider2D collider in _colliderList)
+        Physics2D.OverlapCircle(transform.position, transform.GetComponent<Light2D>().pointLightOuterRadius, _contactFilter, _colliderList);
+        foreach (Collider2D collider in _colliderList)
         {
             if (collider.gameObject.CompareTag("Ennemy"))
             {
@@ -41,7 +41,7 @@ public class FovSetActive : MonoBehaviour
             }
         }
 
-        foreach(Collider2D collider in _colliderVisible)
+        foreach (Collider2D collider in _colliderVisible)
         {
             if (!_colliderList.Contains(collider))
             {
@@ -54,7 +54,7 @@ public class FovSetActive : MonoBehaviour
             }
         }
 
-        foreach(Collider2D collider in _colliderRemove)
+        foreach (Collider2D collider in _colliderRemove)
         {
             _colliderVisible.Remove(collider);
         }

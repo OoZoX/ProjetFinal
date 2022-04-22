@@ -21,6 +21,11 @@ public class PlayerTank : Tank
         Shoot();
         RotateTurret();
 
+
+    }
+
+    private void FixedUpdate()
+    {
         if (m_startDep)
         {
             StopAllCoroutines();

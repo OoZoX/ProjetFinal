@@ -35,19 +35,22 @@ public class CaptureZone : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if(CaptureActuelle < 0 && CaptureActuelle > CaptureMin)
+        if (CaptureActuelle < 0 && CaptureActuelle > CaptureMin)
         {
             _ZoneState = ZoneState.CapturingAI;
-        }else if(CaptureActuelle <= CaptureMin)
+        }
+        else if (CaptureActuelle <= CaptureMin)
         {
             _ZoneState = ZoneState.CapturedAI;
             CaptureActuelle = CaptureMin;
-        }else if(CaptureActuelle < CaptureMax && CaptureActuelle > 0)
+        }
+        else if (CaptureActuelle < CaptureMax && CaptureActuelle > 0)
         {
             _ZoneState = ZoneState.CapturingPlayer;
-        }else if (CaptureActuelle >= CaptureMax)
+        }
+        else if (CaptureActuelle >= CaptureMax)
         {
             _ZoneState = ZoneState.CapturedPlayer;
         }
@@ -82,7 +85,7 @@ public class CaptureZone : MonoBehaviour
         FillScale = CaptureActuelle / 100;
         if (CaptureActuelle < 0)
         {
-            FillScale = FillScale  -(FillScale * 2);
+            FillScale = FillScale - (FillScale * 2);
         }
         TextScale = FillScale / 30;
 
@@ -93,6 +96,8 @@ public class CaptureZone : MonoBehaviour
         _Text.color = _TextColor;
 
         _Text.text = CaptureActuelle.ToString();
+    
     }
+
 
 }

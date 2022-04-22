@@ -33,7 +33,7 @@ public class Level : MonoBehaviour
     public  Stopwatch _GameTimer = new Stopwatch();
     
     private int rnd;
-    private enum StateLevel
+    public enum StateLevel
     {
         InGame,
         Victory,
@@ -45,7 +45,7 @@ public class Level : MonoBehaviour
         Checking,
         WaitingForRespawn
     }
-    private StateLevel _StateLevel;
+    public StateLevel _StateLevel;
     private StateRespawn _StatePlayerTeam;
     private StateRespawn _StateIATeam;
     public GameObject TankPlayers;
@@ -87,7 +87,7 @@ public class Level : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         EndGameVerification();
         CheckLists();
@@ -168,11 +168,12 @@ public class Level : MonoBehaviour
     }
     public void EndGameVerification()
     {
+        int nbZone = 0;
         foreach(CaptureZone captureZone in ZoneCaptureList)
         {         
             if(captureZone._ZoneState == CaptureZone.ZoneState.CapturedPlayer)
             {
-                _StateLevel = StateLevel.Victory;
+                nbZone++;
             }
             else
             {
@@ -180,12 +181,20 @@ public class Level : MonoBehaviour
             }
             if(captureZone._ZoneState == CaptureZone.ZoneState.CapturedAI) 
             {
-                _StateLevel = StateLevel.Defeat;
+                nbZone--;
             }
             else
             {
                 _StateLevel = StateLevel.InGame;
             }
+        }
+        if(nbZone == 3)
+        {
+            _StateLevel = StateLevel.Victory;
+        }
+        else if(nbZone == -3)
+        {
+            _StateLevel = StateLevel.Defeat;
         }
         
         if(_GameTimer.Elapsed.TotalSeconds > MaxTimeGame)

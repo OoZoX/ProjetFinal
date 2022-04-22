@@ -175,7 +175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &793165597
 MonoBehaviour:
@@ -236,8 +236,8 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1472
-  m_sizeGrid: {x: 63, y: 38}
-  m_cellRadius: 0.7
+  m_sizeGrid: {x: 68, y: 41}
+  m_cellRadius: 0.65
   m_flowFild: 1
   m_positionStart_X: -9.5
   m_positionStart_Y: -4.5
@@ -254,7 +254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1023887268
 MonoBehaviour:
@@ -281,6 +281,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4941e5275ea8843ba4a0d631e71842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1266600728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266600730}
+  - component: {fileID: 1266600729}
+  m_Layer: 0
+  m_Name: WinAndLose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1266600729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266600728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ace1090aaefc6844bb89f0271069a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1266600730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266600728}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1082.9553, y: 393.47824, z: -410.83167}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2002465464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4005913220302502761, guid: 9a93b9de9ee3cd94e884ca978edffe4a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4005913220302502761, guid: 9a93b9de9ee3cd94e884ca978edffe4a, type: 3}
       propertyPath: m_LocalPosition.x

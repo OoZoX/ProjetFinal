@@ -17,14 +17,7 @@ public class Shell : MonoBehaviour
      {
         IsDestroy = false;
      }
-    void Update() 
-     {
-        if (IsDestroy)
-        {
-            
-            //StartCoroutine(Destroy());
-        }
-    }
+
     public void LaunchProjectile(Vector3 aimedPoint)
     {
         StartCoroutine(Fire(aimedPoint));
