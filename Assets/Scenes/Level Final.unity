@@ -27133,8 +27133,12 @@ PrefabInstance:
       value: IATankPrefab (9)
       objectReference: {fileID: 0}
     - target: {fileID: 2364591957869172992, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
+      propertyPath: PatrolSize
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364591957869172992, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: _PatrolWayX
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4376401861156388118, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27240,11 +27244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.19
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.8
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27281,6 +27285,10 @@ PrefabInstance:
     - target: {fileID: 709094831417110300, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_Name
       value: IATankPrefab (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364591957869172992, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
+      propertyPath: _PatrolWayX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8213874540977960736, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -61238,11 +61246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.42
+      value: 4.59
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43.7
+      value: -28.15
       objectReference: {fileID: 0}
     - target: {fileID: 709094831417110290, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61279,6 +61287,14 @@ PrefabInstance:
     - target: {fileID: 709094831417110300, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_Name
       value: IATankPrefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364591957869172992, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
+      propertyPath: PatrolSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364591957869172992, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
+      propertyPath: _PatrolWayX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8213874540977960736, guid: a12b1f8db2e560140b357fc467d0cfd9, type: 3}
       propertyPath: m_AnchorMax.x
