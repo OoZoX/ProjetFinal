@@ -20,7 +20,7 @@ public class LoadScene : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
