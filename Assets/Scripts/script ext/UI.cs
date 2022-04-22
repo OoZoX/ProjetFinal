@@ -62,7 +62,7 @@ public class UI : MonoBehaviour
         if (CaptureBarValue != _slider.value)
         {
             _slider.value = CaptureBarValue;
-            Debug.Log(" Level.Instance.score.ToString() " + CaptureBarValue);
+            //Debug.Log(" Level.Instance.score.ToString() " + CaptureBarValue);
         }
         /*
         Debug.Log(" (float)TotalCaptureValue " + (float)TotalCaptureValue);

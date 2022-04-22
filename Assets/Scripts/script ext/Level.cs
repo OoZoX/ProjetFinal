@@ -99,6 +99,7 @@ public class Level : MonoBehaviour
         {
             if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
+                UnityEngine.Debug.Log("score " + score);
                 score = score - 1;
                 PlayerTankList.Remove(tank);
                 _StatePlayerTeam = StateRespawn.WaitingForRespawn;
@@ -109,6 +110,7 @@ public class Level : MonoBehaviour
         {
             if (tank.GetComponentInChildren<Tank>()._UITank.gameObject.active == false)
             {
+                UnityEngine.Debug.Log("score " + score);
                 score = score + 1;
                 IATankList.Remove(tank);
                 _StateIATeam = StateRespawn.WaitingForRespawn;
@@ -121,7 +123,7 @@ public class Level : MonoBehaviour
     public IEnumerator ManagePlayerTankRespawn()
     {
 
-        while (_StatePlayerTeam == StateRespawn.WaitingForRespawn )
+        while (PlayerTankList.Count() < NbTotalPlayerTank)
         {
             if (PlayerRespawnRate <= PlayerRespawnCooldown)
             {
@@ -145,7 +147,7 @@ public class Level : MonoBehaviour
     public IEnumerator ManageIATankRespawn()
     {
 
-        while (_StateIATeam == StateRespawn.WaitingForRespawn)
+        while (IATankList.Count() < NbTotalIATank)
         {
             if (IARespawnRate <= IARespawnCooldown)
             {

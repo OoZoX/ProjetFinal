@@ -5289,8 +5289,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 4
+  m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -5320,15 +5320,16 @@ MonoBehaviour:
   _Speed: 1
   _Health: 5
   _MaxHealth: 5
-  _tankMoveSpeed: 0
+  _tankMoveSpeed: 5
   _CaptureSpeed: -1.5
-  _tankRotationSpeed: 0
+  _tankRotationSpeed: 180
   m_layerMask:
     serializedVersion: 2
     m_Bits: 32768
   m_startDep: 0
   m_isMoving: 0
   m_detectionZone: {fileID: 1817830922414253659}
+  _PatrolWayX: 0
   m_layerMaskPlayer:
     serializedVersion: 2
     m_Bits: 0
